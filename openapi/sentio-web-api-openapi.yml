@@ -1,0 +1,1765 @@
+openapi: 3.0.0
+info:
+  title: Sentio AI Web API
+  description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
+  version: '1.0'
+  contact:
+    name: Sentio
+    url: https://www.sentio.xyz
+servers:
+- url: https://api.sentio.xyz
+tags:
+- name: Web
+paths:
+  /v1/users/link:
+    get:
+      operationId: CreateLinkSession
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.LinkAccountSession'
+      tags:
+      - Web
+  /v1/dashboards/{dashboardId}:
+    delete:
+      operationId: DeleteDashboard
+      parameters:
+      - description: filter the dashboard by id
+        in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      - description: filter the dashboard by project id
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - description: username or organization name
+        in: query
+        name: ownerName
+        required: false
+        schema:
+          type: string
+      - description: project slug
+        in: query
+        name: slug
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.Dashboard'
+      summary: Delete a dashboard by id
+      tags:
+      - Web
+    get:
+      operationId: GetDashboard
+      parameters:
+      - description: filter the dashboard by id
+        in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      - description: filter the dashboard by project id
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - description: username or organization name
+        in: query
+        name: ownerName
+        required: false
+        schema:
+          type: string
+      - description: project slug
+        in: query
+        name: slug
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.GetDashboardResponse'
+      summary: Get a dashboard by id
+      tags:
+      - Web
+  /v1/dashboards/{dashboardId}/json:
+    get:
+      operationId: ExportDashboard
+      parameters:
+      - in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.ExportDashboardResponse'
+      summary: Export a dashboard to json
+      tags:
+      - Web
+  /v1/projects/{owner}/{slug}/dashboards/{dashboardId}:
+    get:
+      operationId: GetDashboard2
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - description: filter the dashboard by id
+        in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      - description: filter the dashboard by project id
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.GetDashboardResponse'
+      summary: Get a dashboard by id
+      tags:
+      - Web
+  /v1/dashboards/{dashboardId}/history:
+    get:
+      operationId: GetDashboardHistory
+      parameters:
+      - in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.GetDashboardHistoryResponse'
+      summary: Get dashboard history by dashboard id
+      tags:
+      - Web
+  /v1/dashboards/json:
+    post:
+      operationId: ImportDashboard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/web_service.ImportDashboardRequest'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.ImportDashboardResponse'
+      summary: Import a dashboard
+      tags:
+      - Web
+  /v1/dashboards:
+    get:
+      operationId: ListDashboards
+      parameters:
+      - description: filter the dashboard by id
+        in: query
+        name: dashboardId
+        required: false
+        schema:
+          type: string
+      - description: filter the dashboard by project id
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - description: username or organization name
+        in: query
+        name: ownerName
+        required: false
+        schema:
+          type: string
+      - description: project slug
+        in: query
+        name: slug
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.GetDashboardResponse'
+      summary: List all dashboards in a project
+      tags:
+      - Web
+  /v1/projects/{owner}/{slug}/dashboards:
+    get:
+      operationId: ListDashboards2
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - description: filter the dashboard by id
+        in: query
+        name: dashboardId
+        required: false
+        schema:
+          type: string
+      - description: filter the dashboard by project id
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/web_service.GetDashboardResponse'
+      summary: List all dashboards in a project
+      tags:
+      - Web
+components:
+  schemas:
+    web_service.ChartConfig.SeriesConfig:
+      properties:
+        series:
+          additionalProperties:
+            $ref: '#/components/schemas/web_service.ChartConfig.SeriesConfig.Series'
+          type: object
+      type: object
+    common.Argument:
+      properties:
+        boolValue:
+          type: boolean
+        doubleValue:
+          format: double
+          type: number
+        durationValue:
+          $ref: '#/components/schemas/common.Duration'
+        intValue:
+          format: int32
+          type: integer
+        stringValue:
+          type: string
+      type: object
+    common.Selector:
+      properties:
+        key:
+          type: string
+        operator:
+          $ref: '#/components/schemas/common.Selector.OperatorType'
+        value:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          type: array
+      title: TODO maybe MetricQuery should use this as well
+      type: object
+    common.SelectorExpr.LogicExpr:
+      properties:
+        expressions:
+          items:
+            $ref: '#/components/schemas/common.SelectorExpr'
+          type: array
+        operator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    web_service.ChartConfig.ValueFormatter:
+      default: NumberFormatter
+      enum:
+      - NumberFormatter
+      - DateFormatter
+      - StringFormatter
+      type: string
+    web_service.Dashboard.Extra.TemplateVariable:
+      properties:
+        defaultValue:
+          type: string
+        field:
+          type: string
+        options:
+          items:
+            type: string
+          type: array
+        sourceName:
+          type: string
+      type: object
+    common.ColumnState:
+      properties:
+        columnOrder:
+          items:
+            type: string
+          type: array
+        columnSizing:
+          additionalProperties:
+            format: int32
+            type: integer
+          type: object
+        columnVisibility:
+          additionalProperties:
+            type: boolean
+          type: object
+        sorting:
+          items:
+            $ref: '#/components/schemas/common.ColumnState.Sort'
+          type: array
+      type: object
+    insights_service.QueryRequest.Query:
+      properties:
+        dataSource:
+          $ref: '#/components/schemas/insights_service.DataSource'
+        eventsQuery:
+          $ref: '#/components/schemas/common.SegmentationQuery'
+        metricsQuery:
+          $ref: '#/components/schemas/common.Query'
+        priceQuery:
+          $ref: '#/components/schemas/common.PriceSegmentationQuery'
+        sourceName:
+          title: source name for the query, used when data is from a external project
+          type: string
+      type: object
+    web_service.Note:
+      properties:
+        backgroundColor:
+          type: string
+        content:
+          type: string
+        fontSize:
+          $ref: '#/components/schemas/web_service.Note.FontSize'
+        textAlign:
+          $ref: '#/components/schemas/web_service.Note.Alignment'
+        textColor:
+          type: string
+        verticalAlign:
+          $ref: '#/components/schemas/web_service.Note.VerticalAlignment'
+      type: object
+    web_service.ChartConfig.LabelConfigColumn:
+      properties:
+        name:
+          type: string
+        showLabel:
+          type: boolean
+        showValue:
+          type: boolean
+      type: object
+    web_service.Chart:
+      properties:
+        config:
+          $ref: '#/components/schemas/web_service.ChartConfig'
+        datasourceType:
+          $ref: '#/components/schemas/web_service.Chart.DataSourceType'
+        enableExperimentalFeatures:
+          title: enable experimental_features
+          type: boolean
+        eventLogsConfig:
+          $ref: '#/components/schemas/web_service.EventLogsConfig'
+        formulas:
+          items:
+            $ref: '#/components/schemas/common.Formula'
+          type: array
+        group:
+          $ref: '#/components/schemas/web_service.Group'
+        insightsQueries:
+          items:
+            $ref: '#/components/schemas/insights_service.QueryRequest.Query'
+          type: array
+        note:
+          $ref: '#/components/schemas/web_service.Note'
+        overlayGraphs:
+          items:
+            $ref: '#/components/schemas/web_service.OverlayGraph'
+          title: Overlay graphs for multi-axis support (max 3)
+          type: array
+        queries:
+          items:
+            $ref: '#/components/schemas/common.Query'
+          type: array
+        retentionQuery:
+          $ref: '#/components/schemas/common.RetentionQuery'
+        segmentationQueries:
+          items:
+            $ref: '#/components/schemas/common.SegmentationQuery'
+          type: array
+        sqlExecuteEngine:
+          $ref: '#/components/schemas/analytic_service.ExecuteEngine'
+        sqlQuery:
+          type: string
+        sqlQueryId:
+          type: string
+        type:
+          $ref: '#/components/schemas/web_service.ChartType'
+      type: object
+    web_service.ImportDashboardRequest:
+      properties:
+        dashboardId:
+          description: The id of the target dashboard to import into.
+          type: string
+        dashboardJson:
+          $ref: '#/components/schemas/web_service.Dashboard'
+        overrideLayouts:
+          description: Override the layout of target dashboard.
+          type: boolean
+      required:
+      - dashboardId
+      - dashboardJson
+      type: object
+    common.CohortsFilter.Aggregation:
+      properties:
+        aggregateProperties:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.AggregateProperties'
+        operator:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.OperatorType'
+        total:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.Total'
+        value:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          type: array
+      type: object
+    common.SegmentParameter:
+      properties:
+        allUsers:
+          type: boolean
+        cohortId:
+          type: string
+      type: object
+    insights_service.DataSource:
+      default: METRICS
+      enum:
+      - METRICS
+      - EVENTS
+      - PRICE
+      - FORMULA
+      - COHORTS
+      - SYSTEM_SQL
+      type: string
+    common.UserInfo:
+      description: The same to user but with sensitive data removed.
+      properties:
+        firstName:
+          type: string
+        id:
+          type: string
+        lastName:
+          type: string
+        nickname:
+          type: string
+        picture:
+          type: string
+        username:
+          type: string
+      type: object
+    common.RetentionQuery.Interval:
+      properties:
+        unit:
+          $ref: '#/components/schemas/common.RetentionQuery.Interval.Unit'
+        value:
+          format: int32
+          type: integer
+      type: object
+    common.TimeRange:
+      properties:
+        end:
+          $ref: '#/components/schemas/common.TimeRange.TimeLike'
+        interval:
+          $ref: '#/components/schemas/common.Duration'
+        start:
+          $ref: '#/components/schemas/common.TimeRange.TimeLike'
+        step:
+          format: int64
+          type: string
+        timezone:
+          type: string
+      type: object
+    web_service.Note.FontSize:
+      default: MD
+      enum:
+      - MD
+      - SM
+      - LG
+      - XL
+      - XXL
+      type: string
+    web_service.EventLogsConfig.TimeRangeOverride:
+      properties:
+        enabled:
+          type: boolean
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRange'
+      type: object
+    web_service.ChartConfig.YAxisConfig:
+      properties:
+        column:
+          type: string
+        max:
+          type: string
+        min:
+          type: string
+        name:
+          type: string
+        scale:
+          type: boolean
+        stacked:
+          type: string
+      type: object
+    common.CoinID.AddressIdentifier:
+      properties:
+        address:
+          type: string
+        chain:
+          type: string
+      type: object
+    web_service.SharingConfig:
+      properties:
+        hideModifiers:
+          type: boolean
+        isReadonly:
+          type: boolean
+      type: object
+    common.CohortsGroup:
+      properties:
+        filters:
+          items:
+            $ref: '#/components/schemas/common.CohortsFilter'
+          type: array
+        joinOperator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    web_service.ChartConfig.QueryValueConfig:
+      properties:
+        calculation:
+          $ref: '#/components/schemas/web_service.ChartConfig.Calculation'
+        colorTheme:
+          $ref: '#/components/schemas/web_service.ChartConfig.ColorTheme'
+        seriesCalculation:
+          $ref: '#/components/schemas/web_service.ChartConfig.Calculation'
+        showBackgroundChart:
+          type: boolean
+      type: object
+    common.SegmentationQuery.SelectorExpr.LogicExpr:
+      properties:
+        expressions:
+          items:
+            $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr'
+          type: array
+        operator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    web_service.ChartConfig.PieConfig.PieType:
+      default: Pie
+      enum:
+      - Pie
+      - Donut
+      type: string
+    web_service.ExportDashboardResponse:
+      properties:
+        dashboardJson:
+          $ref: '#/components/schemas/web_service.Dashboard'
+      type: object
+    common.TimeRange.TimeLike:
+      properties:
+        absoluteTime:
+          format: int64
+          type: string
+        relativeTime:
+          $ref: '#/components/schemas/common.TimeRange.RelativeTime'
+      type: object
+    common.RetentionQuery.Criteria:
+      default: OnOrAfter
+      enum:
+      - OnOrAfter
+      - 'On'
+      type: string
+    common.RetentionQuery.Filter.TimeFilter:
+      properties:
+        type:
+          $ref: '#/components/schemas/common.RetentionQuery.Filter.TimeFilter.Type'
+      type: object
+    web_service.ChartConfig.ScatterConfig:
+      properties:
+        color:
+          type: string
+        maxSize:
+          format: int32
+          type: integer
+        minSize:
+          format: int32
+          type: integer
+        symbolSize:
+          type: string
+      type: object
+    web_service.ChartConfig.Sort:
+      properties:
+        orderDesc:
+          type: boolean
+        sortBy:
+          $ref: '#/components/schemas/web_service.ChartConfig.SortBy'
+      type: object
+    web_service.ChartConfig.LineConfig:
+      properties:
+        smooth:
+          type: boolean
+        style:
+          $ref: '#/components/schemas/web_service.ChartConfig.LineConfig.Style'
+      type: object
+    web_service.Dashboard.Layouts.Layout:
+      properties:
+        h:
+          format: int32
+          type: integer
+        i:
+          type: string
+        w:
+          format: int32
+          type: integer
+        x:
+          format: int32
+          type: integer
+        y:
+          format: int32
+          type: integer
+      type: object
+    web_service.Note.Alignment:
+      default: LEFT
+      enum:
+      - LEFT
+      - CENTER
+      - RIGHT
+      type: string
+    web_service.Dashboard.Layouts:
+      properties:
+        layouts:
+          items:
+            $ref: '#/components/schemas/web_service.Dashboard.Layouts.Layout'
+          type: array
+      type: object
+    common.ColumnState.Sort:
+      properties:
+        desc:
+          type: boolean
+        id:
+          type: string
+      type: object
+    web_service.ChartConfig.PieConfig:
+      properties:
+        absValue:
+          type: boolean
+        calculation:
+          $ref: '#/components/schemas/web_service.ChartConfig.Calculation'
+        pieType:
+          $ref: '#/components/schemas/web_service.ChartConfig.PieConfig.PieType'
+        showPercent:
+          type: boolean
+        showValue:
+          type: boolean
+      type: object
+    common.CohortsFilter.Aggregation.AggregateProperties:
+      properties:
+        propertyName:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.AggregateProperties.AggregationType'
+      type: object
+    web_service.ChartConfig.ColorTheme:
+      properties:
+        backgroundColor:
+          type: string
+        textColor:
+          type: string
+        themeType:
+          type: string
+      type: object
+    web_service.Panel:
+      properties:
+        chart:
+          $ref: '#/components/schemas/web_service.Chart'
+        creator:
+          $ref: '#/components/schemas/common.UserInfo'
+        dashboardId:
+          type: string
+        groupId:
+          description: 'When non-empty, this panel renders inside the Group panel identified by group_id.
+
+            GROUP-typed panels must keep this field empty (groups cannot nest).'
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        updater:
+          $ref: '#/components/schemas/common.UserInfo'
+      type: object
+    web_service.OverlayGraph:
+      description: 'An additional graph overlaid on the primary chart, with its own queries
+
+        and Y-axis configuration. Chart type defaults to the parent chart type.'
+      properties:
+        chartType:
+          $ref: '#/components/schemas/web_service.ChartType'
+        dataConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.DataConfig'
+        formulas:
+          items:
+            $ref: '#/components/schemas/common.Formula'
+          type: array
+        insightsQueries:
+          items:
+            $ref: '#/components/schemas/insights_service.QueryRequest.Query'
+          title: Unified query format
+          type: array
+        lineConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.LineConfig'
+        name:
+          title: Y-axis label
+          type: string
+        sqlExecuteEngine:
+          $ref: '#/components/schemas/analytic_service.ExecuteEngine'
+        sqlQuery:
+          title: For SQL datasource
+          type: string
+        sqlQueryId:
+          title: For saved SQL queries
+          type: string
+        valueConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.ValueConfig'
+        yAxis:
+          $ref: '#/components/schemas/web_service.ChartConfig.YAxisConfig'
+      type: object
+    common.EventLogColumn:
+      properties:
+        accessorKey:
+          type: string
+        enableHiding:
+          type: boolean
+        enableResizing:
+          type: boolean
+        enableSorting:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        size:
+          format: int32
+          type: integer
+      type: object
+    web_service.ChartType:
+      default: LINE
+      enum:
+      - LINE
+      - AREA
+      - BAR
+      - BAR_GAUGE
+      - TABLE
+      - QUERY_VALUE
+      - PIE
+      - NOTE
+      - SCATTER
+      - GROUP
+      type: string
+    common.TimeRangeLite:
+      description: 'start and end time of the time range, Find more: https://docs.sentio.xyz/reference/data#time-range-configuration-guide'
+      example:
+        end: now
+        start: now-1M
+        step: 86400
+        timezone: Europe/London
+      externalDocs:
+        description: Find more about time range here.
+        url: https://docs.sentio.xyz/reference/data#time-range-configuration-guide
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+        step:
+          format: int32
+          title: interval in seconds between each data point
+          type: integer
+        timezone:
+          type: string
+      required:
+      - start
+      - end
+      - step
+      title: Time range
+      type: object
+    common.CoinID:
+      properties:
+        address:
+          $ref: '#/components/schemas/common.CoinID.AddressIdentifier'
+        symbol:
+          type: string
+      type: object
+    common.TimeRange.RelativeTime:
+      properties:
+        align:
+          type: string
+        unit:
+          type: string
+        value:
+          format: int32
+          type: integer
+      type: object
+    common.CohortsFilter:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation'
+        name:
+          type: string
+        selectorExpr:
+          $ref: '#/components/schemas/common.SelectorExpr'
+        symbol:
+          type: boolean
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+      type: object
+    common.CohortsFilter.Aggregation.Total:
+      type: object
+    web_service.Dashboard.DashboardVisibility:
+      default: INTERNAL
+      enum:
+      - INTERNAL
+      - PRIVATE
+      - PUBLIC
+      type: string
+    web_service.ChartConfig.LineConfig.Style:
+      default: Solid
+      enum:
+      - Solid
+      - Dotted
+      type: string
+    web_service.Group.Style:
+      default: DEFAULT
+      description: 'Visual treatment for the Group''s header card. Default = plain border;
+
+        Emphasis = solid highlight_color tint behind the title row.'
+      enum:
+      - DEFAULT
+      - EMPHASIS
+      type: string
+    common.SegmentationQuery.Aggregation.AggregateProperties.AggregationType:
+      default: SUM
+      enum:
+      - SUM
+      - CUMULATIVE_SUM
+      - AVG
+      - MEDIAN
+      - MIN
+      - MAX
+      - DISTINCT_COUNT
+      - CUMULATIVE_DISTINCT_COUNT
+      - CUMULATIVE_COUNT
+      - LAST
+      - CUMULATIVE_LAST
+      - FIRST
+      - CUMULATIVE_FIRST
+      - PERCENTILE_25TH
+      - PERCENTILE_75TH
+      - PERCENTILE_90TH
+      - PERCENTILE_95TH
+      - PERCENTILE_99TH
+      type: string
+    web_service.DashboardSharing:
+      properties:
+        config:
+          $ref: '#/components/schemas/web_service.SharingConfig'
+        dashboardId:
+          type: string
+        id:
+          type: string
+        isPublic:
+          type: boolean
+        viewers:
+          items:
+            type: string
+          type: array
+      type: object
+    web_service.ChartConfig.TableConfig:
+      properties:
+        calculation:
+          $ref: '#/components/schemas/web_service.ChartConfig.Calculation'
+        calculations:
+          additionalProperties:
+            $ref: '#/components/schemas/web_service.ChartConfig.Calculation'
+          type: object
+        columnOrders:
+          items:
+            type: string
+          type: array
+        columnWidths:
+          additionalProperties:
+            format: int32
+            type: integer
+          type: object
+        rowLimit:
+          format: int32
+          type: integer
+        showColumns:
+          additionalProperties:
+            type: boolean
+          title: map<string, bool> sort_by = 2;
+          type: object
+        showPlainData:
+          type: boolean
+        sortColumns:
+          items:
+            $ref: '#/components/schemas/web_service.ChartConfig.ColumnSort'
+          type: array
+        valueConfigs:
+          additionalProperties:
+            $ref: '#/components/schemas/web_service.ChartConfig.ValueConfig'
+          type: object
+      type: object
+    common.EventLogConfig:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/common.EventLogColumn'
+          type: array
+        state:
+          $ref: '#/components/schemas/common.ColumnState'
+      type: object
+    common.SegmentationQuery.Aggregation:
+      properties:
+        aggregateProperties:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.AggregateProperties'
+        countUnique:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.CountUnique'
+        total:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.Total'
+        unique:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.Unique'
+      type: object
+    common.RetentionQuery.Filter:
+      properties:
+        propertyFilter:
+          $ref: '#/components/schemas/common.SelectorExpr'
+        timeFilter:
+          $ref: '#/components/schemas/common.RetentionQuery.Filter.TimeFilter'
+      type: object
+    web_service.Note.VerticalAlignment:
+      default: TOP
+      enum:
+      - TOP
+      - MIDDLE
+      - BOTTOM
+      type: string
+    web_service.DashboardHistory:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        createdById:
+          type: string
+        dashboardId:
+          type: string
+        default:
+          type: boolean
+        description:
+          type: string
+        extra:
+          $ref: '#/components/schemas/web_service.Dashboard.Extra'
+        id:
+          format: int64
+          type: integer
+        isPinned:
+          type: boolean
+        layouts:
+          $ref: '#/components/schemas/web_service.Dashboard.ResponsiveLayouts'
+        name:
+          type: string
+        ownerId:
+          type: string
+        projectId:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        url:
+          type: string
+        version:
+          format: int32
+          type: integer
+        visibility:
+          $ref: '#/components/schemas/web_service.Dashboard.DashboardVisibility'
+      type: object
+    common.RetentionQuery.Filter.TimeFilter.Type:
+      default: Disable
+      enum:
+      - Disable
+      - FirstInTimeRange
+      - FirstInGlobal
+      type: string
+    web_service.Group:
+      description: 'Configuration for a GROUP-typed Panel — a collapsible container that holds
+
+        other panels referencing it via Panel.group_id. Groups cannot nest.'
+      properties:
+        childLayouts:
+          $ref: '#/components/schemas/web_service.Dashboard.ResponsiveLayouts'
+        collapsed:
+          type: boolean
+        highlightColor:
+          description: 'Palette key (e.g. "green", "purple") used to derive the header
+
+            background. Empty string keeps the theme default.'
+          type: string
+        style:
+          $ref: '#/components/schemas/web_service.Group.Style'
+        title:
+          type: string
+      type: object
+    web_service.ChartConfig.MarkerType:
+      default: LINE
+      enum:
+      - LINE
+      - AREA
+      - LINEX
+      type: string
+    web_service.ChartConfig.ValueConfig:
+      properties:
+        currencySymbol:
+          type: string
+        dateFormat:
+          type: string
+        mappingRules:
+          items:
+            $ref: '#/components/schemas/web_service.ChartConfig.MappingRule'
+          type: array
+        maxFractionDigits:
+          format: int32
+          type: integer
+        maxSignificantDigits:
+          format: int32
+          type: integer
+        precision:
+          format: int32
+          type: integer
+        prefix:
+          type: string
+        showValueLabel:
+          type: boolean
+        style:
+          $ref: '#/components/schemas/web_service.ChartConfig.ValueConfig.Style'
+        suffix:
+          type: string
+        tooltipTotal:
+          type: boolean
+        valueFormatter:
+          $ref: '#/components/schemas/web_service.ChartConfig.ValueFormatter'
+      type: object
+    common.Selector.OperatorType:
+      default: EQ
+      enum:
+      - EQ
+      - NEQ
+      - EXISTS
+      - NOT_EXISTS
+      - GT
+      - GTE
+      - LT
+      - LTE
+      - BETWEEN
+      - NOT_BETWEEN
+      - CONTAINS
+      - NOT_CONTAINS
+      - IN
+      - NOT_IN
+      - IN_COHORTS
+      - NOT_IN_COHORTS
+      title: TODO add Date Value and List Value and its data type
+      type: string
+    common.Function:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/common.Argument'
+          type: array
+        name:
+          type: string
+      type: object
+    common.CohortsFilter.Aggregation.AggregateProperties.AggregationType:
+      default: SUM
+      enum:
+      - SUM
+      - AVG
+      - MEDIAN
+      - MIN
+      - MAX
+      - DISTINCT_COUNT
+      - LAST
+      - FIRST
+      type: string
+    common.Formula:
+      description: the formula to combine multiple queries
+      example:
+        expression: sum(a)+sum(b)
+      properties:
+        alias:
+          title: bool enabled = 2;
+          type: string
+        color:
+          type: string
+        disabled:
+          type: boolean
+        expression:
+          type: string
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        id:
+          type: string
+      title: formula
+      type: object
+    web_service.Chart.DataSourceType:
+      default: METRICS
+      enum:
+      - METRICS
+      - NOTES
+      - ANALYTICS
+      - INSIGHTS
+      - EVENTS
+      - RETENTION
+      - SQL
+      - GROUP
+      type: string
+    common.SegmentationQuery.SelectorExpr:
+      properties:
+        logicExpr:
+          $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr.LogicExpr'
+        selector:
+          $ref: '#/components/schemas/common.Selector'
+      type: object
+    common.Query:
+      description: the query to fetch metrics data, promql
+      example:
+        aggregate: null
+        alias: transfer (24h)
+        disabled: false
+        functions:
+        - arguments:
+          - durationValue:
+              unit: d
+              value: 1
+          name: rollup_sum
+        id: a
+        labelSelector: {}
+        query: transfer_sum
+      externalDocs:
+        description: Find more about prometheus query language here.
+        url: https://prometheus.io/docs/prometheus/latest/querying/basics/
+      properties:
+        aggregate:
+          $ref: '#/components/schemas/common.Aggregate'
+        alias:
+          title: the alias of the query
+          type: string
+        color:
+          type: string
+        disabled:
+          title: hide the result, usually used for formula, default is false
+          type: boolean
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        id:
+          title: the id of the query
+          type: string
+        labelSelector:
+          additionalProperties:
+            type: string
+          type: object
+        query:
+          title: the promql query or the metric name
+          type: string
+      title: Metrics query
+      type: object
+    analytic_service.ExecuteEngine:
+      enum:
+      - ULTRA
+      - SMALL
+      - MEDIUM
+      - LARGE
+      type: string
+    web_service.ChartConfig.DataConfig:
+      properties:
+        seriesLimit:
+          format: int32
+          type: integer
+      type: object
+    common.RetentionQuery.Resource:
+      properties:
+        eventNames:
+          items:
+            type: string
+          type: array
+        filter:
+          $ref: '#/components/schemas/common.RetentionQuery.Filter'
+      type: object
+    common.Permission:
+      default: READ
+      enum:
+      - READ
+      - WRITE
+      - ADMIN
+      type: string
+    web_service.Dashboard.ResponsiveLayouts:
+      properties:
+        responsiveLayouts:
+          additionalProperties:
+            $ref: '#/components/schemas/web_service.Dashboard.Layouts'
+          type: object
+      type: object
+    common.Aggregate:
+      properties:
+        grouping:
+          items:
+            type: string
+          type: array
+        op:
+          $ref: '#/components/schemas/common.Aggregate.AggregateOps'
+      type: object
+    web_service.ChartConfig.ValueConfig.Style:
+      default: Standard
+      enum:
+      - Standard
+      - Compact
+      - Scientific
+      - Percent
+      - Currency
+      - None
+      type: string
+    web_service.ChartConfig.CompareTime:
+      properties:
+        ago:
+          $ref: '#/components/schemas/common.Duration'
+      type: object
+    common.PriceSegmentationQuery:
+      properties:
+        alias:
+          type: string
+        coinId:
+          items:
+            $ref: '#/components/schemas/common.CoinID'
+          type: array
+        color:
+          type: string
+        disabled:
+          type: boolean
+        id:
+          type: string
+      type: object
+    web_service.Dashboard.Extra:
+      properties:
+        templateVariables:
+          additionalProperties:
+            $ref: '#/components/schemas/web_service.Dashboard.Extra.TemplateVariable'
+          type: object
+        templateViews:
+          items:
+            $ref: '#/components/schemas/web_service.Dashboard.Extra.TemplateView'
+          type: array
+      type: object
+    web_service.ChartConfig.SortBy:
+      default: ByName
+      enum:
+      - ByName
+      - ByValue
+      type: string
+    common.Duration:
+      properties:
+        unit:
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    web_service.Dashboard:
+      properties:
+        createPanels:
+          items:
+            type: string
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        default:
+          type: boolean
+        description:
+          type: string
+        editPanels:
+          items:
+            type: string
+          type: array
+        extra:
+          $ref: '#/components/schemas/web_service.Dashboard.Extra'
+        id:
+          type: string
+        isPinned:
+          type: boolean
+        layouts:
+          $ref: '#/components/schemas/web_service.Dashboard.ResponsiveLayouts'
+        name:
+          type: string
+        ownerId:
+          type: string
+        panels:
+          additionalProperties:
+            $ref: '#/components/schemas/web_service.Panel'
+          type: object
+        projectId:
+          type: string
+        projectOwner:
+          type: string
+        projectSlug:
+          type: string
+        sharing:
+          $ref: '#/components/schemas/web_service.DashboardSharing'
+        tags:
+          items:
+            type: string
+          type: array
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/web_service.Dashboard.DashboardVisibility'
+      type: object
+    common.CohortsFilter.Aggregation.OperatorType:
+      default: EQ
+      enum:
+      - EQ
+      - NEQ
+      - GT
+      - GTE
+      - LT
+      - LTE
+      - BETWEEN
+      - NOT_BETWEEN
+      type: string
+    web_service.GetDashboardHistoryResponse:
+      properties:
+        histories:
+          items:
+            $ref: '#/components/schemas/web_service.DashboardHistory'
+          type: array
+        total:
+          format: int32
+          type: integer
+      type: object
+    web_service.ChartConfig.LabelConfig:
+      properties:
+        alias:
+          type: string
+        columns:
+          items:
+            $ref: '#/components/schemas/web_service.ChartConfig.LabelConfigColumn'
+          type: array
+      type: object
+    common.JoinOperator:
+      default: AND
+      enum:
+      - AND
+      - OR
+      - THEN
+      type: string
+    common.SegmentationQuery.Aggregation.Unique:
+      type: object
+    web_service.ChartConfig.SeriesConfig.Series:
+      properties:
+        type:
+          $ref: '#/components/schemas/web_service.ChartType'
+      type: object
+    web_service.ChartConfig.XAxisConfig:
+      properties:
+        column:
+          type: string
+        format:
+          type: string
+        max:
+          type: string
+        min:
+          type: string
+        name:
+          type: string
+        scale:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/web_service.ChartConfig.Sort'
+        type:
+          type: string
+      type: object
+    common.Any:
+      properties:
+        boolValue:
+          type: boolean
+        dateValue:
+          format: date-time
+          type: string
+        doubleValue:
+          format: double
+          type: number
+        intValue:
+          format: int32
+          type: integer
+        listValue:
+          $ref: '#/components/schemas/common.StringList'
+        longValue:
+          format: int64
+          type: string
+        stringValue:
+          type: string
+      type: object
+    web_service.LinkAccountSession:
+      properties:
+        sessionId:
+          type: string
+      type: object
+    common.RetentionQuery:
+      properties:
+        criteria:
+          $ref: '#/components/schemas/common.RetentionQuery.Criteria'
+        groupBy:
+          items:
+            type: string
+          type: array
+        interval:
+          $ref: '#/components/schemas/common.RetentionQuery.Interval'
+        resources:
+          items:
+            $ref: '#/components/schemas/common.RetentionQuery.Resource'
+          title: only support 2 resources
+          type: array
+        segmentBy:
+          items:
+            $ref: '#/components/schemas/common.SegmentParameter'
+          type: array
+        selectorExpr:
+          $ref: '#/components/schemas/common.SelectorExpr'
+        windowSize:
+          format: int32
+          type: integer
+      type: object
+    web_service.ChartConfig.ColumnSort:
+      properties:
+        column:
+          type: string
+        orderDesc:
+          type: boolean
+      type: object
+    web_service.Dashboard.Extra.TemplateView:
+      properties:
+        values:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    common.CohortsQuery:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/common.CohortsGroup'
+          type: array
+        id:
+          type: string
+        joinOperator:
+          $ref: '#/components/schemas/common.JoinOperator'
+        name:
+          type: string
+      type: object
+    common.Aggregate.AggregateOps:
+      default: AVG
+      enum:
+      - AVG
+      - SUM
+      - MIN
+      - MAX
+      - COUNT
+      type: string
+    common.SegmentationQuery:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation'
+        alias:
+          type: string
+        color:
+          type: string
+        disabled:
+          type: boolean
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        groupBy:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        limit:
+          format: int32
+          type: integer
+        resource:
+          $ref: '#/components/schemas/common.SegmentationQuery.Resource'
+        selectorExpr:
+          $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr'
+      type: object
+    common.StringList:
+      properties:
+        values:
+          items:
+            type: string
+          title: JoinOperator operator = 2; // this field should implement in the future
+          type: array
+      type: object
+    web_service.EventLogsConfig:
+      properties:
+        columnsConfig:
+          $ref: '#/components/schemas/common.EventLogConfig'
+        query:
+          type: string
+        sourceName:
+          type: string
+        timeRangeOverride:
+          $ref: '#/components/schemas/web_service.EventLogsConfig.TimeRangeOverride'
+      type: object
+    web_service.ChartConfig.Direction:
+      default: HORIZONTAL
+      enum:
+      - HORIZONTAL
+      - VERTICAL
+      type: string
+    common.SegmentationQuery.Aggregation.CountUnique:
+      properties:
+        duration:
+          $ref: '#/components/schemas/common.Duration'
+      type: object
+    common.SegmentationQuery.Resource:
+      properties:
+        cohortsId:
+          type: string
+        cohortsQuery:
+          $ref: '#/components/schemas/common.CohortsQuery'
+        multipleNames:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.SegmentationQuery.ResourceType'
+      type: object
+    common.SelectorExpr:
+      properties:
+        logicExpr:
+          $ref: '#/components/schemas/common.SelectorExpr.LogicExpr'
+        selector:
+          $ref: '#/components/schemas/common.Selector'
+      title: TODO migrate segmentationQuery to use this
+      type: object
+    web_service.ChartConfig.BarGaugeConfig:
+      properties:
+        calculation:
+          $ref: '#/components/schemas/web_service.ChartConfig.Calculation'
+        direction:
+          $ref: '#/components/schemas/web_service.ChartConfig.Direction'
+        sort:
+          $ref: '#/components/schemas/web_service.ChartConfig.Sort'
+      type: object
+    web_service.ChartConfig.TimeRangeOverride:
+      properties:
+        compareTime:
+          $ref: '#/components/schemas/web_service.ChartConfig.CompareTime'
+        enabled:
+          type: boolean
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRange'
+      type: object
+    web_service.ChartConfig.Calculation:
+      default: LAST
+      enum:
+      - LAST
+      - FIRST
+      - MEAN
+      - TOTAL
+      - ALL
+      - MIN
+      - MAX
+      type: string
+    web_service.ChartConfig:
+      properties:
+        barGauge:
+          $ref: '#/components/schemas/web_service.ChartConfig.BarGaugeConfig'
+        dataConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.DataConfig'
+        labelConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.LabelConfig'
+        lineConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.LineConfig'
+        markers:
+          items:
+            $ref: '#/components/schemas/web_service.ChartConfig.Marker'
+          type: array
+        pieConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.PieConfig'
+        queryValueConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.QueryValueConfig'
+        scatterConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.ScatterConfig'
+        seriesConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.SeriesConfig'
+        tableConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.TableConfig'
+        timeRangeOverride:
+          $ref: '#/components/schemas/web_service.ChartConfig.TimeRangeOverride'
+        valueConfig:
+          $ref: '#/components/schemas/web_service.ChartConfig.ValueConfig'
+        xAxis:
+          $ref: '#/components/schemas/web_service.ChartConfig.XAxisConfig'
+        yAxis:
+          $ref: '#/components/schemas/web_service.ChartConfig.YAxisConfig'
+      type: object
+    web_service.ImportDashboardResponse:
+      properties:
+        dashboard:
+          $ref: '#/components/schemas/web_service.Dashboard'
+      type: object
+    web_service.ChartConfig.Marker:
+      properties:
+        color:
+          type: string
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/web_service.ChartConfig.MarkerType'
+        value:
+          format: double
+          type: number
+        valueX:
+          type: string
+      type: object
+    common.SegmentationQuery.Aggregation.AggregateProperties:
+      properties:
+        propertyName:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.AggregateProperties.AggregationType'
+      type: object
+    common.SegmentationQuery.ResourceType:
+      default: EVENTS
+      enum:
+      - EVENTS
+      - COHORTS
+      type: string
+    common.SegmentationQuery.Aggregation.Total:
+      type: object
+    web_service.ChartConfig.MappingRule:
+      properties:
+        colorTheme:
+          $ref: '#/components/schemas/web_service.ChartConfig.ColorTheme'
+        comparison:
+          type: string
+        text:
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    common.RetentionQuery.Interval.Unit:
+      default: Day
+      enum:
+      - Day
+      - Week
+      - Month
+      type: string
+    web_service.GetDashboardResponse:
+      properties:
+        dashboards:
+          items:
+            $ref: '#/components/schemas/web_service.Dashboard'
+          type: array
+        permissions:
+          items:
+            $ref: '#/components/schemas/common.Permission'
+          type: array
+      type: object
+  securitySchemes:
+    ApiKeyHeaderAuth:
+      in: header
+      name: api-key
+      type: apiKey
+    ApiKeyQueryAuth:
+      in: query
+      name: api-key
+      type: apiKey
+externalDocs:
+  description: Sentio API Reference
+  url: https://docs.sentio.xyz/reference

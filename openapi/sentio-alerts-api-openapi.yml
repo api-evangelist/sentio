@@ -1,0 +1,1004 @@
+openapi: 3.0.0
+info:
+  title: Sentio AI Alerts API
+  description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
+  version: '1.0'
+  contact:
+    name: Sentio
+    url: https://www.sentio.xyz
+servers:
+- url: https://api.sentio.xyz
+tags:
+- name: Alerts
+paths:
+  /v1/alerts/rule/{id}:
+    delete:
+      operationId: DeleteAlertRule
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+      summary: Delete an alert rule
+      tags:
+      - Alerts
+    put:
+      operationId: SaveAlertRule2
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/alert_service.AlertService.SaveAlertRuleBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+      summary: Save an alert rule
+      tags:
+      - Alerts
+  /v1/alerts/{ruleId}:
+    get:
+      operationId: GetAlert
+      parameters:
+      - in: path
+        name: ruleId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/alert_service.GetAlertResponse'
+      summary: Find an alert rule by id, and list all alerts for this rule
+      tags:
+      - Alerts
+  /v1/alerts/rule/project/{projectId}:
+    get:
+      operationId: GetAlertRules
+      parameters:
+      - in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/alert_service.GetAlertRulesResponse'
+      summary: List all alert rules for a project
+      tags:
+      - Alerts
+  /v1/alerts/rule:
+    post:
+      operationId: SaveAlertRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/alert_service.SaveAlertRuleRequest'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+      summary: Save an alert rule
+      tags:
+      - Alerts
+components:
+  schemas:
+    common.Argument:
+      properties:
+        boolValue:
+          type: boolean
+        doubleValue:
+          format: double
+          type: number
+        durationValue:
+          $ref: '#/components/schemas/common.Duration'
+        intValue:
+          format: int32
+          type: integer
+        stringValue:
+          type: string
+      type: object
+    common.CohortsFilter.Aggregation.OperatorType:
+      default: EQ
+      enum:
+      - EQ
+      - NEQ
+      - GT
+      - GTE
+      - LT
+      - LTE
+      - BETWEEN
+      - NOT_BETWEEN
+      type: string
+    alert_service.Alert:
+      properties:
+        active:
+          type: boolean
+        createState:
+          $ref: '#/components/schemas/alert_service.Alert.AlertState'
+        endTime:
+          format: date-time
+          type: string
+        id:
+          type: string
+        lastNotified:
+          format: date-time
+          type: string
+        lastState:
+          $ref: '#/components/schemas/alert_service.Alert.AlertState'
+        query:
+          type: string
+        ruleId:
+          type: string
+        startTime:
+          format: date-time
+          type: string
+      type: object
+    common.Selector:
+      properties:
+        key:
+          type: string
+        operator:
+          $ref: '#/components/schemas/common.Selector.OperatorType'
+        value:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          type: array
+      title: TODO maybe MetricQuery should use this as well
+      type: object
+    common.JoinOperator:
+      default: AND
+      enum:
+      - AND
+      - OR
+      - THEN
+      type: string
+    common.SegmentationQuery.Aggregation.Unique:
+      type: object
+    alert_service.SQLCondition:
+      properties:
+        columnCondition:
+          $ref: '#/components/schemas/alert_service.SQLCondition.ColumnCondition'
+        rowCondition:
+          $ref: '#/components/schemas/alert_service.SQLCondition.RowCondition'
+        sqlQuery:
+          type: string
+      type: object
+    common.Any:
+      properties:
+        boolValue:
+          type: boolean
+        dateValue:
+          format: date-time
+          type: string
+        doubleValue:
+          format: double
+          type: number
+        intValue:
+          format: int32
+          type: integer
+        listValue:
+          $ref: '#/components/schemas/common.StringList'
+        longValue:
+          format: int64
+          type: string
+        stringValue:
+          type: string
+      type: object
+    common.SegmentationQuery.Aggregation:
+      properties:
+        aggregateProperties:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.AggregateProperties'
+        countUnique:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.CountUnique'
+        total:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.Total'
+        unique:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.Unique'
+      type: object
+    common.SelectorExpr.LogicExpr:
+      properties:
+        expressions:
+          items:
+            $ref: '#/components/schemas/common.SelectorExpr'
+          type: array
+        operator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    alert_service.SQLCondition.RowCondition:
+      type: object
+    common.Channel.Type:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - EMAIL
+      - SLACK
+      - TELEGRAM
+      - WEBHOOK
+      - DISCORD
+      - PAGERDUTY
+      type: string
+    alert_service.SQLCondition.ColumnCondition:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/alert_service.SQLCondition.Aggregation'
+        comparisonOp:
+          type: string
+        threshold:
+          format: double
+          type: number
+        threshold2:
+          format: double
+          type: number
+        timeColumn:
+          type: string
+        valueColumn:
+          type: string
+      type: object
+    common.CohortsQuery:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/common.CohortsGroup'
+          type: array
+        id:
+          type: string
+        joinOperator:
+          $ref: '#/components/schemas/common.JoinOperator'
+        name:
+          type: string
+      type: object
+    common.Aggregate.AggregateOps:
+      default: AVG
+      enum:
+      - AVG
+      - SUM
+      - MIN
+      - MAX
+      - COUNT
+      type: string
+    alert_service.LogCondition:
+      properties:
+        comparisonOp:
+          type: string
+        query:
+          type: string
+        threshold:
+          format: int32
+          type: integer
+        threshold2:
+          format: int32
+          type: integer
+      type: object
+    alert_service.GetAlertResponse:
+      properties:
+        alertRule:
+          $ref: '#/components/schemas/alert_service.AlertRule'
+        alerts:
+          items:
+            $ref: '#/components/schemas/alert_service.Alert'
+          type: array
+        mute:
+          $ref: '#/components/schemas/alert_service.Mute'
+      type: object
+    common.EventLogEntry:
+      properties:
+        attributes:
+          type: object
+        blockNumber:
+          format: uint64
+          type: string
+        chainId:
+          type: string
+        contractAddress:
+          type: string
+        contractName:
+          type: string
+        distinctId:
+          type: string
+        eventName:
+          type: string
+        highlightedMessage:
+          type: string
+        id:
+          type: string
+        logIndex:
+          format: int32
+          type: integer
+        logLevel:
+          type: string
+        logType:
+          type: string
+        message:
+          type: string
+        timestamp:
+          format: int64
+          type: string
+        transactionHash:
+          type: string
+        transactionIndex:
+          format: int32
+          type: integer
+      type: object
+    common.SegmentationQuery:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation'
+        alias:
+          type: string
+        color:
+          type: string
+        disabled:
+          type: boolean
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        groupBy:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        limit:
+          format: int32
+          type: integer
+        resource:
+          $ref: '#/components/schemas/common.SegmentationQuery.Resource'
+        selectorExpr:
+          $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr'
+      type: object
+    common.StringList:
+      properties:
+        values:
+          items:
+            type: string
+          title: JoinOperator operator = 2; // this field should implement in the future
+          type: array
+      type: object
+    common.Selector.OperatorType:
+      default: EQ
+      enum:
+      - EQ
+      - NEQ
+      - EXISTS
+      - NOT_EXISTS
+      - GT
+      - GTE
+      - LT
+      - LTE
+      - BETWEEN
+      - NOT_BETWEEN
+      - CONTAINS
+      - NOT_CONTAINS
+      - IN
+      - NOT_IN
+      - IN_COHORTS
+      - NOT_IN_COHORTS
+      title: TODO add Date Value and List Value and its data type
+      type: string
+    common.Function:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/common.Argument'
+          type: array
+        name:
+          type: string
+      type: object
+    common.CohortsFilter.Aggregation:
+      properties:
+        aggregateProperties:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.AggregateProperties'
+        operator:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.OperatorType'
+        total:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.Total'
+        value:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          type: array
+      type: object
+    common.CohortsFilter.Aggregation.AggregateProperties.AggregationType:
+      default: SUM
+      enum:
+      - SUM
+      - AVG
+      - MEDIAN
+      - MIN
+      - MAX
+      - DISTINCT_COUNT
+      - LAST
+      - FIRST
+      type: string
+    alert_service.AlertRule:
+      properties:
+        alertType:
+          $ref: '#/components/schemas/alert_service.AlertType'
+        channels:
+          items:
+            $ref: '#/components/schemas/common.Channel'
+          type: array
+        condition:
+          $ref: '#/components/schemas/alert_service.Condition'
+        error:
+          type: string
+        for:
+          $ref: '#/components/schemas/common.Duration'
+        group:
+          type: string
+        id:
+          type: string
+        interval:
+          $ref: '#/components/schemas/common.Duration'
+        lastQueryTime:
+          format: date-time
+          type: string
+        logCondition:
+          $ref: '#/components/schemas/alert_service.LogCondition'
+        message:
+          type: string
+        mute:
+          type: boolean
+        projectId:
+          title: project it belongs to
+          type: string
+        query:
+          type: string
+        renotifyDuration:
+          $ref: '#/components/schemas/common.Duration'
+        renotifyLimit:
+          format: int32
+          type: integer
+        sqlCondition:
+          $ref: '#/components/schemas/alert_service.SQLCondition'
+        state:
+          $ref: '#/components/schemas/alert_service.AlertRule.State'
+        subject:
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+      type: object
+    common.CohortsFilter.Aggregation.AggregateProperties:
+      properties:
+        propertyName:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.AggregateProperties.AggregationType'
+      type: object
+    alert_service.Condition.InsightQuery:
+      properties:
+        eventsQuery:
+          $ref: '#/components/schemas/common.SegmentationQuery'
+        metricsQuery:
+          $ref: '#/components/schemas/common.Query'
+        priceQuery:
+          $ref: '#/components/schemas/common.PriceSegmentationQuery'
+        sourceName:
+          type: string
+      type: object
+    common.Formula:
+      description: the formula to combine multiple queries
+      example:
+        expression: sum(a)+sum(b)
+      properties:
+        alias:
+          title: bool enabled = 2;
+          type: string
+        color:
+          type: string
+        disabled:
+          type: boolean
+        expression:
+          type: string
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        id:
+          type: string
+      title: formula
+      type: object
+    common.SegmentationQuery.Aggregation.CountUnique:
+      properties:
+        duration:
+          $ref: '#/components/schemas/common.Duration'
+      type: object
+    common.SegmentationQuery.SelectorExpr:
+      properties:
+        logicExpr:
+          $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr.LogicExpr'
+        selector:
+          $ref: '#/components/schemas/common.Selector'
+      type: object
+    alert_service.Sample:
+      properties:
+        metric:
+          additionalProperties:
+            type: string
+          type: object
+        timestamp:
+          format: date-time
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    common.Query:
+      description: the query to fetch metrics data, promql
+      example:
+        aggregate: null
+        alias: transfer (24h)
+        disabled: false
+        functions:
+        - arguments:
+          - durationValue:
+              unit: d
+              value: 1
+          name: rollup_sum
+        id: a
+        labelSelector: {}
+        query: transfer_sum
+      externalDocs:
+        description: Find more about prometheus query language here.
+        url: https://prometheus.io/docs/prometheus/latest/querying/basics/
+      properties:
+        aggregate:
+          $ref: '#/components/schemas/common.Aggregate'
+        alias:
+          title: the alias of the query
+          type: string
+        color:
+          type: string
+        disabled:
+          title: hide the result, usually used for formula, default is false
+          type: boolean
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        id:
+          title: the id of the query
+          type: string
+        labelSelector:
+          additionalProperties:
+            type: string
+          type: object
+        query:
+          title: the promql query or the metric name
+          type: string
+      title: Metrics query
+      type: object
+    alert_service.AlertType:
+      default: METRIC
+      enum:
+      - METRIC
+      - LOG
+      - SQL
+      type: string
+    common.SegmentationQuery.Resource:
+      properties:
+        cohortsId:
+          type: string
+        cohortsQuery:
+          $ref: '#/components/schemas/common.CohortsQuery'
+        multipleNames:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.SegmentationQuery.ResourceType'
+      type: object
+    alert_service.Alert.AlertState:
+      properties:
+        condition:
+          $ref: '#/components/schemas/alert_service.Condition'
+        logCondition:
+          $ref: '#/components/schemas/alert_service.LogCondition'
+        logSamples:
+          items:
+            $ref: '#/components/schemas/common.EventLogEntry'
+          type: array
+        message:
+          type: string
+        queryTimeRange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+        samples:
+          items:
+            $ref: '#/components/schemas/alert_service.Sample'
+          type: array
+        sqlCondition:
+          $ref: '#/components/schemas/alert_service.SQLCondition'
+        sqlMatchCount:
+          format: int32
+          type: integer
+        sqlSamples:
+          items:
+            type: object
+          type: array
+        state:
+          $ref: '#/components/schemas/alert_service.AlertRule.State'
+        subject:
+          type: string
+        time:
+          format: date-time
+          type: string
+      type: object
+    common.SelectorExpr:
+      properties:
+        logicExpr:
+          $ref: '#/components/schemas/common.SelectorExpr.LogicExpr'
+        selector:
+          $ref: '#/components/schemas/common.Selector'
+      title: TODO migrate segmentationQuery to use this
+      type: object
+    alert_service.SaveAlertRuleRequest:
+      properties:
+        rule:
+          $ref: '#/components/schemas/alert_service.AlertRule'
+      type: object
+    common.CoinID.AddressIdentifier:
+      properties:
+        address:
+          type: string
+        chain:
+          type: string
+      type: object
+    alert_service.SQLCondition.Aggregation:
+      default: COUNT
+      enum:
+      - COUNT
+      - SUM
+      - AVG
+      - MAX
+      - MIN
+      - LAST
+      type: string
+    common.CohortsGroup:
+      properties:
+        filters:
+          items:
+            $ref: '#/components/schemas/common.CohortsFilter'
+          type: array
+        joinOperator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    common.SegmentationQuery.SelectorExpr.LogicExpr:
+      properties:
+        expressions:
+          items:
+            $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr'
+          type: array
+        operator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    common.CoinID:
+      properties:
+        address:
+          $ref: '#/components/schemas/common.CoinID.AddressIdentifier'
+        symbol:
+          type: string
+      type: object
+    common.TimeRangeLite:
+      description: 'start and end time of the time range, Find more: https://docs.sentio.xyz/reference/data#time-range-configuration-guide'
+      example:
+        end: now
+        start: now-1M
+        step: 86400
+        timezone: Europe/London
+      externalDocs:
+        description: Find more about time range here.
+        url: https://docs.sentio.xyz/reference/data#time-range-configuration-guide
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+        step:
+          format: int32
+          title: interval in seconds between each data point
+          type: integer
+        timezone:
+          type: string
+      required:
+      - start
+      - end
+      - step
+      title: Time range
+      type: object
+    alert_service.GetAlertRulesResponse:
+      properties:
+        rules:
+          items:
+            $ref: '#/components/schemas/alert_service.AlertRule'
+          type: array
+      type: object
+    common.Aggregate:
+      properties:
+        grouping:
+          items:
+            type: string
+          type: array
+        op:
+          $ref: '#/components/schemas/common.Aggregate.AggregateOps'
+      type: object
+    common.SegmentationQuery.Aggregation.AggregateProperties:
+      properties:
+        propertyName:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.AggregateProperties.AggregationType'
+      type: object
+    common.CohortsFilter:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation'
+        name:
+          type: string
+        selectorExpr:
+          $ref: '#/components/schemas/common.SelectorExpr'
+        symbol:
+          type: boolean
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+      type: object
+    alert_service.AlertRule.State:
+      default: NO_DATA
+      enum:
+      - NO_DATA
+      - FIRING
+      - NORMAL
+      - ERROR
+      type: string
+    common.PriceSegmentationQuery:
+      properties:
+        alias:
+          type: string
+        coinId:
+          items:
+            $ref: '#/components/schemas/common.CoinID'
+          type: array
+        color:
+          type: string
+        disabled:
+          type: boolean
+        id:
+          type: string
+      type: object
+    common.SegmentationQuery.ResourceType:
+      default: EVENTS
+      enum:
+      - EVENTS
+      - COHORTS
+      type: string
+    common.CohortsFilter.Aggregation.Total:
+      type: object
+    common.SegmentationQuery.Aggregation.Total:
+      type: object
+    alert_service.Mute:
+      properties:
+        active:
+          title: unmute api will make it inactive
+          type: boolean
+        endTime:
+          format: date-time
+          type: string
+        group:
+          title: if alert id is empty, then group could be used to select a list of alerts
+          type: string
+        id:
+          type: string
+        ruleId:
+          title: can be valid alert id or empty meanning match all alerts
+          type: string
+        startTime:
+          format: date-time
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+      type: object
+    common.Channel:
+      properties:
+        customHeaders:
+          additionalProperties:
+            type: string
+          type: object
+        customWebhookUrl:
+          type: string
+        emailAddress:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        pagerdutyConfig:
+          type: object
+        projectId:
+          type: string
+        slackChannel:
+          type: string
+        slackTeam:
+          type: string
+        slackWebhookUrl:
+          type: string
+        telegramChatId:
+          type: string
+        telegramReference:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.Channel.Type'
+      title: TODO, finish this
+      type: object
+    alert_service.AlertService.SaveAlertRuleBody:
+      properties:
+        rule:
+          properties:
+            alertType:
+              $ref: '#/components/schemas/alert_service.AlertType'
+            channels:
+              items:
+                $ref: '#/components/schemas/common.Channel'
+              type: array
+            condition:
+              $ref: '#/components/schemas/alert_service.Condition'
+            error:
+              type: string
+            for:
+              $ref: '#/components/schemas/common.Duration'
+            group:
+              type: string
+            interval:
+              $ref: '#/components/schemas/common.Duration'
+            lastQueryTime:
+              format: date-time
+              type: string
+            logCondition:
+              $ref: '#/components/schemas/alert_service.LogCondition'
+            message:
+              type: string
+            mute:
+              type: boolean
+            projectId:
+              title: project it belongs to
+              type: string
+            query:
+              type: string
+            renotifyDuration:
+              $ref: '#/components/schemas/common.Duration'
+            renotifyLimit:
+              format: int32
+              type: integer
+            sqlCondition:
+              $ref: '#/components/schemas/alert_service.SQLCondition'
+            state:
+              $ref: '#/components/schemas/alert_service.AlertRule.State'
+            subject:
+              type: string
+            updateTime:
+              format: date-time
+              type: string
+          type: object
+      type: object
+    alert_service.Condition:
+      properties:
+        comparisonOp:
+          type: string
+        eventsQueries:
+          items:
+            $ref: '#/components/schemas/common.SegmentationQuery'
+          title: to be deprecated
+          type: array
+        formula:
+          $ref: '#/components/schemas/common.Formula'
+        insightQueries:
+          items:
+            $ref: '#/components/schemas/alert_service.Condition.InsightQuery'
+          type: array
+        priceQueries:
+          items:
+            $ref: '#/components/schemas/common.PriceSegmentationQuery'
+          title: to be deprecated
+          type: array
+        queries:
+          items:
+            $ref: '#/components/schemas/common.Query'
+          title: to be deprecated
+          type: array
+        threshold:
+          format: double
+          type: number
+        threshold2:
+          format: double
+          type: number
+      type: object
+    common.SegmentationQuery.Aggregation.AggregateProperties.AggregationType:
+      default: SUM
+      enum:
+      - SUM
+      - CUMULATIVE_SUM
+      - AVG
+      - MEDIAN
+      - MIN
+      - MAX
+      - DISTINCT_COUNT
+      - CUMULATIVE_DISTINCT_COUNT
+      - CUMULATIVE_COUNT
+      - LAST
+      - CUMULATIVE_LAST
+      - FIRST
+      - CUMULATIVE_FIRST
+      - PERCENTILE_25TH
+      - PERCENTILE_75TH
+      - PERCENTILE_90TH
+      - PERCENTILE_95TH
+      - PERCENTILE_99TH
+      type: string
+    common.Duration:
+      properties:
+        unit:
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+  securitySchemes:
+    ApiKeyHeaderAuth:
+      in: header
+      name: api-key
+      type: apiKey
+    ApiKeyQueryAuth:
+      in: query
+      name: api-key
+      type: apiKey
+externalDocs:
+  description: Sentio API Reference
+  url: https://docs.sentio.xyz/reference

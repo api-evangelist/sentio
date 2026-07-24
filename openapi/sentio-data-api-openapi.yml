@@ -1,0 +1,3049 @@
+openapi: 3.0.0
+info:
+  title: Sentio AI Data API
+  description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
+  version: '1.0'
+  contact:
+    name: Sentio
+    url: https://www.sentio.xyz
+servers:
+- url: https://api.sentio.xyz
+tags:
+- name: Data
+paths:
+  /v1/analytics/{owner}/{slug}/sql/cancel_query/{executionId}:
+    put:
+      description: Cancel a SQL query by execution_id.
+      operationId: CancelSQLQuery
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: executionId
+        required: true
+        schema:
+          type: string
+      - description: use project id if project_owner and project_slug are not provided
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - description: version of the datasource, default to the active version if not provided
+        in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+      summary: Cancel SQL Query
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/refreshable_materialized_view/{name}:
+    delete:
+      description: Delete a refreshable materialized view in a project.
+      operationId: DeleteRefreshableMaterializedView
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      - description: use project id if project_owner and project_slug are not provided
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+      summary: Delete Refreshable Materialized View
+      tags:
+      - Data
+    get:
+      description: Get the status of a refreshable materialized view in a project.
+      operationId: GetRefreshableMaterializedStatus
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      - description: use project id if project_owner and project_slug are not provided
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.GetRefreshableMaterializedViewStatusResponse'
+      summary: Get Refreshable Materialized View Status
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/execute:
+    post:
+      description: 'Execute SQL in a project. Go to "Data Studio" -> "SQL Editor", write your query and then click "Export as cURL"
+
+
+        ![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(102).png)
+
+
+        Find more: https://docs.sentio.xyz/reference/data#sql-api'
+      externalDocs:
+        description: find more information here
+        url: https://docs.sentio.xyz/reference/data#sql-api
+      operationId: ExecuteSQL
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analytic_service.AnalyticService.ExecuteSQLBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.SyncExecuteSQLResponse'
+      summary: Execute SQL
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/execute/async:
+    post:
+      description: Execute SQL in a project asynchronously.
+      operationId: ExecuteSQLAsync
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analytic_service.AnalyticService.ExecuteSQLAsyncBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.AsyncExecuteSQLResponse'
+      summary: Execute SQL by Async
+      tags:
+      - Data
+  /v1/metrics:
+    get:
+      operationId: GetMetrics
+      parameters:
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: labelLimit
+        required: false
+        schema:
+          type: string
+          format: uint64
+      - in: query
+        name: labelSearchQuery
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metrics_service.GetMetricsResponse'
+      summary: Get a list of metrics in a project
+      tags:
+      - Data
+  /v1/analytics/sql/sharing/{id}:
+    get:
+      description: Get sharing settings for a SQL query.
+      operationId: GetSharingSQL
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.GetSharingSQLResponse'
+      summary: Get Sharing SQL
+      tags:
+      - Data
+  /v1/insights/{owner}/{slug}/coins:
+    get:
+      description: Get a list of coins in a project.
+      operationId: ListCoins
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: searchQuery
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/insights_service.ListCoinsResponse'
+      summary: List coins
+      tags:
+      - Data
+  /v1/insights/coins:
+    get:
+      description: Get a list of coins in a project.
+      operationId: ListCoins2
+      parameters:
+      - in: query
+        name: projectOwner
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectSlug
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: searchQuery
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/insights_service.ListCoinsResponse'
+      summary: List coins
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/refreshable_materialized_views:
+    get:
+      description: List all refreshable materialized views in a project.
+      operationId: ListRefreshableMaterializedViews
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - description: use project id if project_owner and project_slug are not provided
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.ListRefreshableMaterializedViewResponse'
+      summary: List Refreshable Materialized Views
+      tags:
+      - Data
+  /v1/sql/{owner}/{slug}/tables:
+    get:
+      operationId: ListTables
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.ListTablesResponse'
+      summary: List Tables
+      tags:
+      - Data
+  /v1/sql/tables:
+    get:
+      operationId: ListTables2
+      parameters:
+      - in: query
+        name: projectOwner
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectSlug
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.ListTablesResponse'
+      summary: List Tables
+      tags:
+      - Data
+  /v1/insights/{owner}/{slug}/query:
+    post:
+      description: Query for metrics,event logs and coin prices in a project.
+      operationId: Query
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/insights_service.InsightsService.QueryBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/insights_service.QueryResponse'
+      summary: Insight Query
+      tags:
+      - Data
+  /v1/metrics/{owner}/{slug}/query:
+    post:
+      operationId: QueryInstant
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/metrics_service.ObservabilityService.QueryBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metrics_service.QueryValueResponse'
+      summary: Metric instant queries
+      tags:
+      - Data
+  /v1/eventlogs/{owner}/{slug}:
+    post:
+      operationId: QueryLog
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analytic_service.SearchService.QueryLogBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.LogQueryResponse'
+      summary: Query event logs
+      tags:
+      - Data
+  /v1/eventlogs/{owner}/{slug}/query:
+    get:
+      operationId: QueryLog2
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: timeRange.start.relativeTime.unit
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: timeRange.start.relativeTime.value
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: timeRange.start.relativeTime.align
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: timeRange.start.absoluteTime
+        required: false
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: timeRange.end.relativeTime.unit
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: timeRange.end.relativeTime.value
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: timeRange.end.relativeTime.align
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: timeRange.end.absoluteTime
+        required: false
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: timeRange.step
+        required: false
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: timeRange.interval.value
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: timeRange.interval.unit
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: timeRange.timezone
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      - description: how long the cache will be stored before it is evicted
+        in: query
+        name: cachePolicy.cacheTtlSecs
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - description: how long the cache will be refreshed in the background
+        in: query
+        name: cachePolicy.cacheRefreshTtlSecs
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - description: force refresh the cache now
+        in: query
+        name: cachePolicy.forceRefresh
+        required: false
+        schema:
+          type: boolean
+      - description: do not use cache
+        in: query
+        name: cachePolicy.noCache
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.LogQueryResponse'
+      summary: Query event logs
+      tags:
+      - Data
+  /v1/metrics/{owner}/{slug}/query_range:
+    post:
+      description: 'The easiest way to build query is through UI, you could first create an insight chart, and then **Export as cURL**.
+
+
+        ![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(101).png)'
+      operationId: QueryRange
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/metrics_service.ObservabilityService.QueryRangeBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/metrics_service.MetricsQueryResponse'
+      summary: Metric range queries
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/query_execution_detail/{executionId}:
+    get:
+      description: Query the execution detail of a SQL query by execution_id.
+      operationId: QuerySQLExecutionDetail
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: executionId
+        required: true
+        schema:
+          type: string
+      - description: use project id if project_owner and project_slug are not provided
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - description: version of the datasource, default to the active version if not provided
+        in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.QuerySQLExecutionDetailResponse'
+      summary: Query SQL Execution Detail
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/query_result/{executionId}:
+    get:
+      description: Query the result of a SQL query by execution_id.
+      operationId: QuerySQLResult
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: executionId
+        required: true
+        schema:
+          type: string
+      - description: use project id if project_owner and project_slug are not provided
+        in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - description: version of the datasource, default to the active version if not provided
+        in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.QuerySQLResultResponse'
+      summary: Query SQL Result
+      tags:
+      - Data
+  /v1/sql/{owner}/{slug}/table/{name}:
+    get:
+      description: Query table schema by name.
+      operationId: QueryTable
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.QueryTableResponse'
+      summary: Query Table By Name
+      tags:
+      - Data
+  /v1/sql/table:
+    get:
+      description: Query table schema by name.
+      operationId: QueryTable2
+      parameters:
+      - in: query
+        name: projectOwner
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectSlug
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.QueryTableResponse'
+      summary: Query Table By Name
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/tables:
+    get:
+      description: Query tables in a project. use flag to control which type of tables to include.
+      operationId: QueryTables
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: includeChains
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeViews
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeExternals
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeDash
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.QueryTablesResponse'
+      summary: Query Tables
+      tags:
+      - Data
+  /v1/analytics/sql/tables:
+    get:
+      description: Query tables in a project. use flag to control which type of tables to include.
+      operationId: QueryTables2
+      parameters:
+      - in: query
+        name: projectOwner
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectSlug
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: projectId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: includeChains
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeViews
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeExternals
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeDash
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.QueryTablesResponse'
+      summary: Query Tables
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/refreshable_materialized_view:
+    post:
+      description: Save or update a refreshable materialized view in a project.
+      operationId: SaveRefreshableMaterializedView
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analytic_service.AnalyticService.SaveRefreshableMaterializedViewBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.SaveRefreshableMaterializedViewResponse'
+      summary: Save Refreshable Materialized View
+      tags:
+      - Data
+  /v1/analytics/sql/sharing:
+    post:
+      description: Save or update sharing settings for a SQL query.
+      operationId: SaveSharingSQL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/analytic_service.SaveSharingSQLRequest'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.SaveSharingSQLResponse'
+      summary: Save Sharing SQL
+      tags:
+      - Data
+  /v1/analytics/{owner}/{slug}/sql/save:
+    post:
+      description: Save or update a SQL query in a project.
+      operationId: SaveSQL
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/analytic_service.AnalyticService.SaveSQLBody'
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.SaveSQLResponse'
+      summary: Save SQL
+      tags:
+      - Data
+    put:
+      description: Save or update a SQL query in a project.
+      operationId: SaveSQL2
+      parameters:
+      - description: username or organization name
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: project slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/analytic_service.AnalyticService.SaveSQLBody'
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analytic_service.SaveSQLResponse'
+      summary: Save SQL
+      tags:
+      - Data
+components:
+  schemas:
+    common.Organization:
+      properties:
+        createdAt:
+          format: int64
+          type: string
+        displayName:
+          type: string
+        id:
+          type: string
+        logoUrl:
+          type: string
+        members:
+          items:
+            $ref: '#/components/schemas/common.Organization.Member'
+          type: array
+        name:
+          type: string
+        oid:
+          type: string
+        projects:
+          items:
+            $ref: '#/components/schemas/common.ProjectInfo'
+          type: array
+        tier:
+          $ref: '#/components/schemas/common.Tier'
+        updatedAt:
+          format: int64
+          type: string
+      type: object
+    common.RichStruct:
+      properties:
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/common.RichValue'
+          type: object
+      type: object
+    common.Argument:
+      properties:
+        boolValue:
+          type: boolean
+        doubleValue:
+          format: double
+          type: number
+        durationValue:
+          $ref: '#/components/schemas/common.Duration'
+        intValue:
+          format: int32
+          type: integer
+        stringValue:
+          type: string
+      type: object
+    common.ComputeStats.ClickhouseStats:
+      properties:
+        memoryUsage:
+          format: uint64
+          type: string
+        queryDurationMs:
+          format: uint64
+          type: string
+        readBytes:
+          format: uint64
+          type: string
+        readRows:
+          format: uint64
+          type: string
+        resultBytes:
+          format: uint64
+          type: string
+        resultRows:
+          format: uint64
+          type: string
+      type: object
+    common.Selector:
+      properties:
+        key:
+          type: string
+        operator:
+          $ref: '#/components/schemas/common.Selector.OperatorType'
+        value:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          type: array
+      title: TODO maybe MetricQuery should use this as well
+      type: object
+    analytic_service.ExecutionInfo:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        error:
+          type: string
+        executionId:
+          type: string
+        finishedAt:
+          format: date-time
+          type: string
+        processorVersion:
+          format: int32
+          type: integer
+        queryId:
+          type: string
+        result:
+          $ref: '#/components/schemas/common.TabularData'
+        scheduledAt:
+          format: date-time
+          type: string
+        startedAt:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/analytic_service.ExecutionStatus'
+      type: object
+    analytic_service.Table:
+      properties:
+        columns:
+          additionalProperties:
+            $ref: '#/components/schemas/analytic_service.Table.Column'
+          type: object
+        name:
+          type: string
+        relatedProjectId:
+          title: only exists if table is external
+          type: string
+        tableType:
+          $ref: '#/components/schemas/analytic_service.Table.TableType'
+      type: object
+    common.SelectorExpr.LogicExpr:
+      properties:
+        expressions:
+          items:
+            $ref: '#/components/schemas/common.SelectorExpr'
+          type: array
+        operator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    metrics_service.MetricInfo:
+      properties:
+        chainId:
+          items:
+            type: string
+          type: array
+        contractAddress:
+          items:
+            type: string
+          type: array
+        contractName:
+          items:
+            type: string
+          type: array
+        displayName:
+          type: string
+        labels:
+          additionalProperties:
+            $ref: '#/components/schemas/metrics_service.MetricInfo.LabelValues'
+          type: object
+        metadata:
+          $ref: '#/components/schemas/metrics_service.MetricMetadata'
+        name:
+          type: string
+        projectId:
+          type: string
+      type: object
+    common.Channel.Type:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - EMAIL
+      - SLACK
+      - TELEGRAM
+      - WEBHOOK
+      - DISCORD
+      - PAGERDUTY
+      type: string
+    common.OrganizationRole:
+      default: ORG_MEMBER
+      enum:
+      - ORG_MEMBER
+      - ORG_ADMIN
+      type: string
+    metrics_service.ObservabilityService.QueryBody:
+      properties:
+        enableExperimentalFeatures:
+          type: boolean
+        formulas:
+          items:
+            $ref: '#/components/schemas/common.Formula'
+          type: array
+        queries:
+          items:
+            $ref: '#/components/schemas/common.Query'
+          type: array
+        samplesLimit:
+          format: int32
+          type: integer
+        samplesOffset:
+          format: int32
+          type: integer
+        time:
+          type: string
+        timezone:
+          type: string
+        version:
+          format: int32
+          type: integer
+      type: object
+    insights_service.QueryRequest.Query:
+      properties:
+        dataSource:
+          $ref: '#/components/schemas/insights_service.DataSource'
+        eventsQuery:
+          $ref: '#/components/schemas/common.SegmentationQuery'
+        metricsQuery:
+          $ref: '#/components/schemas/common.Query'
+        priceQuery:
+          $ref: '#/components/schemas/common.PriceSegmentationQuery'
+        sourceName:
+          title: source name for the query, used when data is from a external project
+          type: string
+      type: object
+    common.ColumnState:
+      properties:
+        columnOrder:
+          items:
+            type: string
+          type: array
+        columnSizing:
+          additionalProperties:
+            format: int32
+            type: integer
+          type: object
+        columnVisibility:
+          additionalProperties:
+            type: boolean
+          type: object
+        sorting:
+          items:
+            $ref: '#/components/schemas/common.ColumnState.Sort'
+          type: array
+      type: object
+    common.CohortsFilter.Aggregation:
+      properties:
+        aggregateProperties:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.AggregateProperties'
+        operator:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.OperatorType'
+        total:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.Total'
+        value:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          type: array
+      type: object
+    common.User.AccountStatus:
+      default: PENDING
+      enum:
+      - PENDING
+      - SET_USERNAME
+      - BANNED
+      - ACTIVE
+      type: string
+    common.RichValue.NullValue:
+      default: NULL_VALUE
+      enum:
+      - NULL_VALUE
+      type: string
+    common.ComputeStats:
+      properties:
+        binaryVersionHash:
+          format: uint64
+          type: string
+        clickhouseStats:
+          $ref: '#/components/schemas/common.ComputeStats.ClickhouseStats'
+        computeCostMs:
+          format: int64
+          type: string
+        computedAt:
+          format: date-time
+          type: string
+        computedBy:
+          type: string
+        isCached:
+          type: boolean
+        isRefreshing:
+          type: boolean
+      type: object
+    insights_service.DataSource:
+      default: METRICS
+      enum:
+      - METRICS
+      - EVENTS
+      - PRICE
+      - FORMULA
+      - COHORTS
+      - SYSTEM_SQL
+      type: string
+    common.UserInfo:
+      description: The same to user but with sensitive data removed.
+      properties:
+        firstName:
+          type: string
+        id:
+          type: string
+        lastName:
+          type: string
+        nickname:
+          type: string
+        picture:
+          type: string
+        username:
+          type: string
+      type: object
+    analytic_service.SaveRefreshableMaterializedViewResponse:
+      properties:
+        isUpdated:
+          type: boolean
+        name:
+          type: string
+      type: object
+    common.TimeRange:
+      properties:
+        end:
+          $ref: '#/components/schemas/common.TimeRange.TimeLike'
+        interval:
+          $ref: '#/components/schemas/common.Duration'
+        start:
+          $ref: '#/components/schemas/common.TimeRange.TimeLike'
+        step:
+          format: int64
+          type: string
+        timezone:
+          type: string
+      type: object
+    metrics_service.MetricsQueryResponse.Value:
+      properties:
+        extraValues:
+          items:
+            format: double
+            type: number
+          type: array
+        timestamp:
+          format: int64
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    analytic_service.ListTablesResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        names:
+          items:
+            type: string
+          type: array
+      type: object
+    common.CoinID.AddressIdentifier:
+      properties:
+        address:
+          type: string
+        chain:
+          type: string
+      type: object
+    analytic_service.GetRefreshableMaterializedViewStatusResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        exception:
+          type: string
+        lastRefreshTime:
+          format: date-time
+          type: string
+        lastSuccessTime:
+          format: date-time
+          type: string
+        name:
+          type: string
+        nextRefreshTime:
+          format: date-time
+          type: string
+        progress:
+          type: string
+        readBytes:
+          format: uint64
+          type: string
+        readRows:
+          format: uint64
+          type: string
+        refreshSettings:
+          $ref: '#/components/schemas/analytic_service.ViewRefreshSettings'
+        sql:
+          type: string
+        status:
+          type: string
+        totalRows:
+          format: uint64
+          type: string
+        writtenBytes:
+          format: uint64
+          type: string
+        writtenRows:
+          format: uint64
+          type: string
+      type: object
+    analytic_service.ListRefreshableMaterializedViewResponse.RefreshableMaterializedView:
+      properties:
+        name:
+          type: string
+        sql:
+          type: string
+      type: object
+    common.CohortsGroup:
+      properties:
+        filters:
+          items:
+            $ref: '#/components/schemas/common.CohortsFilter'
+          type: array
+        joinOperator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    analytic_service.AsyncExecuteSQLResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        executionId:
+          type: string
+        queryId:
+          type: string
+        queueLength:
+          format: int32
+          type: integer
+      type: object
+    common.SegmentationQuery.SelectorExpr.LogicExpr:
+      properties:
+        expressions:
+          items:
+            $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr'
+          type: array
+        operator:
+          $ref: '#/components/schemas/common.JoinOperator'
+      type: object
+    insights_service.QueryResponse:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/insights_service.QueryResponse.Result'
+          type: array
+      type: object
+    common.TimeRange.TimeLike:
+      properties:
+        absoluteTime:
+          format: int64
+          type: string
+        relativeTime:
+          $ref: '#/components/schemas/common.TimeRange.RelativeTime'
+      type: object
+    common.ProjectInfo:
+      properties:
+        createdAt:
+          format: int64
+          type: string
+        defaultTimerange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+        description:
+          type: string
+        displayName:
+          type: string
+        enableDisk:
+          type: boolean
+        enableMaterializedView:
+          type: boolean
+        id:
+          type: string
+        multiVersion:
+          type: boolean
+        owner:
+          type: string
+        slug:
+          type: string
+        superset:
+          $ref: '#/components/schemas/common.ProjectSuperset'
+        supersetEnable:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/common.Project.Type'
+        updatedAt:
+          format: int64
+          type: string
+        visibility:
+          $ref: '#/components/schemas/common.Project.Visibility'
+      type: object
+    common.ProjectSuperset:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        projectId:
+          type: string
+        syncAt:
+          format: date-time
+          type: string
+      type: object
+    analytic_service.LogQueryRequest.Filter:
+      properties:
+        field:
+          type: string
+        not:
+          type: boolean
+        value:
+          type: string
+      type: object
+    common.RichValueList:
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/common.RichValue'
+          type: array
+      type: object
+    analytic_service.SaveSQLResponse:
+      properties:
+        queryId:
+          type: string
+      type: object
+    analytic_service.ExecutionStatus:
+      default: PENDING
+      enum:
+      - PENDING
+      - RUNNING
+      - FINISHED
+      - KILLED
+      type: string
+    common.Organization.Member:
+      properties:
+        role:
+          $ref: '#/components/schemas/common.OrganizationRole'
+        user:
+          $ref: '#/components/schemas/common.UserInfo'
+      type: object
+    common.TabularData.ColumnType:
+      default: STRING
+      enum:
+      - STRING
+      - NUMBER
+      - BOOLEAN
+      - LIST
+      - TIME
+      - MAP
+      - JSON
+      - TOKEN
+      - DYNAMIC
+      type: string
+    common.CommunityProject:
+      properties:
+        chain:
+          additionalProperties:
+            $ref: '#/components/schemas/common.StringList'
+          type: object
+        curated:
+          type: boolean
+        dashAlias:
+          type: string
+      type: object
+    analytic_service.ViewRefreshSettings.RefreshStrategy:
+      default: EVERY
+      enum:
+      - EVERY
+      - AFTER
+      type: string
+    metrics_service.GetMetricsResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        metrics:
+          items:
+            $ref: '#/components/schemas/metrics_service.MetricInfo'
+          type: array
+      type: object
+    common.Project.ProjectMember:
+      properties:
+        role:
+          type: string
+        user:
+          $ref: '#/components/schemas/common.UserInfo'
+      type: object
+    common.EventLogEntry:
+      properties:
+        attributes:
+          type: object
+        blockNumber:
+          format: uint64
+          type: string
+        chainId:
+          type: string
+        contractAddress:
+          type: string
+        contractName:
+          type: string
+        distinctId:
+          type: string
+        eventName:
+          type: string
+        highlightedMessage:
+          type: string
+        id:
+          type: string
+        logIndex:
+          format: int32
+          type: integer
+        logLevel:
+          type: string
+        logType:
+          type: string
+        message:
+          type: string
+        timestamp:
+          format: int64
+          type: string
+        transactionHash:
+          type: string
+        transactionIndex:
+          format: int32
+          type: integer
+      type: object
+    analytic_service.GetSharingSQLResponse:
+      properties:
+        project:
+          $ref: '#/components/schemas/common.Project'
+        query:
+          $ref: '#/components/schemas/analytic_service.GetSharingSQLResponse.Query'
+      title: Response message for GetSharingSQL
+      type: object
+    common.ColumnState.Sort:
+      properties:
+        desc:
+          type: boolean
+        id:
+          type: string
+      type: object
+    common.BigInteger:
+      properties:
+        data:
+          format: byte
+          type: string
+        negative:
+          type: boolean
+      type: object
+    analytic_service.QueryTableResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        table:
+          $ref: '#/components/schemas/analytic_service.Table'
+      type: object
+    analytic_service.AnalyticService.ExecuteSQLBody:
+      example:
+        sqlQuery:
+          sql: SELECT uniq(distinct_id) FROM `Transfer`
+      properties:
+        cachePolicy:
+          $ref: '#/components/schemas/common.CachePolicy'
+        cursor:
+          description: Pagination cursor for the next page of results, using the value from the previous response.
+          type: string
+        engine:
+          $ref: '#/components/schemas/analytic_service.ExecuteEngine'
+        projectId:
+          title: use project id if project_owner and project_slug are not provided
+          type: string
+        sqlQuery:
+          $ref: '#/components/schemas/analytic_service.SQLQuery'
+        version:
+          format: int32
+          title: version of the datasource, default to the active version if not provided
+          type: integer
+      type: object
+    common.CohortsFilter.Aggregation.AggregateProperties:
+      properties:
+        propertyName:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation.AggregateProperties.AggregationType'
+      type: object
+    analytic_service.SaveSharingSQLRequest:
+      properties:
+        isPublic:
+          title: Whether the SQL query is publicly accessible
+          type: boolean
+        queryId:
+          title: ID of the SQL query to share
+          type: string
+      title: Request message for SaveSharingSQL
+      type: object
+    analytic_service.LogQueryRequest.Sort:
+      properties:
+        desc:
+          type: boolean
+        field:
+          type: string
+      type: object
+    analytic_service.LogQueryResponse:
+      properties:
+        after:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          title: for pagination
+          type: array
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        entries:
+          items:
+            $ref: '#/components/schemas/common.EventLogEntry'
+          type: array
+        total:
+          format: int64
+          type: string
+      type: object
+    analytic_service.GetSharingSQLResponse.Query:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        sqlQuery:
+          $ref: '#/components/schemas/analytic_service.SQLQuery'
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    analytic_service.QueryTablesResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        tables:
+          additionalProperties:
+            $ref: '#/components/schemas/analytic_service.Table'
+          type: object
+      type: object
+    metrics_service.QueryValueResponse:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/metrics_service.QueryValueResponse.Result'
+          type: array
+      type: object
+    common.Project.Type:
+      default: SENTIO
+      enum:
+      - SENTIO
+      - SUBGRAPH
+      - ACTION
+      type: string
+    common.RichValue:
+      properties:
+        bigdecimalValue:
+          $ref: '#/components/schemas/common.BigDecimal'
+        bigintValue:
+          $ref: '#/components/schemas/common.BigInteger'
+        boolValue:
+          type: boolean
+        bytesValue:
+          format: byte
+          type: string
+        floatValue:
+          format: double
+          type: number
+        int64Value:
+          format: int64
+          type: string
+        intValue:
+          format: int32
+          type: integer
+        listValue:
+          $ref: '#/components/schemas/common.RichValueList'
+        nullValue:
+          $ref: '#/components/schemas/common.RichValue.NullValue'
+        stringValue:
+          type: string
+        structValue:
+          $ref: '#/components/schemas/common.RichStruct'
+        timestampValue:
+          format: date-time
+          type: string
+        tokenValue:
+          $ref: '#/components/schemas/common.TokenAmount'
+      type: object
+    common.EventLogColumn:
+      properties:
+        accessorKey:
+          type: string
+        enableHiding:
+          type: boolean
+        enableResizing:
+          type: boolean
+        enableSorting:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        size:
+          format: int32
+          type: integer
+      type: object
+    analytic_service.QuerySQLExecutionDetailResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+      type: object
+    common.ProjectView:
+      properties:
+        config:
+          $ref: '#/components/schemas/common.ProjectView.ProjectViewConfig'
+        id:
+          type: string
+        name:
+          type: string
+        projectId:
+          type: string
+      type: object
+    common.CoinID:
+      properties:
+        address:
+          $ref: '#/components/schemas/common.CoinID.AddressIdentifier'
+        symbol:
+          type: string
+      type: object
+    common.TimeRangeLite:
+      description: 'start and end time of the time range, Find more: https://docs.sentio.xyz/reference/data#time-range-configuration-guide'
+      example:
+        end: now
+        start: now-1M
+        step: 86400
+        timezone: Europe/London
+      externalDocs:
+        description: Find more about time range here.
+        url: https://docs.sentio.xyz/reference/data#time-range-configuration-guide
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+        step:
+          format: int32
+          title: interval in seconds between each data point
+          type: integer
+        timezone:
+          type: string
+      required:
+      - start
+      - end
+      - step
+      title: Time range
+      type: object
+    metrics_service.MetricsQueryResponse.Metric:
+      properties:
+        displayName:
+          title: string project_id = 3;
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      type: object
+    metrics_service.MetricsQueryResponse.Sample:
+      properties:
+        metric:
+          $ref: '#/components/schemas/metrics_service.MetricsQueryResponse.Metric'
+        values:
+          items:
+            $ref: '#/components/schemas/metrics_service.MetricsQueryResponse.Value'
+          type: array
+      type: object
+    common.CachePolicy:
+      properties:
+        cacheRefreshTtlSecs:
+          format: int32
+          title: how long the cache will be refreshed in the background
+          type: integer
+        cacheTtlSecs:
+          format: int32
+          title: how long the cache will be stored before it is evicted
+          type: integer
+        forceRefresh:
+          title: force refresh the cache now
+          type: boolean
+        noCache:
+          title: do not use cache
+          type: boolean
+      type: object
+    common.TimeRange.RelativeTime:
+      properties:
+        align:
+          type: string
+        unit:
+          type: string
+        value:
+          format: int32
+          type: integer
+      type: object
+    common.CohortsFilter:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/common.CohortsFilter.Aggregation'
+        name:
+          type: string
+        selectorExpr:
+          $ref: '#/components/schemas/common.SelectorExpr'
+        symbol:
+          type: boolean
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+      type: object
+    metrics_service.MetricsQueryResponse.Result:
+      properties:
+        alias:
+          type: string
+        color:
+          type: string
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        error:
+          type: string
+        id:
+          type: string
+        matrix:
+          $ref: '#/components/schemas/metrics_service.MetricsQueryResponse.Matrix'
+      type: object
+    common.CohortsFilter.Aggregation.Total:
+      type: object
+    analytic_service.SQLQuery:
+      properties:
+        name:
+          description: the name of the query, if sql is empty and name not empty, the query will be fetched by the name.
+          type: string
+        parameters:
+          $ref: '#/components/schemas/common.RichStruct'
+        queryId:
+          description: the id of the query, if sql and name both empty, the query will be fetched by the id.
+          type: string
+        size:
+          format: int32
+          title: the limit of the query
+          type: integer
+        sql:
+          title: the sql query
+          type: string
+      type: object
+    common.Channel:
+      properties:
+        customHeaders:
+          additionalProperties:
+            type: string
+          type: object
+        customWebhookUrl:
+          type: string
+        emailAddress:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        pagerdutyConfig:
+          type: object
+        projectId:
+          type: string
+        slackChannel:
+          type: string
+        slackTeam:
+          type: string
+        slackWebhookUrl:
+          type: string
+        telegramChatId:
+          type: string
+        telegramReference:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.Channel.Type'
+      title: TODO, finish this
+      type: object
+    common.SegmentationQuery.Aggregation.AggregateProperties.AggregationType:
+      default: SUM
+      enum:
+      - SUM
+      - CUMULATIVE_SUM
+      - AVG
+      - MEDIAN
+      - MIN
+      - MAX
+      - DISTINCT_COUNT
+      - CUMULATIVE_DISTINCT_COUNT
+      - CUMULATIVE_COUNT
+      - LAST
+      - CUMULATIVE_LAST
+      - FIRST
+      - CUMULATIVE_FIRST
+      - PERCENTILE_25TH
+      - PERCENTILE_75TH
+      - PERCENTILE_90TH
+      - PERCENTILE_95TH
+      - PERCENTILE_99TH
+      type: string
+    analytic_service.Table.Column:
+      properties:
+        clickhouseDataType:
+          type: string
+        columnType:
+          $ref: '#/components/schemas/analytic_service.Table.Column.ColumnType'
+        isBuiltin:
+          type: boolean
+        name:
+          type: string
+      type: object
+    common.EventLogConfig:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/common.EventLogColumn'
+          type: array
+        state:
+          $ref: '#/components/schemas/common.ColumnState'
+      type: object
+    metrics_service.MetricInfo.LabelValues:
+      properties:
+        totalCount:
+          format: uint64
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    common.BigDecimal:
+      properties:
+        exp:
+          format: int32
+          type: integer
+        value:
+          $ref: '#/components/schemas/common.BigInteger'
+      type: object
+    common.SegmentationQuery.Aggregation:
+      properties:
+        aggregateProperties:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.AggregateProperties'
+        countUnique:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.CountUnique'
+        total:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.Total'
+        unique:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.Unique'
+      type: object
+    metrics_service.ObservabilityService.QueryRangeBody:
+      example:
+        formulas: []
+        queries:
+        - aggregate: null
+          alias: Mint (24 hours)
+          disabled: false
+          functions:
+          - arguments:
+            - durationValue:
+                unit: d
+                value: 1
+            name: rollup_sum
+          id: a
+          labelSelector: {}
+          query: mint_sum
+        - aggregate: null
+          alias: Burn (24 hours)
+          disabled: false
+          functions:
+          - arguments:
+            - durationValue:
+                unit: d
+                value: 1
+            name: rollup_sum
+          id: b
+          labelSelector: {}
+          query: burn_sum
+        samplesLimit: 20
+        timeRange:
+          end: now
+          start: now-30d
+          step: 3600
+          timezone: America/Los_Angeles
+      properties:
+        enableExperimentalFeatures:
+          type: boolean
+        formulas:
+          items:
+            $ref: '#/components/schemas/common.Formula'
+          type: array
+        projectId:
+          type: string
+        queries:
+          items:
+            $ref: '#/components/schemas/common.Query'
+          type: array
+        samplesLimit:
+          format: int32
+          type: integer
+        samplesOffset:
+          format: int32
+          type: integer
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+        version:
+          format: int32
+          type: integer
+      required:
+      - timeRange
+      type: object
+    common.Project.Visibility:
+      default: PUBLIC
+      enum:
+      - PUBLIC
+      - PRIVATE
+      type: string
+    common.Selector.OperatorType:
+      default: EQ
+      enum:
+      - EQ
+      - NEQ
+      - EXISTS
+      - NOT_EXISTS
+      - GT
+      - GTE
+      - LT
+      - LTE
+      - BETWEEN
+      - NOT_BETWEEN
+      - CONTAINS
+      - NOT_CONTAINS
+      - IN
+      - NOT_IN
+      - IN_COHORTS
+      - NOT_IN_COHORTS
+      title: TODO add Date Value and List Value and its data type
+      type: string
+    common.Function:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/common.Argument'
+          type: array
+        name:
+          type: string
+      type: object
+    analytic_service.AnalyticService.ExecuteSQLAsyncBody:
+      example:
+        sqlQuery:
+          sql: SELECT uniq(distinct_id) FROM `Transfer`
+      properties:
+        cachePolicy:
+          $ref: '#/components/schemas/common.CachePolicy'
+        cursor:
+          description: Pagination cursor for the next page of results, using the value from the previous response.
+          type: string
+        engine:
+          $ref: '#/components/schemas/analytic_service.ExecuteEngine'
+        projectId:
+          title: use project id if project_owner and project_slug are not provided
+          type: string
+        sqlQuery:
+          $ref: '#/components/schemas/analytic_service.SQLQuery'
+        version:
+          format: int32
+          title: version of the datasource, default to the active version if not provided
+          type: integer
+      type: object
+    common.CohortsFilter.Aggregation.AggregateProperties.AggregationType:
+      default: SUM
+      enum:
+      - SUM
+      - AVG
+      - MEDIAN
+      - MIN
+      - MAX
+      - DISTINCT_COUNT
+      - LAST
+      - FIRST
+      type: string
+    common.Matrix.Value:
+      properties:
+        timestamp:
+          format: int64
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    common.Formula:
+      description: the formula to combine multiple queries
+      example:
+        expression: sum(a)+sum(b)
+      properties:
+        alias:
+          title: bool enabled = 2;
+          type: string
+        color:
+          type: string
+        disabled:
+          type: boolean
+        expression:
+          type: string
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        id:
+          type: string
+      title: formula
+      type: object
+    common.SegmentationQuery.SelectorExpr:
+      properties:
+        logicExpr:
+          $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr.LogicExpr'
+        selector:
+          $ref: '#/components/schemas/common.Selector'
+      type: object
+    common.TokenAmount:
+      properties:
+        amount:
+          $ref: '#/components/schemas/common.BigDecimal'
+        specifiedAt:
+          format: date-time
+          title: optional, if not specified, it will use block_time in eventlogs
+          type: string
+        token:
+          $ref: '#/components/schemas/common.CoinID'
+      type: object
+    common.Query:
+      description: the query to fetch metrics data, promql
+      example:
+        aggregate: null
+        alias: transfer (24h)
+        disabled: false
+        functions:
+        - arguments:
+          - durationValue:
+              unit: d
+              value: 1
+          name: rollup_sum
+        id: a
+        labelSelector: {}
+        query: transfer_sum
+      externalDocs:
+        description: Find more about prometheus query language here.
+        url: https://prometheus.io/docs/prometheus/latest/querying/basics/
+      properties:
+        aggregate:
+          $ref: '#/components/schemas/common.Aggregate'
+        alias:
+          title: the alias of the query
+          type: string
+        color:
+          type: string
+        disabled:
+          title: hide the result, usually used for formula, default is false
+          type: boolean
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        id:
+          title: the id of the query
+          type: string
+        labelSelector:
+          additionalProperties:
+            type: string
+          type: object
+        query:
+          title: the promql query or the metric name
+          type: string
+      title: Metrics query
+      type: object
+    analytic_service.ExecuteEngine:
+      enum:
+      - ULTRA
+      - SMALL
+      - MEDIUM
+      - LARGE
+      type: string
+    common.Matrix.Sample:
+      properties:
+        metric:
+          $ref: '#/components/schemas/common.Matrix.Metric'
+        values:
+          items:
+            $ref: '#/components/schemas/common.Matrix.Value'
+          type: array
+      type: object
+    metrics_service.MetricsQueryResponse:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/metrics_service.MetricsQueryResponse.Result'
+          type: array
+      type: object
+    metrics_service.QueryValueResponse.Result:
+      properties:
+        alias:
+          type: string
+        color:
+          type: string
+        error:
+          type: string
+        id:
+          type: string
+        sample:
+          items:
+            $ref: '#/components/schemas/metrics_service.MetricsQueryResponse.Sample'
+          type: array
+      type: object
+    common.Aggregate:
+      properties:
+        grouping:
+          items:
+            type: string
+          type: array
+        op:
+          $ref: '#/components/schemas/common.Aggregate.AggregateOps'
+      type: object
+    common.PriceSegmentationQuery:
+      properties:
+        alias:
+          type: string
+        coinId:
+          items:
+            $ref: '#/components/schemas/common.CoinID'
+          type: array
+        color:
+          type: string
+        disabled:
+          type: boolean
+        id:
+          type: string
+      type: object
+    common.Matrix.Metric:
+      properties:
+        displayName:
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      type: object
+    common.Duration:
+      properties:
+        unit:
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    analytic_service.QuerySQLResultResponse:
+      properties:
+        executionInfo:
+          $ref: '#/components/schemas/analytic_service.ExecutionInfo'
+      type: object
+    common.CohortsFilter.Aggregation.OperatorType:
+      default: EQ
+      enum:
+      - EQ
+      - NEQ
+      - GT
+      - GTE
+      - LT
+      - LTE
+      - BETWEEN
+      - NOT_BETWEEN
+      type: string
+    common.JoinOperator:
+      default: AND
+      enum:
+      - AND
+      - OR
+      - THEN
+      type: string
+    common.SegmentationQuery.Aggregation.Unique:
+      type: object
+    metrics_service.MetricsQueryResponse.Matrix:
+      properties:
+        samples:
+          items:
+            $ref: '#/components/schemas/metrics_service.MetricsQueryResponse.Sample'
+          type: array
+        totalSamples:
+          format: int32
+          type: integer
+      type: object
+    common.Any:
+      properties:
+        boolValue:
+          type: boolean
+        dateValue:
+          format: date-time
+          type: string
+        doubleValue:
+          format: double
+          type: number
+        intValue:
+          format: int32
+          type: integer
+        listValue:
+          $ref: '#/components/schemas/common.StringList'
+        longValue:
+          format: int64
+          type: string
+        stringValue:
+          type: string
+      type: object
+    analytic_service.SaveSharingSQLResponse:
+      properties:
+        createdAt:
+          format: date-time
+          title: Creation timestamp
+          type: string
+        isPublic:
+          title: Whether the SQL query is publicly accessible
+          type: boolean
+        queryId:
+          title: ID of the SQL query
+          type: string
+        sharingId:
+          title: ID of the sharing record
+          type: string
+        updatedAt:
+          format: date-time
+          title: Last update timestamp
+          type: string
+      title: Response message for SaveSharingSQL
+      type: object
+    common.CohortsQuery:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/common.CohortsGroup'
+          type: array
+        id:
+          type: string
+        joinOperator:
+          $ref: '#/components/schemas/common.JoinOperator'
+        name:
+          type: string
+      type: object
+    common.Aggregate.AggregateOps:
+      default: AVG
+      enum:
+      - AVG
+      - SUM
+      - MIN
+      - MAX
+      - COUNT
+      type: string
+    common.User:
+      properties:
+        accountStatus:
+          $ref: '#/components/schemas/common.User.AccountStatus'
+        createdAt:
+          format: int64
+          type: string
+        email:
+          type: string
+        emailVerified:
+          type: boolean
+        firstName:
+          type: string
+        id:
+          type: string
+        identities:
+          items:
+            type: string
+          type: array
+        isOrganization:
+          title: true if the user is actually an organization account
+          type: boolean
+        lastName:
+          type: string
+        locale:
+          type: string
+        nickname:
+          type: string
+        picture:
+          type: string
+        sub:
+          type: string
+        tier:
+          $ref: '#/components/schemas/common.Tier'
+        updatedAt:
+          format: int64
+          type: string
+        username:
+          type: string
+        walletAddress:
+          type: string
+      type: object
+    analytic_service.Table.TableType:
+      default: RESERVED
+      enum:
+      - RESERVED
+      - EVENT
+      - METRICS
+      - SUBGRAPH
+      - MATERIALIZED_VIEW
+      - IMPORTED_EVENT
+      - SYSTEM
+      - ENTITY
+      - IMPORTED_ENTITY
+      - IMPORTED_SUBGRAPH
+      - USER_REFRESHABLE_VIEW
+      - DASH_COMMUNITY_EVENT
+      - DASH_COMMUNITY_SUBGRAPH
+      - DASH_COMMUNITY_ENTITY
+      - DASH_CURATED_EVENT
+      - DASH_CURATED_SUBGRAPH
+      - DASH_CURATED_ENTITY
+      - DASH_COMMUNITY_MATERIALIZED_VIEW
+      - DASH_CURATED_MATERIALIZED_VIEW
+      - IMPORTED_METRICS
+      - DASH_COMMUNITY_METRICS
+      - DASH_CURATED_METRICS
+      type: string
+    common.ProjectView.ProjectViewConfig:
+      properties:
+        eventLog:
+          $ref: '#/components/schemas/common.EventLogConfig'
+      type: object
+    common.SegmentationQuery:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation'
+        alias:
+          type: string
+        color:
+          type: string
+        disabled:
+          type: boolean
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
+        groupBy:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        limit:
+          format: int32
+          type: integer
+        resource:
+          $ref: '#/components/schemas/common.SegmentationQuery.Resource'
+        selectorExpr:
+          $ref: '#/components/schemas/common.SegmentationQuery.SelectorExpr'
+      type: object
+    insights_service.QueryResponse.Result:
+      properties:
+        alias:
+          type: string
+        color:
+          type: string
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        dataSource:
+          $ref: '#/components/schemas/insights_service.DataSource'
+        error:
+          type: string
+        id:
+          type: string
+        matrix:
+          $ref: '#/components/schemas/common.Matrix'
+      type: object
+    common.StringList:
+      properties:
+        values:
+          items:
+            type: string
+          title: JoinOperator operator = 2; // this field should implement in the future
+          type: array
+      type: object
+    common.Tier:
+      default: FREE
+      enum:
+      - FREE
+      - DEV
+      - PRO
+      - ENTERPRISE
+      - ANONYMOUS
+      type: string
+    metrics_service.MetricMetadata:
+      properties:
+        help:
+          type: string
+        lastSeen:
+          format: int64
+          type: string
+        type:
+          type: string
+        unit:
+          type: string
+      type: object
+    common.SegmentationQuery.Aggregation.CountUnique:
+      properties:
+        duration:
+          $ref: '#/components/schemas/common.Duration'
+      type: object
+    common.Matrix:
+      properties:
+        samples:
+          items:
+            $ref: '#/components/schemas/common.Matrix.Sample'
+          type: array
+        totalSamples:
+          format: int32
+          type: integer
+      type: object
+    insights_service.InsightsService.QueryBody:
+      properties:
+        bypassCache:
+          title: deprecated, use cachePolicy instead
+          type: boolean
+        cachePolicy:
+          $ref: '#/components/schemas/common.CachePolicy'
+        enableExperimentalFeatures:
+          title: enable experimental_features
+          type: boolean
+        formulas:
+          items:
+            $ref: '#/components/schemas/common.Formula'
+          type: array
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        projectId:
+          title: use project id if project_owner and project_slug are not provided
+          type: string
+        queries:
+          items:
+            $ref: '#/components/schemas/insights_service.QueryRequest.Query'
+          type: array
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+        version:
+          format: int32
+          title: version of the datasource, default to the active version if not provided
+          type: integer
+      type: object
+    common.SegmentationQuery.Resource:
+      properties:
+        cohortsId:
+          type: string
+        cohortsQuery:
+          $ref: '#/components/schemas/common.CohortsQuery'
+        multipleNames:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.SegmentationQuery.ResourceType'
+      type: object
+    common.SelectorExpr:
+      properties:
+        logicExpr:
+          $ref: '#/components/schemas/common.SelectorExpr.LogicExpr'
+        selector:
+          $ref: '#/components/schemas/common.Selector'
+      title: TODO migrate segmentationQuery to use this
+      type: object
+    insights_service.ListCoinsResponse:
+      properties:
+        coins:
+          items:
+            $ref: '#/components/schemas/common.CoinID'
+          type: array
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+      type: object
+    analytic_service.ListRefreshableMaterializedViewResponse:
+      properties:
+        total:
+          format: int64
+          type: string
+        views:
+          items:
+            $ref: '#/components/schemas/analytic_service.ListRefreshableMaterializedViewResponse.RefreshableMaterializedView'
+          type: array
+      type: object
+    analytic_service.Table.Column.ColumnType:
+      default: STRING
+      enum:
+      - STRING
+      - NUMBER
+      - BOOLEAN
+      - LIST
+      - TIME
+      - JSON
+      - TOKEN
+      type: string
+    analytic_service.SearchService.QueryLogBody:
+      properties:
+        after:
+          items:
+            $ref: '#/components/schemas/common.Any'
+          title: for pagination
+          type: array
+        cachePolicy:
+          $ref: '#/components/schemas/common.CachePolicy'
+        filters:
+          items:
+            $ref: '#/components/schemas/analytic_service.LogQueryRequest.Filter'
+          type: array
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        projectId:
+          type: string
+        query:
+          type: string
+        sorts:
+          items:
+            $ref: '#/components/schemas/analytic_service.LogQueryRequest.Sort'
+          type: array
+        source:
+          type: string
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRange'
+        version:
+          format: int32
+          type: integer
+      type: object
+    analytic_service.ViewRefreshSettings:
+      properties:
+        appendMode:
+          type: boolean
+        dependsOn:
+          items:
+            type: string
+          type: array
+        orderBy:
+          type: string
+        refreshInterval:
+          type: string
+        strategy:
+          $ref: '#/components/schemas/analytic_service.ViewRefreshSettings.RefreshStrategy'
+      type: object
+    common.Project:
+      properties:
+        communityProject:
+          $ref: '#/components/schemas/common.CommunityProject'
+        createdAt:
+          format: int64
+          type: string
+        defaultTimerange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+        description:
+          type: string
+        displayName:
+          type: string
+        enableDisk:
+          type: boolean
+        enableMaterializedView:
+          type: boolean
+        id:
+          type: string
+        members:
+          items:
+            $ref: '#/components/schemas/common.Project.ProjectMember'
+          type: array
+        multiVersion:
+          type: boolean
+        notificationChannels:
+          items:
+            $ref: '#/components/schemas/common.Channel'
+          type: array
+        owner:
+          $ref: '#/components/schemas/common.Owner'
+        ownerId:
+          type: string
+        ownerName:
+          type: string
+        sentioNetwork:
+          type: boolean
+        slug:
+          title: '{ownerName}/{slug} is the unique name of the project'
+          type: string
+        superset:
+          $ref: '#/components/schemas/common.ProjectSuperset'
+        supersetEnable:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/common.Project.Type'
+        updatedAt:
+          format: int64
+          type: string
+        views:
+          items:
+            $ref: '#/components/schemas/common.ProjectView'
+          type: array
+        visibility:
+          $ref: '#/components/schemas/common.Project.Visibility'
+      type: object
+    analytic_service.SyncExecuteSQLResponse:
+      properties:
+        computeStats:
+          $ref: '#/components/schemas/common.ComputeStats'
+        error:
+          type: string
+        result:
+          $ref: '#/components/schemas/common.TabularData'
+        runtimeCost:
+          format: int64
+          type: string
+      type: object
+    analytic_service.AnalyticService.SaveRefreshableMaterializedViewBody:
+      properties:
+        name:
+          title: name of the materialized view, if name is exists, the materialized view will be updated
+          type: string
+        projectId:
+          title: use project id if project_owner and project_slug are not provided
+          type: string
+        refreshSettings:
+          $ref: '#/components/schemas/analytic_service.ViewRefreshSettings'
+        sql:
+          title: the sql query
+          type: string
+      type: object
+    common.SegmentationQuery.Aggregation.AggregateProperties:
+      properties:
+        propertyName:
+          type: string
+        type:
+          $ref: '#/components/schemas/common.SegmentationQuery.Aggregation.AggregateProperties.AggregationType'
+      type: object
+    common.TabularData:
+      properties:
+        columnTypes:
+          additionalProperties:
+            $ref: '#/components/schemas/common.TabularData.ColumnType'
+          type: object
+        columns:
+          items:
+            type: string
+          type: array
+        cursor:
+          description: The pagination cursor for the next page of results. If present, use this value in the `cursor` field of the next request to retrieve subsequent data. If null or empty, there are no more results.
+          type: string
+        generatedAt:
+          format: date-time
+          type: string
+        rows:
+          items:
+            type: object
+          type: array
+      type: object
+    common.SegmentationQuery.ResourceType:
+      default: EVENTS
+      enum:
+      - EVENTS
+      - COHORTS
+      type: string
+    common.SegmentationQuery.Aggregation.Total:
+      type: object
+    common.Owner:
+      properties:
+        organization:
+          $ref: '#/components/schemas/common.Organization'
+        tier:
+          $ref: '#/components/schemas/common.Tier'
+        user:
+          $ref: '#/components/schemas/common.User'
+      type: object
+  securitySchemes:
+    ApiKeyHeaderAuth:
+      in: header
+      name: api-key
+      type: apiKey
+    ApiKeyQueryAuth:
+      in: query
+      name: api-key
+      type: apiKey
+externalDocs:
+  description: Sentio API Reference
+  url: https://docs.sentio.xyz/reference

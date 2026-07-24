@@ -1,0 +1,432 @@
+openapi: 3.0.0
+info:
+  title: Sentio AI Prices API
+  description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
+  version: '1.0'
+  contact:
+    name: Sentio
+    url: https://www.sentio.xyz
+servers:
+- url: https://api.sentio.xyz
+tags:
+- name: Prices
+paths:
+  /api/v2/prices/assets/add_by_gecko:
+    post:
+      operationId: AddAssetByGecko
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/price_service.AddAssetByGeckoRequest'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_service.AddAssetByGeckoResponse'
+      summary: Adds a new asset by its CoinGecko id.
+      tags:
+      - Prices
+  /api/v2/prices/batch:
+    post:
+      operationId: BatchGetPricesV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/price_service.BatchGetPricesV2Request'
+        description: 'Cross-product request: each entry in `assets` is priced at each entry in `timestamps`.
+
+          The response groups the results per asset as a PriceSeries (one point per timestamp).
+
+          If `timestamps` is empty, the current price is used for every asset.
+
+          Unlike GetPriceSeriesV2 (which returns a continuous range for one asset), this returns
+
+          only the discrete requested timestamps, across many assets.'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_service.BatchGetPricesV2Response'
+      summary: Prices multiple assets at multiple timestamps in one call, grouping results per asset.
+      tags:
+      - Prices
+  /api/v2/prices/series:
+    get:
+      operationId: GetPriceSeriesV2
+      parameters:
+      - in: query
+        name: asset.assetId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.address.chain
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.address.address
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.symbol
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: start
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: end
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      - description: Optional filter to narrow symbol resolution to a single asset class.
+        in: query
+        name: assetClass
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_service.GetPriceSeriesV2Response'
+      summary: Returns a continuous price series for a single asset over a [start, end] time range.
+      tags:
+      - Prices
+  /api/v2/prices:
+    get:
+      operationId: GetPriceV2
+      parameters:
+      - in: query
+        name: asset.assetId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.address.chain
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.address.address
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.symbol
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: timestamp
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: source
+        required: false
+        schema:
+          type: string
+      - description: Optional filter to narrow symbol resolution to a single asset class.
+        in: query
+        name: assetClass
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_service.GetPriceV2Response'
+      summary: Returns the price of a single asset at a given timestamp, or candidates when the asset ref is ambiguous.
+      tags:
+      - Prices
+  /api/v2/prices/assets:
+    get:
+      operationId: ListAssetsV2
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: searchQuery
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: chain
+        required: false
+        schema:
+          type: string
+      - description: Optional filter to narrow symbol resolution to a single asset class.
+        in: query
+        name: assetClass
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_service.ListAssetsV2Response'
+      summary: Lists known assets with pagination and optional search/chain/class filters.
+      tags:
+      - Prices
+  /api/v2/prices/assets/resolve:
+    get:
+      operationId: ResolveAssets
+      parameters:
+      - in: query
+        name: asset.assetId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.address.chain
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.address.address
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: asset.symbol
+        required: false
+        schema:
+          type: string
+      - description: Optional filter to narrow symbol resolution to a single asset class.
+        in: query
+        name: assetClass
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/price_service.ResolveAssetsResponse'
+      summary: Resolves an asset ref (symbol/address/id) to the matching asset candidates.
+      tags:
+      - Prices
+components:
+  schemas:
+    price_service.PriceSeries:
+      properties:
+        assetId:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/price_service.PricePoint'
+          type: array
+        source:
+          type: string
+      type: object
+    price_service.GetPriceSeriesV2Response:
+      properties:
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        series:
+          $ref: '#/components/schemas/price_service.PriceSeries'
+      type: object
+    price_service.AddressID:
+      properties:
+        address:
+          type: string
+        chain:
+          type: string
+      type: object
+    price_service.GetPriceV2Response:
+      properties:
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        price:
+          $ref: '#/components/schemas/price_service.PricePoint'
+      type: object
+    price_service.BatchGetPricesV2Response:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/price_service.BatchGetPricesV2Response.Item'
+          type: array
+      type: object
+    price_service.ListAssetsV2Response:
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/price_service.AssetCandidate'
+          type: array
+      type: object
+    price_service.BatchGetPricesV2Request:
+      description: 'Cross-product request: each entry in `assets` is priced at each entry in `timestamps`.
+
+        The response groups the results per asset as a PriceSeries (one point per timestamp).
+
+        If `timestamps` is empty, the current price is used for every asset.
+
+        Unlike GetPriceSeriesV2 (which returns a continuous range for one asset), this returns
+
+        only the discrete requested timestamps, across many assets.'
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/price_service.AssetRef'
+          type: array
+        source:
+          type: string
+        timestamps:
+          items:
+            format: date-time
+            type: string
+          type: array
+      type: object
+    price_service.BatchGetPricesV2Response.Item:
+      properties:
+        asset:
+          $ref: '#/components/schemas/price_service.AssetRef'
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        error:
+          type: string
+        series:
+          $ref: '#/components/schemas/price_service.PriceSeries'
+      type: object
+    price_service.CandidateList:
+      properties:
+        candidates:
+          items:
+            $ref: '#/components/schemas/price_service.AssetCandidate'
+          type: array
+      type: object
+    price_service.ResolveAssetsResponse:
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/price_service.AssetCandidate'
+          type: array
+      type: object
+    price_service.PricePoint:
+      properties:
+        assetId:
+          type: string
+        price:
+          format: double
+          type: number
+        source:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    price_service.AssetRef:
+      properties:
+        address:
+          $ref: '#/components/schemas/price_service.AddressID'
+        assetId:
+          type: string
+        symbol:
+          type: string
+      type: object
+    price_service.AssetCandidate:
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/price_service.AddressID'
+          type: array
+        assetClass:
+          type: string
+        assetId:
+          type: string
+        marketCap:
+          format: double
+          type: number
+        name:
+          type: string
+        symbol:
+          type: string
+      type: object
+    price_service.AddAssetByGeckoResponse.Status:
+      default: OK
+      enum:
+      - OK
+      - ALREADY_EXISTS
+      - GECKO_NOT_FOUND
+      - GECKO_RETURN_NON_SUPPORTED_CHAIN
+      type: string
+    price_service.AddAssetByGeckoRequest:
+      properties:
+        coingeckoId:
+          type: string
+      type: object
+    price_service.AddAssetByGeckoResponse:
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/price_service.AddressID'
+          type: array
+        assetId:
+          type: string
+        currentPrice:
+          format: double
+          type: number
+        message:
+          type: string
+        status:
+          $ref: '#/components/schemas/price_service.AddAssetByGeckoResponse.Status'
+        symbol:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyHeaderAuth:
+      in: header
+      name: api-key
+      type: apiKey
+    ApiKeyQueryAuth:
+      in: query
+      name: api-key
+      type: apiKey
+externalDocs:
+  description: Sentio API Reference
+  url: https://docs.sentio.xyz/reference

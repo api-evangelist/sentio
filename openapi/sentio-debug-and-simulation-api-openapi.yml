@@ -1,0 +1,877 @@
+openapi: 3.0.0
+info:
+  title: Sentio AI Debug and Simulation API
+  description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
+  version: '1.0'
+  contact:
+    name: Sentio
+    url: https://www.sentio.xyz
+servers:
+- url: https://api.sentio.xyz
+tags:
+- name: Debug and Simulation
+paths:
+  /v1/solidity/{owner}/{slug}/{chainId}/bundle/{bundleId}/call_trace:
+    get:
+      operationId: GetCallTraceByBundle
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: chainId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: bundleId
+        required: true
+        schema:
+          type: string
+      - description: Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace.
+        in: query
+        name: withInternalCalls
+        required: false
+        schema:
+          type: boolean
+      - description: Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution.
+        in: query
+        name: disableOptimizer
+        required: false
+        schema:
+          type: boolean
+      - description: Only effective when disableOptimizer=true.
+        in: query
+        name: ignoreGasCost
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/google.api.HttpBody'
+      summary: Get trace by bundle simulation
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/{chainId}/simulation/{simulationId}/call_trace:
+    get:
+      operationId: GetCallTraceBySimulation
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: chainId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: simulationId
+        required: true
+        schema:
+          type: string
+      - description: Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace.
+        in: query
+        name: withInternalCalls
+        required: false
+        schema:
+          type: boolean
+      - description: Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution.
+        in: query
+        name: disableOptimizer
+        required: false
+        schema:
+          type: boolean
+      - description: Only effective when disableOptimizer=true.
+        in: query
+        name: ignoreGasCost
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/google.api.HttpBody'
+      summary: Get trace by simulation
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/{chainId}/transaction/{txHash}/call_trace:
+    get:
+      description: 'API to get Sentio call trace. It takes `txId.txHash` and `chainSpec.chainId` arguments, where the first is transaction hash, and the second is the numeric ethereum chain ID.
+
+
+        The results looks very similar to the normal [Ethereum call trace](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(2)%20(1)%20(1)%20(1).png). But we have an additional `startIndex` and `startIndex` on each trace entry even for the LOG, representing the execution order in the trace.
+
+
+        This allows you to build chart that marks the order of fund flow.
+
+
+        ![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(2)%20(1)%20(1)%20(1).png)'
+      operationId: GetCallTraceByTransaction
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: chainId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: txHash
+        required: true
+        schema:
+          type: string
+      - description: Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace.
+        in: query
+        name: withInternalCalls
+        required: false
+        schema:
+          type: boolean
+      - description: Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution.
+        in: query
+        name: disableOptimizer
+        required: false
+        schema:
+          type: boolean
+      - description: Only effective when disableOptimizer=true.
+        in: query
+        name: ignoreGasCost
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/google.api.HttpBody'
+      summary: Get trace by transaction
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/simulation/{simulationId}:
+    get:
+      operationId: GetSimulation
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: simulationId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/solidity_service.GetSimulationResponse'
+      summary: Get simulation by ID
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/simulation_bundle/{bundleId}:
+    get:
+      operationId: GetSimulationBundleInProject
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: bundleId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/solidity_service.GetSimulationBundleResponse'
+      summary: Get bundle simulation by ID
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/simulation:
+    get:
+      operationId: GetSimulations
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: labelContains
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/solidity_service.GetSimulationsResponse'
+      summary: Get list of simulations
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/search_transactions:
+    get:
+      operationId: SearchTransactions
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: chainId
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: address
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: includeDirect
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeTrace
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeIn
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeOut
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: startBlock
+        required: false
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: endBlock
+        required: false
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: startTimestamp
+        required: false
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: endTimestamp
+        required: false
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: transactionStatus
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            format: int32
+            type: integer
+      - in: query
+        name: methodSignature
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+          format: byte
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/solidity_service.EvmSearchTransactionsResponse'
+      summary: Search transactions
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/{chainId}/simulation:
+    post:
+      description: 'Create a new transaction simulation. The simulation body should be included in the request body.
+
+        Your simulations will be saved, and a unique ID for each simulation is included in the response. It will be useful for fetching simulation details.'
+      operationId: SimulateTransaction
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: chainId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/solidity_service.SolidityAPIService.SimulateTransactionBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/solidity_service.SimulateTransactionResponse'
+      summary: Run simulation
+      tags:
+      - Debug and Simulation
+  /v1/solidity/{owner}/{slug}/{chainId}/simulation_bundle:
+    post:
+      description: You could also create bundle simulations so that one transaction could be executed one after another. For `blockNumber` `transactionIndex` `networkId` `stateOverrides` and `blockOverrides` fields, only the first simulation takes effect.
+      operationId: SimulateTransactionBundle
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: chainId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/solidity_service.SolidityAPIService.SimulateTransactionBundleBody'
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/solidity_service.SimulateTransactionBundleResponse'
+      summary: Run bundle simulation
+      tags:
+      - Debug and Simulation
+components:
+  schemas:
+    solidity_service.ChainIdentifier:
+      properties:
+        chainId:
+          type: string
+        forkId:
+          type: string
+      type: object
+    solidity_service.BlockOverrides:
+      properties:
+        baseFee:
+          type: string
+        blockHash:
+          additionalProperties:
+            type: string
+          type: object
+        blockNumber:
+          type: string
+        difficulty:
+          type: string
+        gasLimit:
+          type: string
+        timestamp:
+          type: string
+      type: object
+    google.api.HttpBody:
+      properties:
+        contentType:
+          type: string
+        data:
+          format: byte
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/google.protobuf.Any'
+          type: array
+      type: object
+    solidity_service.StateOverride:
+      properties:
+        balance:
+          description: uint256
+          title: map<string, string> stateDiff = 4;
+          type: string
+        code:
+          type: string
+        state:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    evm.TransactionReceipt:
+      properties:
+        cumulativeGasUsed:
+          type: string
+        effectiveGasPrice:
+          type: string
+        error:
+          type: string
+        gasUsed:
+          type: string
+        logs:
+          items:
+            type: object
+          type: array
+        revertReason:
+          type: string
+        status:
+          title: '0x0: failed, 0x1: succeed'
+          type: string
+      type: object
+    solidity_service.GetSimulationsResponse:
+      properties:
+        count:
+          format: int64
+          type: string
+        page:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        simulations:
+          items:
+            $ref: '#/components/schemas/solidity_service.Simulation'
+          type: array
+      type: object
+    solidity_service.Simulation:
+      properties:
+        accessList:
+          items:
+            $ref: '#/components/schemas/evm.AccessListItem'
+          type: array
+        blockNumber:
+          description: Can be "latest".
+          title: blockNumber
+          type: string
+        blockOverride:
+          $ref: '#/components/schemas/solidity_service.BlockOverrides'
+        bundleId:
+          type: string
+        chainId:
+          title: we should use chain_id in favor of network_id
+          type: string
+        chainSpec:
+          $ref: '#/components/schemas/solidity_service.ChainIdentifier'
+        createAt:
+          type: string
+        debugDeployment:
+          title: for debugging user compilation deployment
+          type: boolean
+        from:
+          type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        id:
+          type: string
+        input:
+          type: string
+        label:
+          type: string
+        maxFeePerGas:
+          type: string
+        maxPriorityFeePerGas:
+          type: string
+        networkId:
+          type: string
+        originTxHash:
+          type: string
+        result:
+          $ref: '#/components/schemas/solidity_service.Simulation.Result'
+        sharing:
+          $ref: '#/components/schemas/solidity_service.SimulationSharing'
+        sourceOverrides:
+          additionalProperties:
+            type: string
+          title: map from address to compilationID
+          type: object
+        stateOverrides:
+          additionalProperties:
+            $ref: '#/components/schemas/solidity_service.StateOverride'
+          type: object
+        to:
+          type: string
+        transactionIndex:
+          type: string
+        value:
+          type: string
+      required:
+      - networkId
+      - chainSpec
+      - to
+      - input
+      - blockNumber
+      - transactionIndex
+      - from
+      - gas
+      - gasPrice
+      - value
+      type: object
+    solidity_service.GetSimulationResponse:
+      properties:
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
+      type: object
+    solidity_service.GetSimulationBundleResponse:
+      properties:
+        error:
+          type: string
+        simulations:
+          items:
+            $ref: '#/components/schemas/solidity_service.Simulation'
+          type: array
+      type: object
+    evm.AccessListItem:
+      properties:
+        address:
+          type: string
+        storageKeys:
+          items:
+            type: string
+          type: array
+      type: object
+    solidity_service.Simulation.Result:
+      properties:
+        transaction:
+          $ref: '#/components/schemas/evm.Transaction'
+        transactionReceipt:
+          $ref: '#/components/schemas/evm.TransactionReceipt'
+      type: object
+    evm.Transaction:
+      properties:
+        accessList:
+          items:
+            $ref: '#/components/schemas/evm.AccessListItem'
+          type: array
+        blockHash:
+          type: string
+        blockNumber:
+          type: string
+        chainId:
+          type: string
+        from:
+          type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        hash:
+          type: string
+        input:
+          type: string
+        maxFeePerGas:
+          type: string
+        maxPriorityFeePerGas:
+          type: string
+        nonce:
+          type: string
+        to:
+          type: string
+        transactionIndex:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+      type: object
+    solidity_service.SimulateTransactionBundleResponse:
+      properties:
+        bundleId:
+          type: string
+        error:
+          type: string
+        simulations:
+          items:
+            $ref: '#/components/schemas/solidity_service.Simulation'
+          type: array
+      type: object
+    solidity_service.SolidityAPIService.SimulateTransactionBundleBody:
+      example:
+        simulations:
+        - blockNumber: '17415072'
+          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
+          gas: '0x31ae2'
+          gasPrice: '0xe59a1adbe'
+          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
+          network_id: '1'
+          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
+          transactionIndex: '97'
+          value: '0x0'
+        - from: '0x99922ca65188cc218a5d316969dc66d8672994f2'
+          gas: '0x52'
+          gasPrice: '0xe5909173e'
+          input: 0x
+          maxFeePerGas: '0x147d03'
+          maxPriorityFeePerGas: '0x3b023380'
+          to: '0xae96a46b64e08861cf2af8c7d954b722e0725a0c'
+          value: '0xbe32c0faed7400'
+      properties:
+        simulations:
+          description: For blockNumber, transactionIndex, networkId, stateOverrides and blockOverrides fields, only the first simulation takes effect.
+          items:
+            $ref: '#/components/schemas/solidity_service.Simulation'
+          type: array
+      required:
+      - simulations
+      type: object
+    solidity_service.SolidityAPIService.SimulateTransactionBody:
+      example:
+        simulation:
+          blockNumber: '17415072'
+          blockOverride:
+            baseFee: '0x0'
+          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
+          gas: '0x31ae2'
+          gasPrice: '0xe59a1adbe'
+          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
+          networkId: '1'
+          stateOverrides:
+            '0x0811fd1808e14f0b93f0514313965a5f142c5539':
+              balance: '0x1111111111111111'
+          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
+          transactionIndex: '97'
+          value: '0x0'
+      properties:
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
+      required:
+      - simulation
+      type: object
+    solidity_service.SimulationSharing:
+      properties:
+        id:
+          type: string
+        isPublic:
+          type: boolean
+        simulationId:
+          type: string
+      type: object
+    google.protobuf.Any:
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nIn its binary encoding, an `Any` is an ordinary message; but in other wire\nforms like JSON, it has a special encoding. The format of the type URL is\ndescribed on the `type_url` field.\n\nProtobuf APIs provide utilities to interact with `Any` values:\n\n- A 'pack' operation accepts a message and constructs a generic `Any` wrapper\n  around it.\n- An 'unpack' operation reads the content of an `Any` message, either into an\n  existing message or a new one. Unpack operations must check the type of the\n  value they unpack against the declared `type_url`.\n- An 'is' operation decides whether an `Any` contains a message of the given\n  type, i.e. whether it can 'unpack' that type.\n\nThe JSON format representation of an `Any` follows one of these cases:\n\n- For types without special-cased JSON encodings, the JSON format\n  representation of the `Any` is the same as that of the message, with an\n  additional `@type` field which contains the type URL.\n- For types with special-cased JSON encodings (typically called 'well-known'\n  types, listed in https://protobuf.dev/programming-guides/json/#any), the\n  JSON format representation has a key `@type` which contains the type URL\n  and a key `value` which contains the JSON-serialized value.\n\nThe text format representation of an `Any` is like a message with one field\nwhose name is the type URL in brackets. For example, an `Any` containing a\n`foo.Bar` message may be written `[type.googleapis.com/foo.Bar] { a: 2 }`."
+      properties:
+        '@type':
+          description: 'Identifies the type of the serialized Protobuf message with a URI reference
+
+            consisting of a prefix ending in a slash and the fully-qualified type name.
+
+
+            Example: type.googleapis.com/google.protobuf.StringValue
+
+
+            This string must contain at least one `/` character, and the content after
+
+            the last `/` must be the fully-qualified name of the type in canonical
+
+            form, without a leading dot. Do not write a scheme on these URI references
+
+            so that clients do not attempt to contact them.
+
+
+            The prefix is arbitrary and Protobuf implementations are expected to
+
+            simply strip off everything up to and including the last `/` to identify
+
+            the type. `type.googleapis.com/` is a common default prefix that some
+
+            legacy implementations require. This prefix does not indicate the origin of
+
+            the type, and URIs containing it are not expected to respond to any
+
+            requests.
+
+
+            All type URL strings must be legal URI references with the additional
+
+            restriction (for the text format) that the content of the reference
+
+            must consist only of alphanumeric characters, percent-encoded escapes, and
+
+            characters in the following set (not including the outer backticks):
+
+            `/-.~_!$&()*+,;=`. Despite our allowing percent encodings, implementations
+
+            should not unescape them to prevent confusion with existing parsers. For
+
+            example, `type.googleapis.com%2FFoo` should be rejected.
+
+
+            In the original design of `Any`, the possibility of launching a type
+
+            resolution service at these type URLs was considered but Protobuf never
+
+            implemented one and considers contacting these URLs to be problematic and
+
+            a potential security issue. Do not attempt to contact type URLs.'
+          type: string
+      type: object
+    solidity_service.SimulateTransactionResponse:
+      properties:
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
+      type: object
+    solidity_service.EvmSearchTransactionsResponse:
+      properties:
+        nextPageToken:
+          format: byte
+          type: string
+        transactions:
+          items:
+            $ref: '#/components/schemas/solidity_service.EvmRawTransaction'
+          type: array
+      type: object
+    solidity_service.EvmRawTransaction:
+      properties:
+        abiItem:
+          type: string
+        blockNumber:
+          format: int64
+          type: string
+        hash:
+          type: string
+        isIn:
+          type: boolean
+        json:
+          type: string
+        methodSignature:
+          type: string
+        methodSignatureText:
+          type: string
+        timestamp:
+          format: int64
+          type: string
+        trace:
+          type: boolean
+        transactionStatus:
+          format: int32
+          type: integer
+        tx:
+          $ref: '#/components/schemas/evm.Transaction'
+      type: object
+  securitySchemes:
+    ApiKeyHeaderAuth:
+      in: header
+      name: api-key
+      type: apiKey
+    ApiKeyQueryAuth:
+      in: query
+      name: api-key
+      type: apiKey
+externalDocs:
+  description: Sentio API Reference
+  url: https://docs.sentio.xyz/reference

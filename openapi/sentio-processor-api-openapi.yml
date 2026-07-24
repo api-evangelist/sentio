@@ -1,0 +1,296 @@
+openapi: 3.0.0
+info:
+  title: Sentio AI Processor API
+  description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
+  version: '1.0'
+  contact:
+    name: Sentio
+    url: https://www.sentio.xyz
+servers:
+- url: https://api.sentio.xyz
+tags:
+- name: Processor
+paths:
+  /v1/processors/{owner}/{slug}/activate_pending:
+    put:
+      operationId: ActivatePendingVersion
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+      summary: activate the pending version of a processor
+      tags:
+      - Processor
+  /v1/processors/{owner}/{slug}/status:
+    get:
+      operationId: GetProcessorStatusV2
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - description: " - ACTIVE: Only active version\n - PENDING: Only pending versions\n - ALL: All version"
+        in: query
+        name: version
+        required: false
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - PENDING
+          - ALL
+          default: ACTIVE
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse'
+      summary: Get processor status
+      tags:
+      - Processor
+components:
+  schemas:
+    processor_service.GetProcessorStatusResponse.ProcessorStatus:
+      properties:
+        errorRecord:
+          $ref: '#/components/schemas/common.ErrorRecord'
+        state:
+          $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
+      type: object
+    processor_service.ChainState.Status:
+      properties:
+        errorRecord:
+          $ref: '#/components/schemas/common.ErrorRecord'
+        state:
+          $ref: '#/components/schemas/processor_service.ChainState.Status.State'
+      title: Status of this chain indexer
+      type: object
+    processor_service.ChainState:
+      properties:
+        chainId:
+          description: The chain id.
+          type: string
+        estimatedLatestBlockNumber:
+          format: int64
+          type: string
+        handlerStat:
+          title: The serialized handler stat
+          type: string
+        indexerState:
+          description: The serialized indexer state.
+          type: string
+        initialStartBlockNumber:
+          format: int64
+          type: string
+        lastBlockNumber:
+          format: int64
+          type: string
+        meterState:
+          description: The serialized meter state.
+          type: string
+        processedBlockHash:
+          type: string
+        processedBlockNumber:
+          description: The most recently processed block number and block hash.
+          format: int64
+          type: string
+        processedTimestampMicros:
+          format: int64
+          type: string
+        processedVersion:
+          format: int32
+          title: Processed version
+          type: integer
+        status:
+          $ref: '#/components/schemas/processor_service.ChainState.Status'
+        templates:
+          description: The serialized templates info.
+          type: string
+        trackers:
+          description: To be deprecated after the migration.
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    processor_service.ChainState.Status.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - CATCHING_UP
+      - PROCESSING_LATEST
+      - QUEUING
+      type: string
+    processor_service.ProcessorVersionState:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - PENDING
+      - ACTIVE
+      - OBSOLETE
+      type: string
+    common.ErrorRecord:
+      properties:
+        code:
+          format: int32
+          title: same as google.rpc.status.Status.code
+          type: integer
+        createdAt:
+          format: date-time
+          title: details
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+        namespace:
+          format: int32
+          type: integer
+        namespaceCode:
+          format: int32
+          title: additional codes definted in the namespace
+          type: integer
+      type: object
+    processor_service.NetworkOverride:
+      properties:
+        chain:
+          type: string
+        host:
+          type: string
+      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - STARTING
+      - PROCESSING
+      type: string
+    processor_service.GetProcessorStatusResponse:
+      properties:
+        processors:
+          items:
+            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
+          type: array
+      type: object
+    common.UserInfo:
+      description: The same to user but with sensitive data removed.
+      properties:
+        firstName:
+          type: string
+        id:
+          type: string
+        lastName:
+          type: string
+        nickname:
+          type: string
+        picture:
+          type: string
+        username:
+          type: string
+      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorEx:
+      properties:
+        cliVersion:
+          type: string
+        codeHash:
+          type: string
+        commitSha:
+          type: string
+        debugFork:
+          type: string
+        driverVersion:
+          type: string
+        entitySchema:
+          type: string
+        entitySchemaVersion:
+          format: int32
+          type: integer
+        gitUrl:
+          type: string
+        ipfsHash:
+          type: string
+        networkOverrides:
+          items:
+            $ref: '#/components/schemas/processor_service.NetworkOverride'
+          type: array
+        numWorkers:
+          type: string
+        pause:
+          type: boolean
+        pauseAt:
+          format: date-time
+          type: string
+        pauseReason:
+          type: string
+        processorId:
+          type: string
+        processorStatus:
+          $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus'
+        referenceProjectId:
+          type: string
+        sdkVersion:
+          type: string
+        snChainId:
+          type: string
+        snRequiredChains:
+          items:
+            type: string
+          type: array
+        states:
+          items:
+            $ref: '#/components/schemas/processor_service.ChainState'
+          type: array
+        uploadedAt:
+          format: date-time
+          type: string
+        uploadedBy:
+          $ref: '#/components/schemas/common.UserInfo'
+        version:
+          format: int32
+          type: integer
+        versionLabel:
+          type: string
+        versionState:
+          $ref: '#/components/schemas/processor_service.ProcessorVersionState'
+        warnings:
+          items:
+            type: string
+          type: array
+      type: object
+  securitySchemes:
+    ApiKeyHeaderAuth:
+      in: header
+      name: api-key
+      type: apiKey
+    ApiKeyQueryAuth:
+      in: query
+      name: api-key
+      type: apiKey
+externalDocs:
+  description: Sentio API Reference
+  url: https://docs.sentio.xyz/reference

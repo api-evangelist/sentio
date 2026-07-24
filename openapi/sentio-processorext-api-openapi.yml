@@ -1,0 +1,75 @@
+openapi: 3.0.0
+info:
+  title: Sentio AI ProcessorExt API
+  description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
+  version: '1.0'
+  contact:
+    name: Sentio
+    url: https://www.sentio.xyz
+servers:
+- url: https://api.sentio.xyz
+tags:
+- name: ProcessorExt
+paths:
+  /v1/processors/{owner}/{slug}/source_files:
+    get:
+      operationId: GetProcessorSourceFiles
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - description: Optional version to fetch. If omitted, use latest active version.
+        in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/processor_service.GetProcessorSourceFilesResponse'
+      summary: Get the source files of a processor
+      tags:
+      - ProcessorExt
+components:
+  schemas:
+    processor_service.ProcessorSourceFile:
+      properties:
+        content:
+          title: content of the source file
+          type: string
+        path:
+          title: relative path of the source file
+          type: string
+      type: object
+    processor_service.GetProcessorSourceFilesResponse:
+      properties:
+        sourceFiles:
+          items:
+            $ref: '#/components/schemas/processor_service.ProcessorSourceFile'
+          title: list of source files
+          type: array
+      type: object
+  securitySchemes:
+    ApiKeyHeaderAuth:
+      in: header
+      name: api-key
+      type: apiKey
+    ApiKeyQueryAuth:
+      in: query
+      name: api-key
+      type: apiKey
+externalDocs:
+  description: Sentio API Reference
+  url: https://docs.sentio.xyz/reference
