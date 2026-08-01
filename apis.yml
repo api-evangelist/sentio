@@ -1,23 +1,230 @@
 aid: sentio
 name: Sentio
-description: Sentio is a company surfaced as a portfolio company of lightspeed-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: Sentio is a developer-first, AI-powered Web3 data and observability platform for building,
+  monitoring, and debugging on-chain applications. It provides indexing processors and hosted subgraphs
+  across EVM, Aptos, Sui, IOTA, Solana and Fuel; a Data API that turns SQL or GraphQL into REST endpoints;
+  metrics, event logs, dashboards and alerts; a crypto price API; and a transaction debugger with forks,
+  simulations and call-trace/fund-tracing tools. Sentio exposes a REST API at api.sentio.xyz (api-key
+  auth), TypeScript SDK and CLI, webhooks, and an official Model Context Protocol server. Backed by Lightspeed
+  Faction and added to the API Evangelist network; profile enriched from Sentio's published developer
+  surface.
 url: https://raw.githubusercontent.com/api-evangelist/sentio/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - lightspeed-venture-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: has-api
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
-- Company
-apis: []
+- Web3
+- Blockchain
+- Observability
+- Analytics
+- Data
+- Indexing
+- Monitoring
+- Developer Tools
+- Crypto
+- API
+apis:
+- aid: sentio:sentio-ai-api
+  name: Sentio AI API
+  description: The AI API from Sentio — 4 operation(s) for ai.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - AI
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-ai-api-openapi.yml
+- aid: sentio:sentio-alerts-api
+  name: Sentio Alerts API
+  description: The Alerts API from Sentio — 4 operation(s) for alerts.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-alerts-api-openapi.yml
+- aid: sentio:sentio-data-api
+  name: Sentio Data API
+  description: The Data API from Sentio — 25 operation(s) for data.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-data-api-openapi.yml
+- aid: sentio:sentio-debug-and-simulation-api
+  name: Sentio Debug and Simulation API
+  description: The Debug and Simulation API from Sentio — 9 operation(s) for debug and simulation.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Debug and Simulation
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-debug-and-simulation-api-openapi.yml
+- aid: sentio:sentio-forks-api
+  name: Sentio Forks API
+  description: The Forks API from Sentio — 8 operation(s) for forks.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Forks
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-forks-api-openapi.yml
+- aid: sentio:sentio-move-api
+  name: Sentio Move API
+  description: The Move API from Sentio — 2 operation(s) for move.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Move
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-move-api-openapi.yml
+- aid: sentio:sentio-price-api
+  name: Sentio Price API
+  description: The Price API from Sentio — 5 operation(s) for price.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Price
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-price-api-openapi.yml
+- aid: sentio:sentio-prices-api
+  name: Sentio Prices API
+  description: The Prices API from Sentio — 6 operation(s) for prices.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Prices
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-prices-api-openapi.yml
+- aid: sentio:sentio-processor-api
+  name: Sentio Processor API
+  description: The Processor API from Sentio — 2 operation(s) for processor.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Processor
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-processor-api-openapi.yml
+- aid: sentio:sentio-processorext-api
+  name: Sentio ProcessorExt API
+  description: The ProcessorExt API from Sentio — 1 operation(s) for processorext.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - ProcessorExt
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-processorext-api-openapi.yml
+- aid: sentio:sentio-web-api
+  name: Sentio Web API
+  description: The Web API from Sentio — 8 operation(s) for web.
+  humanURL: https://docs.sentio.xyz/reference
+  baseURL: https://api.sentio.xyz
+  tags:
+  - Web
+  properties:
+  - type: OpenAPI
+    url: openapi/sentio-web-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: AgenticAccess
+  url: agentic-access/sentio-agentic-access.yml
+- type: DomainSecurity
+  url: security/sentio-domain-security.yml
+- type: Authentication
+  url: authentication/sentio-authentication.yml
+- type: DeveloperPortal
+  url: https://docs.sentio.xyz
+- type: Documentation
+  url: https://docs.sentio.xyz/docs/quickstart
+- type: APIReference
+  url: https://docs.sentio.xyz/reference
+- type: GettingStarted
+  url: https://docs.sentio.xyz/docs/quickstart
+- type: SignUp
+  url: https://app.sentio.xyz/
+- type: Pricing
+  url: https://www.sentio.xyz/pricing
+- type: Blog
+  url: https://www.sentio.xyz/blog
+- type: TermsOfService
+  url: https://www.sentio.xyz/terms
+- type: PrivacyPolicy
+  url: https://www.sentio.xyz/privacy
+- type: Support
+  url: https://docs.sentio.xyz/docs/getting-support
+- type: GitHubOrganization
+  url: https://github.com/sentioxyz
+- type: ChangeLog
+  url: https://docs.sentio.xyz/changelog
+- type: StatusPage
+  url: https://status.sentio.xyz
+- type: X
+  url: https://twitter.com/sentioxyz
+- type: Discord
+  url: https://discord.gg/vSdkMYqnjb
+- type: LLMsTxt
+  url: llms/sentio-llms.txt
+- type: Packages
+  url: packages/sentio-packages.yml
+- type: SDKs
+  url: packages/sentio-packages.yml
+- type: CLI
+  url: cli/sentio-cli.yml
+- type: MCPServer
+  url: mcp/sentio-mcp.yml
+- type: WellKnown
+  url: well-known/sentio-well-known.yml
+- type: ErrorCatalog
+  url: errors/sentio-error-codes.yml
+- type: Conventions
+  url: conventions/sentio-conventions.yml
+- type: Lifecycle
+  url: lifecycle/sentio-lifecycle.yml
+- type: ChangeLog
+  url: changelog/sentio-changelog.yml
+- type: Conformance
+  url: conformance/sentio-conformance.yml
+- type: DataModel
+  url: data-model/sentio-data-model.yml
+- type: Webhooks
+  url: asyncapi/sentio-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+image: https://www.sentio.xyz/favicon.ico
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1

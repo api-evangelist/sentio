@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sentio.xyz/docs/cli-reference
+name: sentio
+package: '@sentio/cli'
+install:
+- method: npm
+  command: npm install -g @sentio/cli
+- method: npx
+  command: npx -y -p @sentio/cli sentio <command>
+auth: sentio login --api-key <your api key>  (keys created at https://app.sentio.xyz/profile/apikeys)
+commands:
+- name: login
+  summary: Authenticate the CLI with your Sentio API key / host.
+- name: create
+  summary: Scaffold a new Sentio processor project.
+- name: add
+  summary: Add a contract/ABI or template to the processor project.
+- name: gen
+  summary: Generate typed bindings from ABIs / schema.
+- name: build
+  summary: Build the processor bundle locally.
+- name: upload
+  summary: Upload / deploy the processor to Sentio.

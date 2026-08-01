@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/sentio-openapi.yml
+skills:
+  - file: sentio-query-onchain-data.md
+    name: Query Sentio on-chain data with SQL
+    api: openapi/sentio-openapi.yml
+    operations: [ExecuteSQL, ExecuteSQLAsync, QuerySQLResult, QueryLog]
+  - file: sentio-coin-prices.md
+    name: Look up crypto prices with Sentio
+    api: openapi/sentio-openapi.yml
+    operations: [GetPrice, BatchGetPrices, ListCoins]
+  - file: sentio-simulate-transaction.md
+    name: Simulate and trace a transaction with Sentio
+    api: openapi/sentio-openapi.yml
+    operations: [CreateFork, SimulateTransaction, GetCallTraceByTransaction, SearchTransactions]

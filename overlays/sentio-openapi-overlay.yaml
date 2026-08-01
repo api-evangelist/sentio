@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sentio API
+  version: 1.0.0
+extends: openapi/sentio-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: sentio
+      x-apievangelist-source: https://docs.sentio.xyz/reference
+      x-apievangelist-note: >-
+        Spec reconstructed by merging the per-operation OpenAPI 3.0 fragments Sentio
+        publishes on each docs.sentio.xyz/reference page. Servers, securitySchemes,
+        paths and component schemas are verbatim from those fragments.
+  - target: $.info
+    update:
+      x-apievangelist-auth: api-key (header or query, name "api-key")
+      x-apievangelist-pagination: cursor
+      x-apievangelist-error-envelope: grpc-gateway google.rpc.Status
+      x-apievangelist-webhooks: https://docs.sentio.xyz/docs/webhook
+      x-apievangelist-mcp: "@sentio/mcp"

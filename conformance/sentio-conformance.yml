@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sentio-openapi.yml
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: API reference published as OpenAPI 3.0.0 fragments (servers, securitySchemes, paths).
+- id: apikey-auth
+  conforms: true
+  evidence: securitySchemes ApiKeyHeaderAuth / ApiKeyQueryAuth (type apiKey, name api-key).
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in the spec.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use grpc-gateway google.rpc.Status envelope, not application/problem+json.
+- id: cursor-pagination
+  conforms: true
+  evidence: Data APIs page via a cursor field.
+- id: grpc
+  conforms: true
+  evidence: REST surface is grpc-gateway-generated; @sentio/protos publishes protobuf types.

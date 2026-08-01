@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sentio.xyz/reference/data ; https://docs.sentio.xyz/docs/api-key ; openapi/sentio-openapi.yml
+authentication:
+  style: api-key
+  transport:
+  - 'header: api-key'
+  - 'query: api-key'
+  docs: https://docs.sentio.xyz/docs/api-key
+  note: Create keys at https://app.sentio.xyz/profile/apikeys. Token-based auth also supported (see MCP).
+base_url: https://api.sentio.xyz
+pagination:
+  style: cursor
+  request_field: cursor
+  note: 'Data APIs (SQL, logs) return a cursor; re-POST the same endpoint with {"cursor": <value>} to
+    page. See https://docs.sentio.xyz/reference/data'
+  cross_link: errors/sentio-error-codes.yml
+error_envelope:
+  style: grpc-gateway (google.rpc.Status)
+  fields:
+  - code
+  - message
+  - details
+  example_error: NOT_FOUND returned by GetPrice when no price data exists
+  cross_link: errors/sentio-error-codes.yml
+idempotency:
+  supported: false
+  note: No documented idempotency-key header at time of harvest.
+versioning:
+  style: uri-path
+  values:
+  - v1
+  - v2
+  note: Paths under /v1/... ; some resources have v2 variants.
+  cross_link: lifecycle/sentio-lifecycle.yml
+webhooks:
+  supported: true
+  cross_link: asyncapi/sentio-webhooks.yml

@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sentio-openapi.yml
+note: Entities derived from OpenAPI component schemas and path structure. Most resources are scoped to
+  a project addressed by {owner}/{slug}.
+root_scope:
+  path: /v1/.../{owner}/{slug}
+  description: owner (user/org) + project slug scope nearly every resource.
+entities:
+- name: Dashboard
+  belongs_to: Project (via owner/slug path)
+- name: AlertRule
+  belongs_to: Project (via owner/slug path)
+- name: Alert
+  belongs_to: Project (via owner/slug path)
+- name: Fork
+  belongs_to: Project (via owner/slug path)
+- name: Simulation
+  belongs_to: Project (via owner/slug path)
+- name: SqlQuery
+  belongs_to: Project (via owner/slug path)
+- name: MaterializedView
+  belongs_to: Project (via owner/slug path)
+- name: Coin
+  belongs_to: Project (via owner/slug path)
+- name: Asset
+  belongs_to: Project (via owner/slug path)
+- name: Metric
+  belongs_to: Project (via owner/slug path)
+- name: EventLog
+  belongs_to: Project (via owner/slug path)
+- name: Project
+  belongs_to: Project (via owner/slug path)
+- name: ChatSession
+  belongs_to: Project (via owner/slug path)
+schema_count: 326

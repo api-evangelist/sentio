@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sentio.xyz/changelog
+scheme: product-updates
+format: dated-entries
+entries:
+- title: Sentio SDK 4.0 Released
+  url: https://docs.sentio.xyz/changelog/sentio-sdk-40-released
+  type: release
+  area: sdk
+- title: Sentio SDK 3.0 released
+  url: https://docs.sentio.xyz/changelog/sentio-sdk-30-released
+  type: release
+  area: sdk
+- title: 2024 Feature Roundup
+  url: https://docs.sentio.xyz/changelog/2024-feature-roundup
+  type: roundup
+- title: SDK v2.39.6 & CLI v2.18.7
+  url: https://docs.sentio.xyz/changelog/sdk-v2396-cli-v2187
+  type: release
+  area: sdk,cli

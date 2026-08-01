@@ -1,0 +1,67 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.npmjs.com/org/sentio ; https://github.com/sentioxyz
+packages:
+- language: javascript
+  registry: npm
+  name: '@sentio/sdk'
+  url: https://www.npmjs.com/package/@sentio/sdk
+  install: npm install @sentio/sdk
+  official: true
+  description: Core Sentio processor SDK (event handlers, metrics, entities) for building indexers/processors.
+- language: javascript
+  registry: npm
+  name: '@sentio/cli'
+  url: https://www.npmjs.com/package/@sentio/cli
+  install: npm install -g @sentio/cli
+  official: true
+  description: Sentio command-line interface (login, create, add, gen, build, upload).
+- language: javascript
+  registry: npm
+  name: '@sentio/api'
+  url: https://www.npmjs.com/package/@sentio/api
+  install: npm install @sentio/api
+  official: true
+  description: TypeScript client for the Sentio REST API.
+- language: javascript
+  registry: npm
+  name: '@sentio/protos'
+  url: https://www.npmjs.com/package/@sentio/protos
+  install: npm install @sentio/protos
+  official: true
+  description: Generated protobuf/gRPC message types for Sentio services.
+- language: javascript
+  registry: npm
+  name: '@sentio/runtime'
+  url: https://www.npmjs.com/package/@sentio/runtime
+  install: npm install @sentio/runtime
+  official: true
+  description: Sentio processor runtime.
+- language: javascript
+  registry: npm
+  name: '@sentio/action'
+  url: https://www.npmjs.com/package/@sentio/action
+  install: npm install @sentio/action
+  official: true
+  description: Sentio Action Processor SDK.
+- language: javascript
+  registry: npm
+  name: '@sentio/chain'
+  url: https://www.npmjs.com/package/@sentio/chain
+  install: npm install @sentio/chain
+  official: true
+  description: Chain utility library (chain IDs / specs).
+- language: javascript
+  registry: npm
+  name: '@sentio/mcp'
+  url: https://www.npmjs.com/package/@sentio/mcp
+  install: npx -y @sentio/mcp
+  official: true
+  description: Official Sentio Model Context Protocol (MCP) server.
+- language: typescript
+  registry: npm
+  name: typemove
+  url: https://www.npmjs.com/package/typemove
+  install: npm install @typemove/move
+  official: true
+  description: Generate TypeScript bindings for Move contracts (github.com/sentioxyz/typemove).

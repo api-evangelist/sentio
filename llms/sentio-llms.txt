@@ -1,0 +1,176 @@
+# Sentio Documentation
+
+> Documentation for Sentio
+
+## Guides
+- [👋 Overview](https://docs.sentio.xyz/docs/readme.md)
+- [🚀 Getting Started](https://docs.sentio.xyz/docs/quickstart.md)
+- [🌐 Sentio Network](https://docs.sentio.xyz/docs/sentio-network.md)
+- [Litepaper](https://docs.sentio.xyz/docs/litepaper.md)
+- [Compute Network](https://docs.sentio.xyz/docs/compute-network.md)
+- [Storage Network](https://docs.sentio.xyz/docs/storage-network.md)
+- [Network Participation](https://docs.sentio.xyz/docs/network-participation.md)
+- [Tokenomics](https://docs.sentio.xyz/docs/token-economy.md)
+- [Access the Network](https://docs.sentio.xyz/docs/access-the-network.md)
+- [🧠 Processors](https://docs.sentio.xyz/docs/the-processors.md)
+- [⚡ Sentio Processor](https://docs.sentio.xyz/docs/processor-engine.md)
+- [🕸️ Hosted Subgraphs](https://docs.sentio.xyz/docs/hosted-subgraphs.md)
+- [🔗 Triggers and Handlers](https://docs.sentio.xyz/docs/event-handlers.md)
+- [🪙 Chain Specifics](https://docs.sentio.xyz/docs/multi-chain.md)
+- [EVM Chains](https://docs.sentio.xyz/docs/evm.md)
+- [Aptos](https://docs.sentio.xyz/docs/aptos.md)
+- [Sui](https://docs.sentio.xyz/docs/sui.md)
+- [IOTA](https://docs.sentio.xyz/docs/iota.md)
+- [Solana](https://docs.sentio.xyz/docs/solana.md)
+- [Fuel](https://docs.sentio.xyz/docs/fuel.md)
+- [Other Networks](https://docs.sentio.xyz/docs/other-networks.md)
+- [🗂️ Data Type](https://docs.sentio.xyz/docs/data-outputs.md)
+- [🧭 Metrics](https://docs.sentio.xyz/docs/metrics.md)
+- [📕 Event Logs](https://docs.sentio.xyz/docs/event-logs.md)
+- [📂 Entities](https://docs.sentio.xyz/docs/entities.md)
+- [🪝 Webhook](https://docs.sentio.xyz/docs/webhook.md)
+- [📊 Data Source](https://docs.sentio.xyz/docs/the-monitoring.md)
+- [Web IDE](https://docs.sentio.xyz/docs/web-ide.md)
+- [CLI Reference](https://docs.sentio.xyz/docs/cli-reference.md): Complete reference for Sentio CLI commands including login, create, add, upload, gen, and build with all available options and examples.
+- [🛟 Troubleshooting](https://docs.sentio.xyz/docs/troubleshooting.md)
+- [🚨 Error Codes](https://docs.sentio.xyz/docs/error-codes.md)
+- [💎 Supported Networks](https://docs.sentio.xyz/docs/supported-network.md)
+- [➡ View Metrics](https://docs.sentio.xyz/docs/view-metrics.md)
+- [➡ View Event Logs](https://docs.sentio.xyz/docs/view-and-search-event-logs.md)
+- [📊 Data Studio](https://docs.sentio.xyz/docs/data-studio.md)
+- [📊 Dashboard](https://docs.sentio.xyz/docs/dashboard.md)
+- [🔺 Metrics Dashboard](https://docs.sentio.xyz/docs/metrics-dashboard.md)
+- [⚡ Event Analytics Dashboard](https://docs.sentio.xyz/docs/event-analytics-dashboard.md)
+- [📐 Aggregation, Functions and Formulas](https://docs.sentio.xyz/docs/aggregation-functions-and-formulas.md)
+- [🎛️ Template Variables and Custom Variables](https://docs.sentio.xyz/docs/variables.md)
+- [🥫 Notification Channel](https://docs.sentio.xyz/docs/notification-channel.md)
+- [⏰ Alerts](https://docs.sentio.xyz/docs/alerts.md)
+- [🖥️ Endpoint](https://docs.sentio.xyz/docs/endpoint.md): Turn SQL or GraphQL into restful api endpoints
+- [⚡ Materialized Views](https://docs.sentio.xyz/docs/materialized-views.md)
+- [🎬 Action Processor](https://docs.sentio.xyz/docs/action-processor.md)
+- [🧑‍🤝‍🧑 Cross Project Reference](https://docs.sentio.xyz/docs/cross-project-reference.md)
+- [🔑 API Key](https://docs.sentio.xyz/docs/api-key.md)
+- [🤝 Permission and Sharing](https://docs.sentio.xyz/docs/permission-and-sharing.md)
+- [🔒 Billing and Limits](https://docs.sentio.xyz/docs/quotas-and-limits.md)
+- [⚙️ Overview](https://docs.sentio.xyz/docs/debugger-overview.md)
+- [💱 Transaction info](https://docs.sentio.xyz/docs/transaction-info.md)
+- [💰 Fund Tracing](https://docs.sentio.xyz/docs/fund-tracing.md)
+- [🛣 Trace and Call](https://docs.sentio.xyz/docs/trace-view.md)
+- [🔎 Debugger](https://docs.sentio.xyz/docs/debugger.md)
+- [Function only Mode](https://docs.sentio.xyz/docs/function-only-mode.md)
+- [Single-step mode](https://docs.sentio.xyz/docs/single-step-mode.md)
+- [⚙️ Simulation](https://docs.sentio.xyz/docs/simulation.md)
+- [Upload Compilation](https://docs.sentio.xyz/docs/upload-compilation.md)
+- [ℹ️ Dynamic Logging](https://docs.sentio.xyz/docs/dynamic-logging.md)
+- [✳ Code Intelligence](https://docs.sentio.xyz/docs/code-insight.md)
+- [🛠️ Build Mode](https://docs.sentio.xyz/docs/build-mode.md)
+- [🔀 Forks](https://docs.sentio.xyz/docs/forks.md)
+- [🖥️ RPC Nodes](https://docs.sentio.xyz/docs/rpc-nodes.md)
+- [Cost Reduction](https://docs.sentio.xyz/docs/cost-reduction.md)
+- [Avoiding High Cardinality](https://docs.sentio.xyz/docs/avoid-high-cardinality.md)
+- [Formula Usage](https://docs.sentio.xyz/docs/formula-usage.md)
+- [🧩 Integrations](https://docs.sentio.xyz/docs/integrations.md)
+- [Remix IDE Plugin](https://docs.sentio.xyz/docs/remix-ide-plugin.md)
+- [Sentio VSCode Extension](https://docs.sentio.xyz/docs/vscode-extension-reference.md)
+- [🎧 Getting Support](https://docs.sentio.xyz/docs/getting-support.md)
+- [👥 Community](https://docs.sentio.xyz/docs/community.md)
+- [✨ AI Features Overview](https://docs.sentio.xyz/docs/features-overview.md)
+- [🧩 AI Skills](https://docs.sentio.xyz/docs/ai-skills.md)
+- [💬 AI Chat Interface Guide](https://docs.sentio.xyz/docs/chat-interface.md)
+- [🧮 AI SQL Generation](https://docs.sentio.xyz/docs/sql-generation.md)
+- [📈 AI Insights & Analytics](https://docs.sentio.xyz/docs/insights-analytics.md)
+- [🛠️ AI Processor Generation](https://docs.sentio.xyz/docs/processor-generation.md)
+- [🩺 AI Processor Diagnostics](https://docs.sentio.xyz/docs/processor-diagnostics.md)
+
+## API Reference
+- [AI](https://docs.sentio.xyz/reference/ai.md)
+- [Create Chat Session](https://docs.sentio.xyz/reference/createchatsession-1.md): Initialize a new AI chat session. Returns a session_id that can be used with PostSessionMessage to have a conversation with the AI. Messages are generated as part of runs, with is_final indicating run completion.
+- [Query Chat Session](https://docs.sentio.xyz/reference/querychatsession-1.md): Retrieve information about an existing chat session, returning only messages after the specified cursor position. Messages include run_id to identify generation runs.
+- [Post Session Message](https://docs.sentio.xyz/reference/postsessionmessage-1.md): Add a new message to an existing chat session. This will trigger AI message generation as a run. check is_final to know when all messages for the run have been generated.
+- [Healthz provides a health check endpoint for monitoring](https://docs.sentio.xyz/reference/healthz.md)
+- [Save an alert rule](https://docs.sentio.xyz/reference/savealertrule-1.md)
+- [List all alert rules for a project](https://docs.sentio.xyz/reference/getalertrules-1.md)
+- [Delete an alert rule](https://docs.sentio.xyz/reference/deletealertrule-1.md)
+- [Save an alert rule](https://docs.sentio.xyz/reference/savealertrule2-1.md)
+- [Find an alert rule by id, and list all alerts for this rule](https://docs.sentio.xyz/reference/getalert-1.md)
+- [Data](https://docs.sentio.xyz/reference/data.md)
+- [Save Sharing SQL](https://docs.sentio.xyz/reference/savesharingsql-1.md): Save or update sharing settings for a SQL query.
+- [Get Sharing SQL](https://docs.sentio.xyz/reference/getsharingsql-1.md): Get sharing settings for a SQL query.
+- [Query Tables](https://docs.sentio.xyz/reference/querytables2-1.md): Query tables in a project. use flag to control which type of tables to include.
+- [Cancel SQL Query](https://docs.sentio.xyz/reference/cancelsqlquery-1.md): Cancel a SQL query by execution_id.
+- [Execute SQL](https://docs.sentio.xyz/reference/executesql-1.md): Execute SQL in a project. Go to "Data Studio" -> "SQL Editor", write your query and then click "Export as cURL"  ![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(102).png)  Find more: https://docs.sentio.xyz/reference/data#sql-api
+- [Execute SQL by Async](https://docs.sentio.xyz/reference/executesqlasync-1.md): Execute SQL in a project asynchronously.
+- [Query SQL Execution Detail](https://docs.sentio.xyz/reference/querysqlexecutiondetail-1.md): Query the execution detail of a SQL query by execution_id.
+- [Query SQL Result](https://docs.sentio.xyz/reference/querysqlresult-1.md): Query the result of a SQL query by execution_id.
+- [Save Refreshable Materialized View](https://docs.sentio.xyz/reference/saverefreshablematerializedview-1.md): Save or update a refreshable materialized view in a project.
+- [Get Refreshable Materialized View Status](https://docs.sentio.xyz/reference/getrefreshablematerializedstatus-1.md): Get the status of a refreshable materialized view in a project.
+- [Delete Refreshable Materialized View](https://docs.sentio.xyz/reference/deleterefreshablematerializedview-1.md): Delete a refreshable materialized view in a project.
+- [List Refreshable Materialized Views](https://docs.sentio.xyz/reference/listrefreshablematerializedviews-1.md): List all refreshable materialized views in a project.
+- [Save SQL](https://docs.sentio.xyz/reference/savesql-1.md): Save or update a SQL query in a project.
+- [Save SQL](https://docs.sentio.xyz/reference/savesql2-1.md): Save or update a SQL query in a project.
+- [Query Tables](https://docs.sentio.xyz/reference/querytables-1.md): Query tables in a project. use flag to control which type of tables to include.
+- [Query event logs](https://docs.sentio.xyz/reference/querylog-1.md)
+- [Query event logs](https://docs.sentio.xyz/reference/querylog2-1.md)
+- [List coins](https://docs.sentio.xyz/reference/listcoins2-1.md): Get a list of coins in a project.
+- [List coins](https://docs.sentio.xyz/reference/listcoins-1.md): Get a list of coins in a project.
+- [Insight Query](https://docs.sentio.xyz/reference/query-1.md): Query for metrics,event logs and coin prices in a project.
+- [Get a list of metrics in a project](https://docs.sentio.xyz/reference/getmetrics-1.md)
+- [Metric instant queries](https://docs.sentio.xyz/reference/queryinstant-1.md)
+- [Metric range queries](https://docs.sentio.xyz/reference/queryrange-1.md): The easiest way to build query is through UI, you could first create an insight chart, and then **Export as cURL**.  ![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(101).png)
+- [Query Table By Name](https://docs.sentio.xyz/reference/querytable2.md): Query table schema by name.
+- [List Tables](https://docs.sentio.xyz/reference/listtables2.md)
+- [Query Table By Name](https://docs.sentio.xyz/reference/querytable.md): Query table schema by name.
+- [List Tables](https://docs.sentio.xyz/reference/listtables.md)
+- [Web](https://docs.sentio.xyz/reference/web.md)
+- [List all dashboards in a project](https://docs.sentio.xyz/reference/listdashboards-1.md)
+- [Import a dashboard](https://docs.sentio.xyz/reference/importdashboard-1.md)
+- [Get a dashboard by id](https://docs.sentio.xyz/reference/getdashboard-1.md)
+- [Delete a dashboard by id](https://docs.sentio.xyz/reference/deletedashboard-1.md)
+- [Get dashboard history by dashboard id](https://docs.sentio.xyz/reference/getdashboardhistory-1.md)
+- [Export a dashboard to json](https://docs.sentio.xyz/reference/exportdashboard-1.md)
+- [List all dashboards in a project](https://docs.sentio.xyz/reference/listdashboards2-1.md)
+- [Get a dashboard by id](https://docs.sentio.xyz/reference/getdashboard2-1.md)
+- [/v1/users/link](https://docs.sentio.xyz/reference/createlinksession.md)
+- [Get Aptos transaction call trace](https://docs.sentio.xyz/reference/getcalltrace.md): Retrieves the detailed call trace for an Aptos transaction
+- [Get Sui transaction call trace](https://docs.sentio.xyz/reference/getsuicalltrace.md): Retrieves the detailed call trace for a Sui transaction
+- [Get price](https://docs.sentio.xyz/reference/getprice-1.md): GetPrice returns the price of a given coin identifier, in a best effort way. If we do not have any price data for the given coin, we will return NOT_FOUND error. If we have at least one price data for the given coin, we will return it with the actual timestamp. Client is responsible for checking the timestamp and decide whether to use the price or not.
+- [Add coin by Gecko](https://docs.sentio.xyz/reference/addcoinbygecko-1.md): adds a coin by its coingecko id.  coingecko id the API ID of the coin in coingecko web page.  please AWARE that the coingecko id is NOT the same as the symbol of the coin.  ![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/coingecko_apiid.png)
+- [Batch get prices](https://docs.sentio.xyz/reference/batchgetprices-1.md)
+- [Check latest price](https://docs.sentio.xyz/reference/checklatestprice-1.md)
+- [List coins](https://docs.sentio.xyz/reference/pricelistcoins-1.md)
+- [activate the pending version of a processor](https://docs.sentio.xyz/reference/activatependingversion-1.md)
+- [Get processor status](https://docs.sentio.xyz/reference/getprocessorstatusv2-1.md)
+- [Get the source files of a processor](https://docs.sentio.xyz/reference/getprocessorsourcefiles.md)
+- [List all forks](https://docs.sentio.xyz/reference/listforks-1.md)
+- [Create a fork](https://docs.sentio.xyz/reference/createfork-1.md)
+- [Get trace by bundle simulation](https://docs.sentio.xyz/reference/getcalltraceonforkbundle-1.md)
+- [Run Simulation](https://docs.sentio.xyz/reference/simulatetransactiononfork-1.md)
+- [Get trace by simulation](https://docs.sentio.xyz/reference/getcalltraceonforksimulation-1.md)
+- [Run bundle simulation](https://docs.sentio.xyz/reference/simulatetransactionbundleonfork-1.md)
+- [Get trace by transaction](https://docs.sentio.xyz/reference/getcalltraceonforktransaction-1.md)
+- [Get fork by id](https://docs.sentio.xyz/reference/getfork-1.md)
+- [Delete fork by id](https://docs.sentio.xyz/reference/deletefork-1.md)
+- [Update fork by id](https://docs.sentio.xyz/reference/updatefork-1.md)
+- [Get fork info by id](https://docs.sentio.xyz/reference/getforkinfo-1.md)
+- [Debug and Simulation](https://docs.sentio.xyz/reference/debug-and-simulation.md)
+- [Search transactions](https://docs.sentio.xyz/reference/searchtransactions-1.md)
+- [Get list of simulations](https://docs.sentio.xyz/reference/getsimulations-1.md)
+- [Get simulation by ID](https://docs.sentio.xyz/reference/getsimulation-1.md)
+- [Get bundle simulation by ID](https://docs.sentio.xyz/reference/getsimulationbundleinproject-1.md)
+- [Get trace by bundle simulation](https://docs.sentio.xyz/reference/getcalltracebybundle-1.md)
+- [Run simulation](https://docs.sentio.xyz/reference/simulatetransaction-1.md): Create a new transaction simulation. The simulation body should be included in the request body. Your simulations will be saved, and a unique ID for each simulation is included in the response. It will be useful for fetching simulation details.
+- [Get trace by simulation](https://docs.sentio.xyz/reference/getcalltracebysimulation-1.md)
+- [Run bundle simulation](https://docs.sentio.xyz/reference/simulatetransactionbundle-1.md): You could also create bundle simulations so that one transaction could be executed one after another. For `blockNumber` `transactionIndex` `networkId` `stateOverrides` and `blockOverrides` fields, only the first simulation takes effect.
+- [Get trace by transaction](https://docs.sentio.xyz/reference/getcalltracebytransaction-1.md): API to get Sentio call trace. It takes `txId.txHash` and `chainSpec.chainId` arguments, where the first is transaction hash, and the second is the numeric ethereum chain ID.  The results looks very similar to the normal [Ethereum call trace](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(2)%20(1)%20(1)%20(1).png). But we have an additional `startIndex` and `startIndex` on each trace entry even for the LOG, representing the execution order in the trace.  This allows you to build chart that marks the order of fund flow.  ![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(2)%20(1)%20(1)%20(1).png)
+- [Returns the price of a single asset at a given timestamp, or candidates when the asset ref is ambiguous.](https://docs.sentio.xyz/reference/getpricev2.md)
+- [Lists known assets with pagination and optional search/chain/class filters.](https://docs.sentio.xyz/reference/listassetsv2.md)
+- [Adds a new asset by its CoinGecko id.](https://docs.sentio.xyz/reference/addassetbygecko.md)
+- [Resolves an asset ref (symbol/address/id) to the matching asset candidates.](https://docs.sentio.xyz/reference/resolveassets.md)
+- [Prices multiple assets at multiple timestamps in one call, grouping results per asset.](https://docs.sentio.xyz/reference/batchgetpricesv2.md)
+- [Returns a continuous price series for a single asset over a [start, end] time range.](https://docs.sentio.xyz/reference/getpriceseriesv2.md)
+
+## Changelog
+- [Sentio SDK 4.0 Released](https://docs.sentio.xyz/changelog/sentio-sdk-40-released.md)
+- [Sentio SDK 3.0 released](https://docs.sentio.xyz/changelog/sentio-sdk-30-released.md)
+- [2024 Feature Roundup](https://docs.sentio.xyz/changelog/2024-feature-roundup.md)
+- [SDK v2.39.6 & CLI  v2.18.7](https://docs.sentio.xyz/changelog/sdk-v2396-cli-v2187.md)

@@ -1,0 +1,36 @@
+{
+  "provider": "sentio",
+  "sources": [
+    "sentio-ai-api-openapi.yml",
+    "sentio-alerts-api-openapi.yml",
+    "sentio-data-api-openapi.yml",
+    "sentio-debug-and-simulation-api-openapi.yml",
+    "sentio-forks-api-openapi.yml",
+    "sentio-move-api-openapi.yml",
+    "sentio-price-api-openapi.yml",
+    "sentio-prices-api-openapi.yml",
+    "sentio-processor-api-openapi.yml",
+    "sentio-processorext-api-openapi.yml",
+    "sentio-web-api-openapi.yml"
+  ],
+  "outputs": [
+    "sentio-ai-api-openapi.yml",
+    "sentio-alerts-api-openapi.yml",
+    "sentio-data-api-openapi.yml",
+    "sentio-debug-and-simulation-api-openapi.yml",
+    "sentio-forks-api-openapi.yml",
+    "sentio-move-api-openapi.yml",
+    "sentio-price-api-openapi.yml",
+    "sentio-prices-api-openapi.yml",
+    "sentio-processor-api-openapi.yml",
+    "sentio-processorext-api-openapi.yml",
+    "sentio-web-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [
+    "sentio-data-api-openapi.yml: dangling $ref: #/components/requestBodies/analytic_service.AnalyticService.SaveSQLBody"
+  ],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

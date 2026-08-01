@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: searched
+source: probed https://api.sentio.xyz , https://app.sentio.xyz , https://www.sentio.xyz
+host: https://api.sentio.xyz
+note: >-
+  No /.well-known/ discovery documents were served. app.sentio.xyz returns its
+  Next.js SPA shell (HTTP 200, identical HTML) for every /.well-known/ path, so
+  those are not real discovery documents and are recorded as none. www.sentio.xyz
+  security.txt returned 404.
+documents:
+  - path: /.well-known/security.txt
+    host: https://www.sentio.xyz
+    status: 404
+  - path: /.well-known/security.txt
+    host: https://app.sentio.xyz
+    status: spa-shell
+  - path: /.well-known/openid-configuration
+    host: https://app.sentio.xyz
+    status: spa-shell
+  - path: /.well-known/oauth-authorization-server
+    host: https://app.sentio.xyz
+    status: spa-shell

@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sentio-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: ApiKeyHeaderAuth
+  type: apiKey
+  in: header
+  parameter: api-key
+  sources:
+  - openapi/sentio-openapi.yml
+- name: ApiKeyQueryAuth
+  type: apiKey
+  in: query
+  parameter: api-key
+  sources:
+  - openapi/sentio-openapi.yml

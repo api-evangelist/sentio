@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://www.npmjs.com/package/@sentio/mcp
+server:
+  name: sentio
+  package: '@sentio/mcp'
+  transport: stdio
+  install: npx -y @sentio/mcp
+  auth:
+  - --api-key <key>
+  - --token <token>
+tool_categories:
+- name: Web Tools
+  description: General web / dashboard operations (dashboards, projects).
+- name: Data Tools
+  description: Data management and querying (SQL execution, tables, event logs).
+- name: Price Tools
+  description: Coin/asset price lookups and series.
+- name: Processor Tools
+  description: Processor status and data processing operations.
+- name: Alerts Tools
+  description: Alert rule management and configuration.
+resources:
+- name: Project
+  description: Project resource management.
+note: Official hosted MCP server published by Sentio; tool categories map to the REST API families in
+  openapi/sentio-openapi.yml.

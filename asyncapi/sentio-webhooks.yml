@@ -1,0 +1,23 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.sentio.xyz/docs/webhook
+spec_type: Webhooks
+description: Sentio processors emit webhook messages to a configured Notification Channel. Each call POSTs
+  an array of JSON messages.
+delivery:
+  method: POST
+  payload: array of message objects
+message_fields:
+- field: export_name
+  description: The export/event name defined in the processor.
+- field: event_id
+  description: Unique per channel; re-delivery with same id overrides prior (handles chain reorg).
+- field: timestamp_micros
+  description: Event time in microseconds.
+- field: version
+  description: Processor version (bumps on each upload).
+- field: data
+  description: The exported payload from the processor.
+config:
+  docs: https://docs.sentio.xyz/docs/notification-channel
+  note: Webhook is one Notification Channel type; alerts can also route to webhooks.
