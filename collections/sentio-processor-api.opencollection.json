@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Processor API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Processor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "activate the pending version of a processor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sentio.xyz/v1/processors/:owner/:slug/activate_pending",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "activate the pending version of a processor"
+        },
+        {
+          "info": {
+            "name": "Get processor status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/processors/:owner/:slug/status",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": " - ACTIVE: Only active version\n - PENDING: Only pending versions\n - ALL: All version"
+              }
+            ]
+          },
+          "docs": "Get processor status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

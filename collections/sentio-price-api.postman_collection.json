@@ -1,0 +1,528 @@
+{
+  "item": [
+    {
+      "id": "d07391c2-5008-4f8a-af38-e52b86701fad",
+      "name": "Price",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4685f1ad-5079-4bdf-b3a9-282ea04206e1",
+          "name": "Add coin by Gecko",
+          "request": {
+            "name": "Add coin by Gecko",
+            "description": {
+              "content": "adds a coin by its coingecko id.\n\ncoingecko id the API ID of the coin in coingecko web page.\n\nplease AWARE that the coingecko id is NOT the same as the symbol of the coin.\n\n![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/coingecko_apiid.png)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prices",
+                "add_coin_by_gecko"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coingeckoId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cbbe3624-82db-4c56-a511-e6026e35f31f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prices",
+                    "add_coin_by_gecko"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coingeckoId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"coins\": [\n    {\n      \"address\": {\n        \"address\": \"string\",\n        \"chain\": \"string\"\n      },\n      \"symbol\": \"string\"\n    },\n    {\n      \"address\": {\n        \"address\": \"string\",\n        \"chain\": \"string\"\n      },\n      \"symbol\": \"string\"\n    }\n  ],\n  \"currentPrice\": 3728.9154984772854,\n  \"message\": \"string\",\n  \"status\": \"OK\",\n  \"symbol\": \"string\",\n  \"timestamp\": \"2021-07-20T07:39:41.603Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "257bd1a5-10f1-4386-8bd0-393453a3ab6d",
+          "name": "Batch get prices",
+          "request": {
+            "name": "Batch get prices",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prices",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coinIds\": [\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    },\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    }\n  ],\n  \"experimentalFlag\": {\n    \"enablePythSource\": \"<boolean>\"\n  },\n  \"timestamps\": [\n    \"<dateTime>\",\n    \"<dateTime>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff37876d-5fa7-4f8b-ab32-7addbb294589",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prices",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coinIds\": [\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    },\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    }\n  ],\n  \"experimentalFlag\": {\n    \"enablePythSource\": \"<boolean>\"\n  },\n  \"timestamps\": [\n    \"<dateTime>\",\n    \"<dateTime>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prices\": [\n    {\n      \"coinId\": {\n        \"address\": {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        \"symbol\": \"<string>\"\n      },\n      \"error\": \"string\",\n      \"price\": {\n        \"results\": [\n          {\n            \"price\": 9728.163623295675,\n            \"source\": \"string\",\n            \"timestamp\": \"2023-05-06T21:34:15.748Z\"\n          },\n          {\n            \"price\": 522.2450781010047,\n            \"source\": \"string\",\n            \"timestamp\": \"1951-10-21T08:03:52.594Z\"\n          }\n        ]\n      }\n    },\n    {\n      \"coinId\": {\n        \"address\": {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        \"symbol\": \"<string>\"\n      },\n      \"error\": \"string\",\n      \"price\": {\n        \"results\": [\n          {\n            \"price\": 5911.672474373078,\n            \"source\": \"string\",\n            \"timestamp\": \"2024-08-19T12:14:45.183Z\"\n          },\n          {\n            \"price\": 4581.417273304281,\n            \"source\": \"string\",\n            \"timestamp\": \"2022-03-25T18:58:49.517Z\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89c471c0-0e1a-4a61-8119-7fb1bf470a21",
+          "name": "Check latest price",
+          "request": {
+            "name": "Check latest price",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prices",
+                "check_latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83537125-c525-4fd9-a6b8-82d7b0970902",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prices",
+                    "check_latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"latestPrice\": {\n    \"coinId\": {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    },\n    \"price\": 4015.259404250724,\n    \"timestamp\": \"2012-12-15T18:39:55.006Z\"\n  },\n  \"prices\": [\n    {\n      \"coinId\": {\n        \"address\": {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        \"symbol\": \"<string>\"\n      },\n      \"price\": 695.681898744821,\n      \"timestamp\": \"2026-04-28T08:54:45.713Z\"\n    },\n    {\n      \"coinId\": {\n        \"address\": {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        \"symbol\": \"<string>\"\n      },\n      \"price\": 2162.3109263932115,\n      \"timestamp\": \"2007-10-08T04:56:14.197Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10278546-c7d8-4d82-aae0-2e1a2b56152a",
+          "name": "Get price",
+          "request": {
+            "name": "Get price",
+            "description": {
+              "content": "GetPrice returns the price of a given coin identifier, in a best effort way.\nIf we do not have any price data for the given coin, we will return NOT_FOUND error.\nIf we have at least one price data for the given coin, we will return it with the actual timestamp.\nClient is responsible for checking the timestamp and decide whether to use the price or not.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<dateTime>",
+                  "description": "The timestamp we request the price at. Note, the price service may not have\nthe price at the exact timestamp, in which case it will return the price\nat the closest timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "coinId.symbol",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "coinId.address.address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "coinId.address.chain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "experimentalFlag.enablePythSource",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e4e6e53-2c93-4d3f-9005-16c3066d4af0",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "coinId.symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coinId.address.address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coinId.address.chain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "experimentalFlag.enablePythSource",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"price\": 6347.853264239853,\n  \"source\": \"string\",\n  \"timestamp\": \"1997-06-25T17:53:12.315Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "757c6285-f669-40aa-81ae-c127f7698fe3",
+          "name": "List coins",
+          "request": {
+            "name": "List coins",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prices",
+                "coins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchQuery",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "chain",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1c63d9f-db33-472f-9cbe-f87071f79bc7",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prices",
+                    "coins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "searchQuery",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "chain",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"coinAddressesInChain\": {\n    \"key_0\": {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    },\n    \"key_1\": {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    },\n    \"key_2\": {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    }\n  },\n  \"coins\": [\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    },\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"symbol\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sentio.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76b5debe-2705-4ebb-8a59-a9639c777a5a",
+    "name": "Sentio AI Price API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sentio Open API — REST access to Sentio's Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio's published API reference at docs.sentio.xyz/reference.\n\nContact Support:\n Name: Sentio",
+      "type": "text/plain"
+    }
+  }
+}

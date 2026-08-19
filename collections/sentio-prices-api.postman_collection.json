@@ -1,0 +1,751 @@
+{
+  "item": [
+    {
+      "id": "2bd11fd2-2af0-438b-ac03-1bcc5e1f924f",
+      "name": "Prices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3f14f60-db97-43e3-a833-555ac59cd64b",
+          "name": "Adds a new asset by its CoinGecko id.",
+          "request": {
+            "name": "Adds a new asset by its CoinGecko id.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "prices",
+                "assets",
+                "add_by_gecko"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coingeckoId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ece00da4-8741-4750-b513-5c5319944845",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "prices",
+                    "assets",
+                    "add_by_gecko"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coingeckoId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"addresses\": [\n    {\n      \"address\": \"string\",\n      \"chain\": \"string\"\n    },\n    {\n      \"address\": \"string\",\n      \"chain\": \"string\"\n    }\n  ],\n  \"assetId\": \"string\",\n  \"currentPrice\": 6764.502701462091,\n  \"message\": \"string\",\n  \"status\": \"OK\",\n  \"symbol\": \"string\",\n  \"timestamp\": \"1994-12-21T02:49:33.064Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19fb61df-f927-4c86-ad6b-31c59f9da017",
+          "name": "Prices multiple assets at multiple timestamps in one call, grouping results per asset.",
+          "request": {
+            "name": "Prices multiple assets at multiple timestamps in one call, grouping results per asset.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "prices",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assets\": [\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"assetId\": \"<string>\",\n      \"symbol\": \"<string>\"\n    },\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"assetId\": \"<string>\",\n      \"symbol\": \"<string>\"\n    }\n  ],\n  \"source\": \"<string>\",\n  \"timestamps\": [\n    \"<dateTime>\",\n    \"<dateTime>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "960d4570-d2d6-4e45-b56d-99a418fa0dde",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "prices",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assets\": [\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"assetId\": \"<string>\",\n      \"symbol\": \"<string>\"\n    },\n    {\n      \"address\": {\n        \"address\": \"<string>\",\n        \"chain\": \"<string>\"\n      },\n      \"assetId\": \"<string>\",\n      \"symbol\": \"<string>\"\n    }\n  ],\n  \"source\": \"<string>\",\n  \"timestamps\": [\n    \"<dateTime>\",\n    \"<dateTime>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"asset\": {\n        \"address\": {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        \"assetId\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"candidates\": {\n        \"candidates\": [\n          {\n            \"addresses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"assetClass\": \"string\",\n            \"assetId\": \"string\",\n            \"marketCap\": 642.8258140182608,\n            \"name\": \"string\",\n            \"symbol\": \"string\"\n          },\n          {\n            \"addresses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"assetClass\": \"string\",\n            \"assetId\": \"string\",\n            \"marketCap\": 3611.9235589905206,\n            \"name\": \"string\",\n            \"symbol\": \"string\"\n          }\n        ]\n      },\n      \"error\": \"string\",\n      \"series\": {\n        \"assetId\": \"string\",\n        \"points\": [\n          {\n            \"assetId\": \"string\",\n            \"price\": 4264.005829652009,\n            \"source\": \"string\",\n            \"timestamp\": \"1986-01-22T22:54:57.689Z\"\n          },\n          {\n            \"assetId\": \"string\",\n            \"price\": 7307.829595981669,\n            \"source\": \"string\",\n            \"timestamp\": \"1968-02-05T12:18:05.576Z\"\n          }\n        ],\n        \"source\": \"string\"\n      }\n    },\n    {\n      \"asset\": {\n        \"address\": {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        \"assetId\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"candidates\": {\n        \"candidates\": [\n          {\n            \"addresses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"assetClass\": \"string\",\n            \"assetId\": \"string\",\n            \"marketCap\": 2952.8410714827537,\n            \"name\": \"string\",\n            \"symbol\": \"string\"\n          },\n          {\n            \"addresses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"assetClass\": \"string\",\n            \"assetId\": \"string\",\n            \"marketCap\": 4169.770977002394,\n            \"name\": \"string\",\n            \"symbol\": \"string\"\n          }\n        ]\n      },\n      \"error\": \"string\",\n      \"series\": {\n        \"assetId\": \"string\",\n        \"points\": [\n          {\n            \"assetId\": \"string\",\n            \"price\": 3028.2417173154886,\n            \"source\": \"string\",\n            \"timestamp\": \"1971-10-10T05:55:21.255Z\"\n          },\n          {\n            \"assetId\": \"string\",\n            \"price\": 8233.558981612958,\n            \"source\": \"string\",\n            \"timestamp\": \"1965-05-10T01:25:22.990Z\"\n          }\n        ],\n        \"source\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb03378b-5640-4048-93db-dd761d5aa0ef",
+          "name": "Returns a continuous price series for a single asset over a [start, end] time range.",
+          "request": {
+            "name": "Returns a continuous price series for a single asset over a [start, end] time range.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "prices",
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset.assetId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.address.chain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.address.address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.symbol",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Optional filter to narrow symbol resolution to a single asset class."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae76b04f-9b4b-4b5b-ade9-9ae0546881a5",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "prices",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset.assetId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.address.chain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.address.address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"candidates\": {\n    \"candidates\": [\n      {\n        \"addresses\": [\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          },\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          }\n        ],\n        \"assetClass\": \"string\",\n        \"assetId\": \"string\",\n        \"marketCap\": 7658.908951614229,\n        \"name\": \"string\",\n        \"symbol\": \"string\"\n      },\n      {\n        \"addresses\": [\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          },\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          }\n        ],\n        \"assetClass\": \"string\",\n        \"assetId\": \"string\",\n        \"marketCap\": 1440.8881879655578,\n        \"name\": \"string\",\n        \"symbol\": \"string\"\n      }\n    ]\n  },\n  \"series\": {\n    \"assetId\": \"string\",\n    \"points\": [\n      {\n        \"assetId\": \"string\",\n        \"price\": 473.46571036337326,\n        \"source\": \"string\",\n        \"timestamp\": \"1967-11-10T06:28:02.031Z\"\n      },\n      {\n        \"assetId\": \"string\",\n        \"price\": 5447.951586516522,\n        \"source\": \"string\",\n        \"timestamp\": \"1986-09-17T09:16:45.666Z\"\n      }\n    ],\n    \"source\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bdb38e4-da97-42b8-804a-18277c5ae969",
+          "name": "Returns the price of a single asset at a given timestamp, or candidates when the asset ref is ambiguous.",
+          "request": {
+            "name": "Returns the price of a single asset at a given timestamp, or candidates when the asset ref is ambiguous.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset.assetId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.address.chain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.address.address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.symbol",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Optional filter to narrow symbol resolution to a single asset class."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f5d4124-7b07-4515-a333-a3922b23f585",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset.assetId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.address.chain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.address.address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timestamp",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"candidates\": {\n    \"candidates\": [\n      {\n        \"addresses\": [\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          },\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          }\n        ],\n        \"assetClass\": \"string\",\n        \"assetId\": \"string\",\n        \"marketCap\": 451.9891392514841,\n        \"name\": \"string\",\n        \"symbol\": \"string\"\n      },\n      {\n        \"addresses\": [\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          },\n          {\n            \"address\": \"<string>\",\n            \"chain\": \"<string>\"\n          }\n        ],\n        \"assetClass\": \"string\",\n        \"assetId\": \"string\",\n        \"marketCap\": 4903.36152554225,\n        \"name\": \"string\",\n        \"symbol\": \"string\"\n      }\n    ]\n  },\n  \"price\": {\n    \"assetId\": \"string\",\n    \"price\": 4228.031981516784,\n    \"source\": \"string\",\n    \"timestamp\": \"2002-07-28T01:14:07.784Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfd6fb8e-c0c6-4cb7-8ec8-5c0e90a46e02",
+          "name": "Lists known assets with pagination and optional search/chain/class filters.",
+          "request": {
+            "name": "Lists known assets with pagination and optional search/chain/class filters.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "prices",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "searchQuery",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "chain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Optional filter to narrow symbol resolution to a single asset class."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c1ef3b2-4252-4931-bc4d-5a852d23185d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "prices",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "searchQuery",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "chain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"addresses\": [\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        }\n      ],\n      \"assetClass\": \"string\",\n      \"assetId\": \"string\",\n      \"marketCap\": 2917.015123636331,\n      \"name\": \"string\",\n      \"symbol\": \"string\"\n    },\n    {\n      \"addresses\": [\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        }\n      ],\n      \"assetClass\": \"string\",\n      \"assetId\": \"string\",\n      \"marketCap\": 7396.91650266973,\n      \"name\": \"string\",\n      \"symbol\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55ad01db-b4cb-4249-bd31-7fbe82b91f10",
+          "name": "Resolves an asset ref (symbol/address/id) to the matching asset candidates.",
+          "request": {
+            "name": "Resolves an asset ref (symbol/address/id) to the matching asset candidates.",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "prices",
+                "assets",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset.assetId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.address.chain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.address.address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset.symbol",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "assetClass",
+                  "value": "<string>",
+                  "description": "Optional filter to narrow symbol resolution to a single asset class."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68fb14a2-5303-4d75-b78b-68d22c20db3e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "prices",
+                    "assets",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset.assetId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.address.chain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.address.address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset.symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assetClass",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"addresses\": [\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        }\n      ],\n      \"assetClass\": \"string\",\n      \"assetId\": \"string\",\n      \"marketCap\": 2917.015123636331,\n      \"name\": \"string\",\n      \"symbol\": \"string\"\n    },\n    {\n      \"addresses\": [\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        },\n        {\n          \"address\": \"<string>\",\n          \"chain\": \"<string>\"\n        }\n      ],\n      \"assetClass\": \"string\",\n      \"assetId\": \"string\",\n      \"marketCap\": 7396.91650266973,\n      \"name\": \"string\",\n      \"symbol\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sentio.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ffcc98e6-26ec-40da-94db-bd6f3d0ff76c",
+    "name": "Sentio AI Prices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sentio Open API — REST access to Sentio's Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio's published API reference at docs.sentio.xyz/reference.\n\nContact Support:\n Name: Sentio",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Chat Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/ai/chat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initialize a new AI chat session. Returns a session_id that can be used with PostSessionMessage to have a conversation with the AI. Messages are generated as part of runs, with is_final indicating run completion."
+        },
+        {
+          "info": {
+            "name": "Healthz provides a health check endpoint for monitoring",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/ai/healthz"
+          },
+          "docs": "Healthz provides a health check endpoint for monitoring"
+        },
+        {
+          "info": {
+            "name": "Post Session Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/ai/chat/:sessionId/message",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the session"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new message to an existing chat session. This will trigger AI message generation as a run. check is_final to know when all messages for the run have been generated."
+        },
+        {
+          "info": {
+            "name": "Query Chat Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/ai/chat/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the session"
+              },
+              {
+                "name": "cursorPosition",
+                "value": "",
+                "type": "query",
+                "description": "Start cursor position - only messages after this position will be returned"
+              }
+            ]
+          },
+          "docs": "Retrieve information about an existing chat session, returning only messages after the specified cursor position. Messages include run_id to identify generation runs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,417 @@
+{
+  "item": [
+    {
+      "id": "1d04cc19-4ee1-4cda-b48e-7fa1e5e75876",
+      "name": "AI",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "041b0d15-024d-4479-9724-bd6fed6f150c",
+          "name": "Create Chat Session",
+          "request": {
+            "name": "Create Chat Session",
+            "description": {
+              "content": "Initialize a new AI chat session. Returns a session_id that can be used with PostSessionMessage to have a conversation with the AI. Messages are generated as part of runs, with is_final indicating run completion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"autoConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"insightConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"projectOwner\": \"<string>\",\n    \"projectSlug\": \"<string>\",\n    \"scenario\": \"SCENARIO_UNSPECIFIED\",\n    \"sqlConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"version\": \"<integer>\"\n  },\n  \"messages\": [\n    {\n      \"isFinal\": \"<boolean>\",\n      \"resources\": [\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        },\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        }\n      ],\n      \"role\": \"ROLE_UNSPECIFIED\",\n      \"runId\": \"<string>\",\n      \"structured\": {\n        \"error\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"insightQuery\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"explanation\": \"<string>\",\n          \"formulas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"queries\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"results\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"samplesLimit\": \"<integer>\",\n          \"timeRange\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"step\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timezone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"sql\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"error\": \"<string>\",\n          \"explanation\": \"<string>\",\n          \"query\": \"<string>\",\n          \"result\": {\n            \"columnTypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columns\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cursor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"generatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rows\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n      },\n      \"text\": \"<string>\"\n    },\n    {\n      \"isFinal\": \"<boolean>\",\n      \"resources\": [\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        },\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        }\n      ],\n      \"role\": \"ROLE_UNSPECIFIED\",\n      \"runId\": \"<string>\",\n      \"structured\": {\n        \"error\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"insightQuery\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"explanation\": \"<string>\",\n          \"formulas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"queries\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"results\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"samplesLimit\": \"<integer>\",\n          \"timeRange\": {\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"step\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timezone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"sql\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"error\": \"<string>\",\n          \"explanation\": \"<string>\",\n          \"query\": \"<string>\",\n          \"result\": {\n            \"columnTypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columns\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cursor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"generatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rows\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n      },\n      \"text\": \"<string>\"\n    }\n  ],\n  \"preserveSession\": \"<boolean>\",\n  \"streaming\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c225894-28e4-4e2c-8ea5-8895b6846189",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"autoConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"insightConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"projectOwner\": \"<string>\",\n    \"projectSlug\": \"<string>\",\n    \"scenario\": \"SCENARIO_UNSPECIFIED\",\n    \"sqlConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"version\": \"<integer>\"\n  },\n  \"messages\": [\n    {\n      \"isFinal\": \"<boolean>\",\n      \"resources\": [\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        },\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        }\n      ],\n      \"role\": \"ROLE_UNSPECIFIED\",\n      \"runId\": \"<string>\",\n      \"structured\": {\n        \"error\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"insightQuery\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"explanation\": \"<string>\",\n          \"formulas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"queries\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"results\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"samplesLimit\": \"<integer>\",\n          \"timeRange\": {\n            \"end\": \"now\",\n            \"start\": \"now-1M\",\n            \"step\": 86400,\n            \"timezone\": \"Europe/London\"\n          },\n          \"title\": \"<string>\"\n        },\n        \"sql\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"error\": \"<string>\",\n          \"explanation\": \"<string>\",\n          \"query\": \"<string>\",\n          \"result\": {\n            \"columnTypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columns\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cursor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"generatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rows\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n      },\n      \"text\": \"<string>\"\n    },\n    {\n      \"isFinal\": \"<boolean>\",\n      \"resources\": [\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        },\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        }\n      ],\n      \"role\": \"ROLE_UNSPECIFIED\",\n      \"runId\": \"<string>\",\n      \"structured\": {\n        \"error\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"insightQuery\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"explanation\": \"<string>\",\n          \"formulas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"queries\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"results\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"samplesLimit\": \"<integer>\",\n          \"timeRange\": {\n            \"end\": \"now\",\n            \"start\": \"now-1M\",\n            \"step\": 86400,\n            \"timezone\": \"Europe/London\"\n          },\n          \"title\": \"<string>\"\n        },\n        \"sql\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"error\": \"<string>\",\n          \"explanation\": \"<string>\",\n          \"query\": \"<string>\",\n          \"result\": {\n            \"columnTypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columns\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cursor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"generatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rows\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n      },\n      \"text\": \"<string>\"\n    }\n  ],\n  \"preserveSession\": \"<boolean>\",\n  \"streaming\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currentCursorPosition\": 8061,\n  \"sessionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55dea0f6-6469-4ab0-b2bf-8a82dcc7dc2c",
+          "name": "Healthz provides a health check endpoint for monitoring",
+          "request": {
+            "name": "Healthz provides a health check endpoint for monitoring",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "ai",
+                "healthz"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9043dc3-def0-4f80-ba08-7d229f00c3d0",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai",
+                    "healthz"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ba5815c-e927-4c3f-b431-914bf2c626dc",
+          "name": "Post Session Message",
+          "request": {
+            "name": "Post Session Message",
+            "description": {
+              "content": "Add a new message to an existing chat session. This will trigger AI message generation as a run. check is_final to know when all messages for the run have been generated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai",
+                "chat",
+                ":sessionId",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier for the session"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": {\n    \"isFinal\": \"<boolean>\",\n    \"resources\": [\n      {\n        \"blob\": \"<byte>\",\n        \"description\": \"<string>\",\n        \"mimeType\": \"<string>\",\n        \"name\": \"<string>\",\n        \"text\": \"<string>\",\n        \"uri\": \"<string>\"\n      },\n      {\n        \"blob\": \"<byte>\",\n        \"description\": \"<string>\",\n        \"mimeType\": \"<string>\",\n        \"name\": \"<string>\",\n        \"text\": \"<string>\",\n        \"uri\": \"<string>\"\n      }\n    ],\n    \"role\": \"ROLE_UNSPECIFIED\",\n    \"runId\": \"<string>\",\n    \"structured\": {\n      \"error\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"insightQuery\": {\n        \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n        \"explanation\": \"<string>\",\n        \"formulas\": [\n          {\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"color\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disabled\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expression\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"functions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"color\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disabled\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expression\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"functions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"queries\": [\n          {\n            \"aggregate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"color\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disabled\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"functions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"aggregate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"color\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disabled\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"functions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"results\": [\n          {\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matrix\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matrix\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"samplesLimit\": \"<integer>\",\n        \"timeRange\": {\n          \"start\": \"<string>\",\n          \"end\": \"<string>\",\n          \"step\": \"<integer>\",\n          \"timezone\": \"<string>\"\n        },\n        \"title\": \"<string>\"\n      },\n      \"sql\": {\n        \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n        \"error\": \"<string>\",\n        \"explanation\": \"<string>\",\n        \"query\": \"<string>\",\n        \"result\": {\n          \"columnTypes\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"columns\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"cursor\": \"<string>\",\n          \"generatedAt\": \"<dateTime>\",\n          \"rows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"title\": \"<string>\"\n      },\n      \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n    },\n    \"text\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d9028b5a-fceb-4389-82c2-b6a9b0b9ea9b",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai",
+                    "chat",
+                    ":sessionId",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the session"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {\n    \"isFinal\": \"<boolean>\",\n    \"resources\": [\n      {\n        \"blob\": \"<byte>\",\n        \"description\": \"<string>\",\n        \"mimeType\": \"<string>\",\n        \"name\": \"<string>\",\n        \"text\": \"<string>\",\n        \"uri\": \"<string>\"\n      },\n      {\n        \"blob\": \"<byte>\",\n        \"description\": \"<string>\",\n        \"mimeType\": \"<string>\",\n        \"name\": \"<string>\",\n        \"text\": \"<string>\",\n        \"uri\": \"<string>\"\n      }\n    ],\n    \"role\": \"ROLE_UNSPECIFIED\",\n    \"runId\": \"<string>\",\n    \"structured\": {\n      \"error\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"insightQuery\": {\n        \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n        \"explanation\": \"<string>\",\n        \"formulas\": [\n          {\n            \"expression\": \"sum(a)+sum(b)\"\n          },\n          {\n            \"expression\": \"sum(a)+sum(b)\"\n          }\n        ],\n        \"queries\": [\n          {\n            \"aggregate\": null,\n            \"alias\": \"transfer (24h)\",\n            \"disabled\": false,\n            \"functions\": [\n              {\n                \"arguments\": [\n                  {\n                    \"durationValue\": {\n                      \"unit\": \"d\",\n                      \"value\": 1\n                    }\n                  }\n                ],\n                \"name\": \"rollup_sum\"\n              }\n            ],\n            \"labelSelector\": {},\n            \"query\": \"transfer_sum\"\n          },\n          {\n            \"aggregate\": null,\n            \"alias\": \"transfer (24h)\",\n            \"disabled\": false,\n            \"functions\": [\n              {\n                \"arguments\": [\n                  {\n                    \"durationValue\": {\n                      \"unit\": \"d\",\n                      \"value\": 1\n                    }\n                  }\n                ],\n                \"name\": \"rollup_sum\"\n              }\n            ],\n            \"labelSelector\": {},\n            \"query\": \"transfer_sum\"\n          }\n        ],\n        \"results\": [\n          {\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matrix\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"alias\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"error\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"matrix\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"samplesLimit\": \"<integer>\",\n        \"timeRange\": {\n          \"end\": \"now\",\n          \"start\": \"now-1M\",\n          \"step\": 86400,\n          \"timezone\": \"Europe/London\"\n        },\n        \"title\": \"<string>\"\n      },\n      \"sql\": {\n        \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n        \"error\": \"<string>\",\n        \"explanation\": \"<string>\",\n        \"query\": \"<string>\",\n        \"result\": {\n          \"columnTypes\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"columns\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"cursor\": \"<string>\",\n          \"generatedAt\": \"<dateTime>\",\n          \"rows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"title\": \"<string>\"\n      },\n      \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n    },\n    \"text\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currentCursorPosition\": 9800\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ec309a0-f972-48c9-bd35-6ad289722b75",
+          "name": "Query Chat Session",
+          "request": {
+            "name": "Query Chat Session",
+            "description": {
+              "content": "Retrieve information about an existing chat session, returning only messages after the specified cursor position. Messages include run_id to identify generation runs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ai",
+                "chat",
+                ":sessionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursorPosition",
+                  "value": "<integer>",
+                  "description": "Start cursor position - only messages after this position will be returned"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier for the session"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "633d4b1b-2126-45ef-9822-a490cb1345f4",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ai",
+                    "chat",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursorPosition",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the session"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"context\": {\n    \"autoConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"insightConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"projectOwner\": \"<string>\",\n    \"projectSlug\": \"<string>\",\n    \"scenario\": \"SCENARIO_UNSPECIFIED\",\n    \"sqlConfig\": {\n      \"executeQuery\": \"<boolean>\"\n    },\n    \"version\": \"<integer>\"\n  },\n  \"messages\": [\n    {\n      \"isFinal\": \"<boolean>\",\n      \"resources\": [\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        },\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        }\n      ],\n      \"role\": \"ROLE_UNSPECIFIED\",\n      \"runId\": \"<string>\",\n      \"structured\": {\n        \"error\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"insightQuery\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"explanation\": \"<string>\",\n          \"formulas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"queries\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"results\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"samplesLimit\": \"<integer>\",\n          \"timeRange\": {\n            \"end\": \"now\",\n            \"start\": \"now-1M\",\n            \"step\": 86400,\n            \"timezone\": \"Europe/London\"\n          },\n          \"title\": \"<string>\"\n        },\n        \"sql\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"error\": \"<string>\",\n          \"explanation\": \"<string>\",\n          \"query\": \"<string>\",\n          \"result\": {\n            \"columnTypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columns\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cursor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"generatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rows\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n      },\n      \"text\": \"<string>\"\n    },\n    {\n      \"isFinal\": \"<boolean>\",\n      \"resources\": [\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        },\n        {\n          \"blob\": \"<byte>\",\n          \"description\": \"<string>\",\n          \"mimeType\": \"<string>\",\n          \"name\": \"<string>\",\n          \"text\": \"<string>\",\n          \"uri\": \"<string>\"\n        }\n      ],\n      \"role\": \"ROLE_UNSPECIFIED\",\n      \"runId\": \"<string>\",\n      \"structured\": {\n        \"error\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"insightQuery\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"explanation\": \"<string>\",\n          \"formulas\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"queries\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"results\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"samplesLimit\": \"<integer>\",\n          \"timeRange\": {\n            \"end\": \"now\",\n            \"start\": \"now-1M\",\n            \"step\": 86400,\n            \"timezone\": \"Europe/London\"\n          },\n          \"title\": \"<string>\"\n        },\n        \"sql\": {\n          \"chartType\": \"CHART_TYPE_UNSPECIFIED\",\n          \"error\": \"<string>\",\n          \"explanation\": \"<string>\",\n          \"query\": \"<string>\",\n          \"result\": {\n            \"columnTypes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"columns\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cursor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"generatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rows\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"title\": \"<string>\"\n        },\n        \"type\": \"CONTENT_TYPE_UNSPECIFIED\"\n      },\n      \"text\": \"<string>\"\n    }\n  ],\n  \"preserveSession\": \"<boolean>\",\n  \"streaming\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sentio.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b6c47810-329d-4be5-b245-b8af66e0d45d",
+    "name": "Sentio AI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sentio Open API — REST access to Sentio's Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio's published API reference at docs.sentio.xyz/reference.\n\nContact Support:\n Name: Sentio",
+      "type": "text/plain"
+    }
+  }
+}

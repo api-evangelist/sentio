@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Alerts API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Save an alert rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sentio.xyz/v1/alerts/rule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save an alert rule"
+        },
+        {
+          "info": {
+            "name": "Delete an alert rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sentio.xyz/v1/alerts/rule/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an alert rule"
+        },
+        {
+          "info": {
+            "name": "Find an alert rule by id, and list all alerts for this rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/alerts/:ruleId",
+            "params": [
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Find an alert rule by id, and list all alerts for this rule"
+        },
+        {
+          "info": {
+            "name": "List all alert rules for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/alerts/rule/project/:projectId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all alert rules for a project"
+        },
+        {
+          "info": {
+            "name": "Save an alert rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/alerts/rule",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save an alert rule"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

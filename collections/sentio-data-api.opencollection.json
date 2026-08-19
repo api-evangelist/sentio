@@ -1,0 +1,1050 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Data API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancel SQL Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/cancel_query/:executionId",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "use project id if project_owner and project_slug are not provided"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "version of the datasource, default to the active version if not provided"
+              }
+            ]
+          },
+          "docs": "Cancel a SQL query by execution_id."
+        },
+        {
+          "info": {
+            "name": "Get Refreshable Materialized View Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/refreshable_materialized_view/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "use project id if project_owner and project_slug are not provided"
+              }
+            ]
+          },
+          "docs": "Get the status of a refreshable materialized view in a project."
+        },
+        {
+          "info": {
+            "name": "Delete Refreshable Materialized View",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/refreshable_materialized_view/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "use project id if project_owner and project_slug are not provided"
+              }
+            ]
+          },
+          "docs": "Delete a refreshable materialized view in a project."
+        },
+        {
+          "info": {
+            "name": "Execute SQL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/execute",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute SQL in a project. Go to \"Data Studio\" -> \"SQL Editor\", write your query and then click \"Export as cURL\"\n\n![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(102).png)\n\nFind more: https://docs.sentio.xyz/reference/data#sql-api"
+        },
+        {
+          "info": {
+            "name": "Execute SQL by Async",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/execute/async",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute SQL in a project asynchronously."
+        },
+        {
+          "info": {
+            "name": "Get a list of metrics in a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/metrics",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "labelLimit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "labelSearchQuery",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of metrics in a project"
+        },
+        {
+          "info": {
+            "name": "Get Sharing SQL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/analytics/sql/sharing/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get sharing settings for a SQL query."
+        },
+        {
+          "info": {
+            "name": "List coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/insights/:owner/:slug/coins",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "searchQuery",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of coins in a project."
+        },
+        {
+          "info": {
+            "name": "List coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/insights/coins",
+            "params": [
+              {
+                "name": "projectOwner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectSlug",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "searchQuery",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of coins in a project."
+        },
+        {
+          "info": {
+            "name": "List Refreshable Materialized Views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/refreshable_materialized_views",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "use project id if project_owner and project_slug are not provided"
+              }
+            ]
+          },
+          "docs": "List all refreshable materialized views in a project."
+        },
+        {
+          "info": {
+            "name": "List Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/sql/:owner/:slug/tables",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Tables"
+        },
+        {
+          "info": {
+            "name": "List Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/sql/tables",
+            "params": [
+              {
+                "name": "projectOwner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectSlug",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Tables"
+        },
+        {
+          "info": {
+            "name": "Insight Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/insights/:owner/:slug/query",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query for metrics,event logs and coin prices in a project."
+        },
+        {
+          "info": {
+            "name": "Metric instant queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/metrics/:owner/:slug/query",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Metric instant queries"
+        },
+        {
+          "info": {
+            "name": "Query event logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/eventlogs/:owner/:slug",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query event logs"
+        },
+        {
+          "info": {
+            "name": "Query event logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/eventlogs/:owner/:slug/query",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.start.relativeTime.unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.start.relativeTime.value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.start.relativeTime.align",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.start.absoluteTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.end.relativeTime.unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.end.relativeTime.value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.end.relativeTime.align",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.end.absoluteTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.step",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.interval.value",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.interval.unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeRange.timezone",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cachePolicy.cacheTtlSecs",
+                "value": "",
+                "type": "query",
+                "description": "how long the cache will be stored before it is evicted"
+              },
+              {
+                "name": "cachePolicy.cacheRefreshTtlSecs",
+                "value": "",
+                "type": "query",
+                "description": "how long the cache will be refreshed in the background"
+              },
+              {
+                "name": "cachePolicy.forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "force refresh the cache now"
+              },
+              {
+                "name": "cachePolicy.noCache",
+                "value": "",
+                "type": "query",
+                "description": "do not use cache"
+              }
+            ]
+          },
+          "docs": "Query event logs"
+        },
+        {
+          "info": {
+            "name": "Metric range queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/metrics/:owner/:slug/query_range",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The easiest way to build query is through UI, you could first create an insight chart, and then **Export as cURL**.\n\n![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(101).png)"
+        },
+        {
+          "info": {
+            "name": "Query SQL Execution Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/query_execution_detail/:executionId",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "use project id if project_owner and project_slug are not provided"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "version of the datasource, default to the active version if not provided"
+              }
+            ]
+          },
+          "docs": "Query the execution detail of a SQL query by execution_id."
+        },
+        {
+          "info": {
+            "name": "Query SQL Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/query_result/:executionId",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "executionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "use project id if project_owner and project_slug are not provided"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "version of the datasource, default to the active version if not provided"
+              }
+            ]
+          },
+          "docs": "Query the result of a SQL query by execution_id."
+        },
+        {
+          "info": {
+            "name": "Query Table By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/sql/:owner/:slug/table/:name",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query table schema by name."
+        },
+        {
+          "info": {
+            "name": "Query Table By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/sql/table",
+            "params": [
+              {
+                "name": "projectOwner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectSlug",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query table schema by name."
+        },
+        {
+          "info": {
+            "name": "Query Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/tables",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeChains",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeViews",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeExternals",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeDash",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query tables in a project. use flag to control which type of tables to include."
+        },
+        {
+          "info": {
+            "name": "Query Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/analytics/sql/tables",
+            "params": [
+              {
+                "name": "projectOwner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectSlug",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeChains",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeViews",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeExternals",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeDash",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query tables in a project. use flag to control which type of tables to include."
+        },
+        {
+          "info": {
+            "name": "Save Refreshable Materialized View",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/refreshable_materialized_view",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save or update a refreshable materialized view in a project."
+        },
+        {
+          "info": {
+            "name": "Save Sharing SQL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/analytics/sql/sharing",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save or update sharing settings for a SQL query."
+        },
+        {
+          "info": {
+            "name": "Save SQL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/save",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ]
+          },
+          "docs": "Save or update a SQL query in a project."
+        },
+        {
+          "info": {
+            "name": "Save SQL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sentio.xyz/v1/analytics/:owner/:slug/sql/save",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              }
+            ]
+          },
+          "docs": "Save or update a SQL query in a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

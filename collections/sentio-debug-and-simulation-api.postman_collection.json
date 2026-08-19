@@ -1,0 +1,1474 @@
+{
+  "item": [
+    {
+      "id": "cabdcd05-f788-4792-9207-365d949e8da6",
+      "name": "Debug and Simulation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "668fd8d1-63d3-4afa-9978-19cfb9b3f718",
+          "name": "Get trace by bundle simulation",
+          "request": {
+            "name": "Get trace by bundle simulation",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                ":chainId",
+                "bundle",
+                ":bundleId",
+                "call_trace"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "withInternalCalls",
+                  "value": "<boolean>",
+                  "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+                },
+                {
+                  "disabled": false,
+                  "key": "disableOptimizer",
+                  "value": "<boolean>",
+                  "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreGasCost",
+                  "value": "<boolean>",
+                  "description": "Only effective when disableOptimizer=true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chainId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bundleId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7691ba59-bcd6-43d6-8b0f-94dcfffde425",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    ":chainId",
+                    "bundle",
+                    ":bundleId",
+                    "call_trace"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withInternalCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disableOptimizer",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ignoreGasCost",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chainId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundleId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contentType\": \"string\",\n  \"data\": \"string\",\n  \"extensions\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "225b7203-9c99-46b3-b116-cea915cf5809",
+          "name": "Get trace by simulation",
+          "request": {
+            "name": "Get trace by simulation",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                ":chainId",
+                "simulation",
+                ":simulationId",
+                "call_trace"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "withInternalCalls",
+                  "value": "<boolean>",
+                  "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+                },
+                {
+                  "disabled": false,
+                  "key": "disableOptimizer",
+                  "value": "<boolean>",
+                  "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreGasCost",
+                  "value": "<boolean>",
+                  "description": "Only effective when disableOptimizer=true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chainId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "simulationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8be963c6-99b3-4a73-8a8a-b9e8b2292955",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    ":chainId",
+                    "simulation",
+                    ":simulationId",
+                    "call_trace"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withInternalCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disableOptimizer",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ignoreGasCost",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chainId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "simulationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contentType\": \"string\",\n  \"data\": \"string\",\n  \"extensions\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "560c4439-564d-47cf-9492-0460b13405db",
+          "name": "Get trace by transaction",
+          "request": {
+            "name": "Get trace by transaction",
+            "description": {
+              "content": "API to get Sentio call trace. It takes `txId.txHash` and `chainSpec.chainId` arguments, where the first is transaction hash, and the second is the numeric ethereum chain ID.\n\nThe results looks very similar to the normal [Ethereum call trace](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(2)%20(1)%20(1)%20(1).png). But we have an additional `startIndex` and `startIndex` on each trace entry even for the LOG, representing the execution order in the trace.\n\nThis allows you to build chart that marks the order of fund flow.\n\n![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(2)%20(1)%20(1)%20(1).png)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                ":chainId",
+                "transaction",
+                ":txHash",
+                "call_trace"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "withInternalCalls",
+                  "value": "<boolean>",
+                  "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+                },
+                {
+                  "disabled": false,
+                  "key": "disableOptimizer",
+                  "value": "<boolean>",
+                  "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreGasCost",
+                  "value": "<boolean>",
+                  "description": "Only effective when disableOptimizer=true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chainId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txHash",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03165afb-7c70-48a6-b22c-83d2561c5480",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    ":chainId",
+                    "transaction",
+                    ":txHash",
+                    "call_trace"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withInternalCalls",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disableOptimizer",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ignoreGasCost",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chainId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txHash",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contentType\": \"string\",\n  \"data\": \"string\",\n  \"extensions\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "136fee30-3f52-4b54-a612-5c74c0402ecf",
+          "name": "Get simulation by ID",
+          "request": {
+            "name": "Get simulation by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                "simulation",
+                ":simulationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "simulationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a553930f-b7f6-4694-81f4-6db610f6bb0a",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    "simulation",
+                    ":simulationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "simulationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"simulation\": {\n    \"networkId\": \"string\",\n    \"chainSpec\": {\n      \"chainId\": \"string\",\n      \"forkId\": \"string\"\n    },\n    \"to\": \"string\",\n    \"input\": \"string\",\n    \"blockNumber\": \"string\",\n    \"transactionIndex\": \"string\",\n    \"from\": \"string\",\n    \"gas\": \"string\",\n    \"gasPrice\": \"string\",\n    \"value\": \"string\",\n    \"accessList\": [\n      {\n        \"address\": \"string\",\n        \"storageKeys\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"address\": \"string\",\n        \"storageKeys\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"blockOverride\": {\n      \"baseFee\": \"string\",\n      \"blockHash\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"blockNumber\": \"string\",\n      \"difficulty\": \"string\",\n      \"gasLimit\": \"string\",\n      \"timestamp\": \"string\"\n    },\n    \"bundleId\": \"string\",\n    \"chainId\": \"string\",\n    \"createAt\": \"string\",\n    \"debugDeployment\": true,\n    \"id\": \"string\",\n    \"label\": \"string\",\n    \"maxFeePerGas\": \"string\",\n    \"maxPriorityFeePerGas\": \"string\",\n    \"originTxHash\": \"string\",\n    \"result\": {\n      \"transaction\": {\n        \"accessList\": [\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"blockHash\": \"string\",\n        \"blockNumber\": \"string\",\n        \"chainId\": \"string\",\n        \"from\": \"string\",\n        \"gas\": \"string\",\n        \"gasPrice\": \"string\",\n        \"hash\": \"string\",\n        \"input\": \"string\",\n        \"maxFeePerGas\": \"string\",\n        \"maxPriorityFeePerGas\": \"string\",\n        \"nonce\": \"string\",\n        \"to\": \"string\",\n        \"transactionIndex\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"transactionReceipt\": {\n        \"cumulativeGasUsed\": \"string\",\n        \"effectiveGasPrice\": \"string\",\n        \"error\": \"string\",\n        \"gasUsed\": \"string\",\n        \"revertReason\": \"string\",\n        \"status\": \"string\"\n      }\n    },\n    \"sharing\": {\n      \"id\": \"string\",\n      \"isPublic\": true,\n      \"simulationId\": \"string\"\n    },\n    \"sourceOverrides\": {\n      \"key_0\": \"string\"\n    },\n    \"stateOverrides\": {\n      \"key_0\": {\n        \"balance\": \"string\",\n        \"code\": \"string\",\n        \"state\": {\n          \"key_0\": \"string\"\n        }\n      },\n      \"key_1\": {\n        \"balance\": \"string\",\n        \"code\": \"string\",\n        \"state\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      \"key_2\": {\n        \"balance\": \"string\",\n        \"code\": \"string\",\n        \"state\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "735b25bf-3763-4f9a-91e1-980e6f8a5a88",
+          "name": "Get bundle simulation by ID",
+          "request": {
+            "name": "Get bundle simulation by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                "simulation_bundle",
+                ":bundleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bundleId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03feae36-d7cb-4032-9564-4bff04a13f45",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    "simulation_bundle",
+                    ":bundleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundleId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"simulations\": [\n    {\n      \"networkId\": \"string\",\n      \"chainSpec\": {\n        \"chainId\": \"string\",\n        \"forkId\": \"string\"\n      },\n      \"to\": \"string\",\n      \"input\": \"string\",\n      \"blockNumber\": \"string\",\n      \"transactionIndex\": \"string\",\n      \"from\": \"string\",\n      \"gas\": \"string\",\n      \"gasPrice\": \"string\",\n      \"value\": \"string\",\n      \"accessList\": [\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"string\",\n        \"blockHash\": {\n          \"key_0\": \"string\"\n        },\n        \"blockNumber\": \"string\",\n        \"difficulty\": \"string\",\n        \"gasLimit\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"bundleId\": \"string\",\n      \"chainId\": \"string\",\n      \"createAt\": \"string\",\n      \"debugDeployment\": true,\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"maxFeePerGas\": \"string\",\n      \"maxPriorityFeePerGas\": \"string\",\n      \"originTxHash\": \"string\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"string\",\n          \"blockNumber\": \"string\",\n          \"chainId\": \"string\",\n          \"from\": \"string\",\n          \"gas\": \"string\",\n          \"gasPrice\": \"string\",\n          \"hash\": \"string\",\n          \"input\": \"string\",\n          \"maxFeePerGas\": \"string\",\n          \"maxPriorityFeePerGas\": \"string\",\n          \"nonce\": \"string\",\n          \"to\": \"string\",\n          \"transactionIndex\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"string\",\n          \"effectiveGasPrice\": \"string\",\n          \"error\": \"string\",\n          \"gasUsed\": \"string\",\n          \"revertReason\": \"string\",\n          \"status\": \"string\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"string\",\n        \"isPublic\": true,\n        \"simulationId\": \"string\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"string\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        },\n        \"key_1\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        },\n        \"key_2\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        }\n      }\n    },\n    {\n      \"networkId\": \"string\",\n      \"chainSpec\": {\n        \"chainId\": \"string\",\n        \"forkId\": \"string\"\n      },\n      \"to\": \"string\",\n      \"input\": \"string\",\n      \"blockNumber\": \"string\",\n      \"transactionIndex\": \"string\",\n      \"from\": \"string\",\n      \"gas\": \"string\",\n      \"gasPrice\": \"string\",\n      \"value\": \"string\",\n      \"accessList\": [\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"string\",\n        \"blockHash\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"blockNumber\": \"string\",\n        \"difficulty\": \"string\",\n        \"gasLimit\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"bundleId\": \"string\",\n      \"chainId\": \"string\",\n      \"createAt\": \"string\",\n      \"debugDeployment\": false,\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"maxFeePerGas\": \"string\",\n      \"maxPriorityFeePerGas\": \"string\",\n      \"originTxHash\": \"string\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"string\",\n          \"blockNumber\": \"string\",\n          \"chainId\": \"string\",\n          \"from\": \"string\",\n          \"gas\": \"string\",\n          \"gasPrice\": \"string\",\n          \"hash\": \"string\",\n          \"input\": \"string\",\n          \"maxFeePerGas\": \"string\",\n          \"maxPriorityFeePerGas\": \"string\",\n          \"nonce\": \"string\",\n          \"to\": \"string\",\n          \"transactionIndex\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"string\",\n          \"effectiveGasPrice\": \"string\",\n          \"error\": \"string\",\n          \"gasUsed\": \"string\",\n          \"revertReason\": \"string\",\n          \"status\": \"string\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"string\",\n        \"isPublic\": true,\n        \"simulationId\": \"string\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"key_1\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "063c4dca-0a6b-4577-bba1-502082c443bd",
+          "name": "Get list of simulations",
+          "request": {
+            "name": "Get list of simulations",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                "simulation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelContains",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80d9b4a1-4c2e-4ed8-b74d-2ed05e3e6b3f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    "simulation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelContains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": \"string\",\n  \"page\": 3908,\n  \"pageSize\": 76,\n  \"simulations\": [\n    {\n      \"networkId\": \"string\",\n      \"chainSpec\": {\n        \"chainId\": \"string\",\n        \"forkId\": \"string\"\n      },\n      \"to\": \"string\",\n      \"input\": \"string\",\n      \"blockNumber\": \"string\",\n      \"transactionIndex\": \"string\",\n      \"from\": \"string\",\n      \"gas\": \"string\",\n      \"gasPrice\": \"string\",\n      \"value\": \"string\",\n      \"accessList\": [\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"string\",\n        \"blockHash\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"blockNumber\": \"string\",\n        \"difficulty\": \"string\",\n        \"gasLimit\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"bundleId\": \"string\",\n      \"chainId\": \"string\",\n      \"createAt\": \"string\",\n      \"debugDeployment\": true,\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"maxFeePerGas\": \"string\",\n      \"maxPriorityFeePerGas\": \"string\",\n      \"originTxHash\": \"string\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"string\",\n          \"blockNumber\": \"string\",\n          \"chainId\": \"string\",\n          \"from\": \"string\",\n          \"gas\": \"string\",\n          \"gasPrice\": \"string\",\n          \"hash\": \"string\",\n          \"input\": \"string\",\n          \"maxFeePerGas\": \"string\",\n          \"maxPriorityFeePerGas\": \"string\",\n          \"nonce\": \"string\",\n          \"to\": \"string\",\n          \"transactionIndex\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"string\",\n          \"effectiveGasPrice\": \"string\",\n          \"error\": \"string\",\n          \"gasUsed\": \"string\",\n          \"revertReason\": \"string\",\n          \"status\": \"string\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"string\",\n        \"isPublic\": false,\n        \"simulationId\": \"string\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"string\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"key_1\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"key_2\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\"\n          }\n        }\n      }\n    },\n    {\n      \"networkId\": \"string\",\n      \"chainSpec\": {\n        \"chainId\": \"string\",\n        \"forkId\": \"string\"\n      },\n      \"to\": \"string\",\n      \"input\": \"string\",\n      \"blockNumber\": \"string\",\n      \"transactionIndex\": \"string\",\n      \"from\": \"string\",\n      \"gas\": \"string\",\n      \"gasPrice\": \"string\",\n      \"value\": \"string\",\n      \"accessList\": [\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"address\": \"string\",\n          \"storageKeys\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"string\",\n        \"blockHash\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"blockNumber\": \"string\",\n        \"difficulty\": \"string\",\n        \"gasLimit\": \"string\",\n        \"timestamp\": \"string\"\n      },\n      \"bundleId\": \"string\",\n      \"chainId\": \"string\",\n      \"createAt\": \"string\",\n      \"debugDeployment\": false,\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"maxFeePerGas\": \"string\",\n      \"maxPriorityFeePerGas\": \"string\",\n      \"originTxHash\": \"string\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"string\",\n          \"blockNumber\": \"string\",\n          \"chainId\": \"string\",\n          \"from\": \"string\",\n          \"gas\": \"string\",\n          \"gasPrice\": \"string\",\n          \"hash\": \"string\",\n          \"input\": \"string\",\n          \"maxFeePerGas\": \"string\",\n          \"maxPriorityFeePerGas\": \"string\",\n          \"nonce\": \"string\",\n          \"to\": \"string\",\n          \"transactionIndex\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"string\",\n          \"effectiveGasPrice\": \"string\",\n          \"error\": \"string\",\n          \"gasUsed\": \"string\",\n          \"revertReason\": \"string\",\n          \"status\": \"string\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"string\",\n        \"isPublic\": false,\n        \"simulationId\": \"string\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"string\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"string\",\n          \"code\": \"string\",\n          \"state\": {\n            \"key_0\": \"string\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c1722be-1547-4077-afa7-235578c9ecfc",
+          "name": "Search transactions",
+          "request": {
+            "name": "Search transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                "search_transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "chainId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "chainId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeDirect",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeTrace",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeIn",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeOut",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "startBlock",
+                  "value": "<int64>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endBlock",
+                  "value": "<int64>"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTimestamp",
+                  "value": "<int64>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTimestamp",
+                  "value": "<int64>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionStatus",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionStatus",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "methodSignature",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<byte>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0704c28-85b5-4f61-a470-33b7fb76149f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    "search_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chainId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "chainId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeDirect",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeTrace",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeIn",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeOut",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startBlock",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "endBlock",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "startTimestamp",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "endTimestamp",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "methodSignature",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<byte>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nextPageToken\": \"string\",\n  \"transactions\": [\n    {\n      \"abiItem\": \"string\",\n      \"blockNumber\": \"string\",\n      \"hash\": \"string\",\n      \"isIn\": false,\n      \"json\": \"string\",\n      \"methodSignature\": \"string\",\n      \"methodSignatureText\": \"string\",\n      \"timestamp\": \"string\",\n      \"trace\": false,\n      \"transactionStatus\": 3314,\n      \"tx\": {\n        \"accessList\": [\n          {\n            \"address\": \"string\",\n            \"storageKeys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"address\": \"string\",\n            \"storageKeys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"blockHash\": \"string\",\n        \"blockNumber\": \"string\",\n        \"chainId\": \"string\",\n        \"from\": \"string\",\n        \"gas\": \"string\",\n        \"gasPrice\": \"string\",\n        \"hash\": \"string\",\n        \"input\": \"string\",\n        \"maxFeePerGas\": \"string\",\n        \"maxPriorityFeePerGas\": \"string\",\n        \"nonce\": \"string\",\n        \"to\": \"string\",\n        \"transactionIndex\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    },\n    {\n      \"abiItem\": \"string\",\n      \"blockNumber\": \"string\",\n      \"hash\": \"string\",\n      \"isIn\": false,\n      \"json\": \"string\",\n      \"methodSignature\": \"string\",\n      \"methodSignatureText\": \"string\",\n      \"timestamp\": \"string\",\n      \"trace\": true,\n      \"transactionStatus\": 8131,\n      \"tx\": {\n        \"accessList\": [\n          {\n            \"address\": \"string\",\n            \"storageKeys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"address\": \"string\",\n            \"storageKeys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"blockHash\": \"string\",\n        \"blockNumber\": \"string\",\n        \"chainId\": \"string\",\n        \"from\": \"string\",\n        \"gas\": \"string\",\n        \"gasPrice\": \"string\",\n        \"hash\": \"string\",\n        \"input\": \"string\",\n        \"maxFeePerGas\": \"string\",\n        \"maxPriorityFeePerGas\": \"string\",\n        \"nonce\": \"string\",\n        \"to\": \"string\",\n        \"transactionIndex\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "969fb4e7-10dd-4c5b-ac05-1c69c3c11065",
+          "name": "Run simulation",
+          "request": {
+            "name": "Run simulation",
+            "description": {
+              "content": "Create a new transaction simulation. The simulation body should be included in the request body.\nYour simulations will be saved, and a unique ID for each simulation is included in the response. It will be useful for fetching simulation details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                ":chainId",
+                "simulation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chainId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"simulation\": {\n    \"networkId\": \"<string>\",\n    \"chainSpec\": {\n      \"chainId\": \"<string>\",\n      \"forkId\": \"<string>\"\n    },\n    \"to\": \"<string>\",\n    \"input\": \"<string>\",\n    \"blockNumber\": \"<string>\",\n    \"transactionIndex\": \"<string>\",\n    \"from\": \"<string>\",\n    \"gas\": \"<string>\",\n    \"gasPrice\": \"<string>\",\n    \"value\": \"<string>\",\n    \"accessList\": [\n      {\n        \"address\": \"<string>\",\n        \"storageKeys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"address\": \"<string>\",\n        \"storageKeys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"blockOverride\": {\n      \"baseFee\": \"<string>\",\n      \"blockHash\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      },\n      \"blockNumber\": \"<string>\",\n      \"difficulty\": \"<string>\",\n      \"gasLimit\": \"<string>\",\n      \"timestamp\": \"<string>\"\n    },\n    \"bundleId\": \"<string>\",\n    \"chainId\": \"<string>\",\n    \"createAt\": \"<string>\",\n    \"debugDeployment\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"maxFeePerGas\": \"<string>\",\n    \"maxPriorityFeePerGas\": \"<string>\",\n    \"originTxHash\": \"<string>\",\n    \"result\": {\n      \"transaction\": {\n        \"accessList\": [\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"blockHash\": \"<string>\",\n        \"blockNumber\": \"<string>\",\n        \"chainId\": \"<string>\",\n        \"from\": \"<string>\",\n        \"gas\": \"<string>\",\n        \"gasPrice\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"input\": \"<string>\",\n        \"maxFeePerGas\": \"<string>\",\n        \"maxPriorityFeePerGas\": \"<string>\",\n        \"nonce\": \"<string>\",\n        \"to\": \"<string>\",\n        \"transactionIndex\": \"<string>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"transactionReceipt\": {\n        \"cumulativeGasUsed\": \"<string>\",\n        \"effectiveGasPrice\": \"<string>\",\n        \"error\": \"<string>\",\n        \"gasUsed\": \"<string>\",\n        \"logs\": [\n          \"<object>\",\n          \"<object>\"\n        ],\n        \"revertReason\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    },\n    \"sharing\": {\n      \"id\": \"<string>\",\n      \"isPublic\": \"<boolean>\",\n      \"simulationId\": \"<string>\"\n    },\n    \"sourceOverrides\": {\n      \"key_0\": \"<string>\"\n    },\n    \"stateOverrides\": {\n      \"key_0\": {\n        \"balance\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      \"key_1\": {\n        \"balance\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15364286-cafc-4da0-b820-bbaf2b09542e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    ":chainId",
+                    "simulation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chainId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"simulation\": {\n    \"networkId\": \"<string>\",\n    \"chainSpec\": {\n      \"chainId\": \"<string>\",\n      \"forkId\": \"<string>\"\n    },\n    \"to\": \"<string>\",\n    \"input\": \"<string>\",\n    \"blockNumber\": \"<string>\",\n    \"transactionIndex\": \"<string>\",\n    \"from\": \"<string>\",\n    \"gas\": \"<string>\",\n    \"gasPrice\": \"<string>\",\n    \"value\": \"<string>\",\n    \"accessList\": [\n      {\n        \"address\": \"<string>\",\n        \"storageKeys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"address\": \"<string>\",\n        \"storageKeys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"blockOverride\": {\n      \"baseFee\": \"<string>\",\n      \"blockHash\": {\n        \"key_0\": \"<string>\"\n      },\n      \"blockNumber\": \"<string>\",\n      \"difficulty\": \"<string>\",\n      \"gasLimit\": \"<string>\",\n      \"timestamp\": \"<string>\"\n    },\n    \"bundleId\": \"<string>\",\n    \"chainId\": \"<string>\",\n    \"createAt\": \"<string>\",\n    \"debugDeployment\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"maxFeePerGas\": \"<string>\",\n    \"maxPriorityFeePerGas\": \"<string>\",\n    \"originTxHash\": \"<string>\",\n    \"result\": {\n      \"transaction\": {\n        \"accessList\": [\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"blockHash\": \"<string>\",\n        \"blockNumber\": \"<string>\",\n        \"chainId\": \"<string>\",\n        \"from\": \"<string>\",\n        \"gas\": \"<string>\",\n        \"gasPrice\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"input\": \"<string>\",\n        \"maxFeePerGas\": \"<string>\",\n        \"maxPriorityFeePerGas\": \"<string>\",\n        \"nonce\": \"<string>\",\n        \"to\": \"<string>\",\n        \"transactionIndex\": \"<string>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"transactionReceipt\": {\n        \"cumulativeGasUsed\": \"<string>\",\n        \"effectiveGasPrice\": \"<string>\",\n        \"error\": \"<string>\",\n        \"gasUsed\": \"<string>\",\n        \"logs\": [\n          \"<object>\",\n          \"<object>\"\n        ],\n        \"revertReason\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    },\n    \"sharing\": {\n      \"id\": \"<string>\",\n      \"isPublic\": \"<boolean>\",\n      \"simulationId\": \"<string>\"\n    },\n    \"sourceOverrides\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"stateOverrides\": {\n      \"key_0\": {\n        \"balance\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"simulation\": {\n    \"networkId\": \"<string>\",\n    \"chainSpec\": {\n      \"chainId\": \"<string>\",\n      \"forkId\": \"<string>\"\n    },\n    \"to\": \"<string>\",\n    \"input\": \"<string>\",\n    \"blockNumber\": \"<string>\",\n    \"transactionIndex\": \"<string>\",\n    \"from\": \"<string>\",\n    \"gas\": \"<string>\",\n    \"gasPrice\": \"<string>\",\n    \"value\": \"<string>\",\n    \"accessList\": [\n      {\n        \"address\": \"<string>\",\n        \"storageKeys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"address\": \"<string>\",\n        \"storageKeys\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"blockOverride\": {\n      \"baseFee\": \"<string>\",\n      \"blockHash\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"blockNumber\": \"<string>\",\n      \"difficulty\": \"<string>\",\n      \"gasLimit\": \"<string>\",\n      \"timestamp\": \"<string>\"\n    },\n    \"bundleId\": \"<string>\",\n    \"chainId\": \"<string>\",\n    \"createAt\": \"<string>\",\n    \"debugDeployment\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"maxFeePerGas\": \"<string>\",\n    \"maxPriorityFeePerGas\": \"<string>\",\n    \"originTxHash\": \"<string>\",\n    \"result\": {\n      \"transaction\": {\n        \"accessList\": [\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storageKeys\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"blockHash\": \"<string>\",\n        \"blockNumber\": \"<string>\",\n        \"chainId\": \"<string>\",\n        \"from\": \"<string>\",\n        \"gas\": \"<string>\",\n        \"gasPrice\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"input\": \"<string>\",\n        \"maxFeePerGas\": \"<string>\",\n        \"maxPriorityFeePerGas\": \"<string>\",\n        \"nonce\": \"<string>\",\n        \"to\": \"<string>\",\n        \"transactionIndex\": \"<string>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"transactionReceipt\": {\n        \"cumulativeGasUsed\": \"<string>\",\n        \"effectiveGasPrice\": \"<string>\",\n        \"error\": \"<string>\",\n        \"gasUsed\": \"<string>\",\n        \"logs\": [\n          \"<object>\",\n          \"<object>\"\n        ],\n        \"revertReason\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    },\n    \"sharing\": {\n      \"id\": \"<string>\",\n      \"isPublic\": \"<boolean>\",\n      \"simulationId\": \"<string>\"\n    },\n    \"sourceOverrides\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"stateOverrides\": {\n      \"key_0\": {\n        \"balance\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      \"key_1\": {\n        \"balance\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      \"key_2\": {\n        \"balance\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      \"key_3\": {\n        \"balance\": \"<string>\",\n        \"code\": \"<string>\",\n        \"state\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a450ddff-94c9-4fe8-a95e-68ab808eb35d",
+          "name": "Run bundle simulation",
+          "request": {
+            "name": "Run bundle simulation",
+            "description": {
+              "content": "You could also create bundle simulations so that one transaction could be executed one after another. For `blockNumber` `transactionIndex` `networkId` `stateOverrides` and `blockOverrides` fields, only the first simulation takes effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "solidity",
+                ":owner",
+                ":slug",
+                ":chainId",
+                "simulation_bundle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chainId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"simulations\": [\n    {\n      \"networkId\": \"<string>\",\n      \"chainSpec\": {\n        \"chainId\": \"<string>\",\n        \"forkId\": \"<string>\"\n      },\n      \"to\": \"<string>\",\n      \"input\": \"<string>\",\n      \"blockNumber\": \"<string>\",\n      \"transactionIndex\": \"<string>\",\n      \"from\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"gasPrice\": \"<string>\",\n      \"value\": \"<string>\",\n      \"accessList\": [\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"<string>\",\n        \"blockHash\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"blockNumber\": \"<string>\",\n        \"difficulty\": \"<string>\",\n        \"gasLimit\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      },\n      \"bundleId\": \"<string>\",\n      \"chainId\": \"<string>\",\n      \"createAt\": \"<string>\",\n      \"debugDeployment\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"maxFeePerGas\": \"<string>\",\n      \"maxPriorityFeePerGas\": \"<string>\",\n      \"originTxHash\": \"<string>\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"<string>\",\n          \"blockNumber\": \"<string>\",\n          \"chainId\": \"<string>\",\n          \"from\": \"<string>\",\n          \"gas\": \"<string>\",\n          \"gasPrice\": \"<string>\",\n          \"hash\": \"<string>\",\n          \"input\": \"<string>\",\n          \"maxFeePerGas\": \"<string>\",\n          \"maxPriorityFeePerGas\": \"<string>\",\n          \"nonce\": \"<string>\",\n          \"to\": \"<string>\",\n          \"transactionIndex\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"<string>\",\n          \"effectiveGasPrice\": \"<string>\",\n          \"error\": \"<string>\",\n          \"gasUsed\": \"<string>\",\n          \"logs\": [\n            \"<object>\",\n            \"<object>\"\n          ],\n          \"revertReason\": \"<string>\",\n          \"status\": \"<string>\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"<string>\",\n        \"isPublic\": \"<boolean>\",\n        \"simulationId\": \"<string>\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\"\n          }\n        },\n        \"key_1\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          }\n        },\n        \"key_2\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"networkId\": \"<string>\",\n      \"chainSpec\": {\n        \"chainId\": \"<string>\",\n        \"forkId\": \"<string>\"\n      },\n      \"to\": \"<string>\",\n      \"input\": \"<string>\",\n      \"blockNumber\": \"<string>\",\n      \"transactionIndex\": \"<string>\",\n      \"from\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"gasPrice\": \"<string>\",\n      \"value\": \"<string>\",\n      \"accessList\": [\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"<string>\",\n        \"blockHash\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"blockNumber\": \"<string>\",\n        \"difficulty\": \"<string>\",\n        \"gasLimit\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      },\n      \"bundleId\": \"<string>\",\n      \"chainId\": \"<string>\",\n      \"createAt\": \"<string>\",\n      \"debugDeployment\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"maxFeePerGas\": \"<string>\",\n      \"maxPriorityFeePerGas\": \"<string>\",\n      \"originTxHash\": \"<string>\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"<string>\",\n          \"blockNumber\": \"<string>\",\n          \"chainId\": \"<string>\",\n          \"from\": \"<string>\",\n          \"gas\": \"<string>\",\n          \"gasPrice\": \"<string>\",\n          \"hash\": \"<string>\",\n          \"input\": \"<string>\",\n          \"maxFeePerGas\": \"<string>\",\n          \"maxPriorityFeePerGas\": \"<string>\",\n          \"nonce\": \"<string>\",\n          \"to\": \"<string>\",\n          \"transactionIndex\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"<string>\",\n          \"effectiveGasPrice\": \"<string>\",\n          \"error\": \"<string>\",\n          \"gasUsed\": \"<string>\",\n          \"logs\": [\n            \"<object>\",\n            \"<object>\"\n          ],\n          \"revertReason\": \"<string>\",\n          \"status\": \"<string>\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"<string>\",\n        \"isPublic\": \"<boolean>\",\n        \"simulationId\": \"<string>\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "058142c2-5f76-4179-9b92-46c5a5f5c078",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "solidity",
+                    ":owner",
+                    ":slug",
+                    ":chainId",
+                    "simulation_bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chainId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"simulations\": [\n    {\n      \"networkId\": \"<string>\",\n      \"chainSpec\": {\n        \"chainId\": \"<string>\",\n        \"forkId\": \"<string>\"\n      },\n      \"to\": \"<string>\",\n      \"input\": \"<string>\",\n      \"blockNumber\": \"<string>\",\n      \"transactionIndex\": \"<string>\",\n      \"from\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"gasPrice\": \"<string>\",\n      \"value\": \"<string>\",\n      \"accessList\": [\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"<string>\",\n        \"blockHash\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        \"blockNumber\": \"<string>\",\n        \"difficulty\": \"<string>\",\n        \"gasLimit\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      },\n      \"bundleId\": \"<string>\",\n      \"chainId\": \"<string>\",\n      \"createAt\": \"<string>\",\n      \"debugDeployment\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"maxFeePerGas\": \"<string>\",\n      \"maxPriorityFeePerGas\": \"<string>\",\n      \"originTxHash\": \"<string>\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"<string>\",\n          \"blockNumber\": \"<string>\",\n          \"chainId\": \"<string>\",\n          \"from\": \"<string>\",\n          \"gas\": \"<string>\",\n          \"gasPrice\": \"<string>\",\n          \"hash\": \"<string>\",\n          \"input\": \"<string>\",\n          \"maxFeePerGas\": \"<string>\",\n          \"maxPriorityFeePerGas\": \"<string>\",\n          \"nonce\": \"<string>\",\n          \"to\": \"<string>\",\n          \"transactionIndex\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"<string>\",\n          \"effectiveGasPrice\": \"<string>\",\n          \"error\": \"<string>\",\n          \"gasUsed\": \"<string>\",\n          \"logs\": [\n            \"<object>\",\n            \"<object>\"\n          ],\n          \"revertReason\": \"<string>\",\n          \"status\": \"<string>\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"<string>\",\n        \"isPublic\": \"<boolean>\",\n        \"simulationId\": \"<string>\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"<string>\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"networkId\": \"<string>\",\n      \"chainSpec\": {\n        \"chainId\": \"<string>\",\n        \"forkId\": \"<string>\"\n      },\n      \"to\": \"<string>\",\n      \"input\": \"<string>\",\n      \"blockNumber\": \"<string>\",\n      \"transactionIndex\": \"<string>\",\n      \"from\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"gasPrice\": \"<string>\",\n      \"value\": \"<string>\",\n      \"accessList\": [\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"<string>\",\n        \"blockHash\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        \"blockNumber\": \"<string>\",\n        \"difficulty\": \"<string>\",\n        \"gasLimit\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      },\n      \"bundleId\": \"<string>\",\n      \"chainId\": \"<string>\",\n      \"createAt\": \"<string>\",\n      \"debugDeployment\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"maxFeePerGas\": \"<string>\",\n      \"maxPriorityFeePerGas\": \"<string>\",\n      \"originTxHash\": \"<string>\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"<string>\",\n          \"blockNumber\": \"<string>\",\n          \"chainId\": \"<string>\",\n          \"from\": \"<string>\",\n          \"gas\": \"<string>\",\n          \"gasPrice\": \"<string>\",\n          \"hash\": \"<string>\",\n          \"input\": \"<string>\",\n          \"maxFeePerGas\": \"<string>\",\n          \"maxPriorityFeePerGas\": \"<string>\",\n          \"nonce\": \"<string>\",\n          \"to\": \"<string>\",\n          \"transactionIndex\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"<string>\",\n          \"effectiveGasPrice\": \"<string>\",\n          \"error\": \"<string>\",\n          \"gasUsed\": \"<string>\",\n          \"logs\": [\n            \"<object>\",\n            \"<object>\"\n          ],\n          \"revertReason\": \"<string>\",\n          \"status\": \"<string>\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"<string>\",\n        \"isPublic\": \"<boolean>\",\n        \"simulationId\": \"<string>\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\",\n        \"key_4\": \"<string>\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\"\n          }\n        },\n        \"key_1\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bundleId\": \"string\",\n  \"error\": \"string\",\n  \"simulations\": [\n    {\n      \"networkId\": \"<string>\",\n      \"chainSpec\": {\n        \"chainId\": \"<string>\",\n        \"forkId\": \"<string>\"\n      },\n      \"to\": \"<string>\",\n      \"input\": \"<string>\",\n      \"blockNumber\": \"<string>\",\n      \"transactionIndex\": \"<string>\",\n      \"from\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"gasPrice\": \"<string>\",\n      \"value\": \"<string>\",\n      \"accessList\": [\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"<string>\",\n        \"blockHash\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"blockNumber\": \"<string>\",\n        \"difficulty\": \"<string>\",\n        \"gasLimit\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      },\n      \"bundleId\": \"<string>\",\n      \"chainId\": \"<string>\",\n      \"createAt\": \"<string>\",\n      \"debugDeployment\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"maxFeePerGas\": \"<string>\",\n      \"maxPriorityFeePerGas\": \"<string>\",\n      \"originTxHash\": \"<string>\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"<string>\",\n          \"blockNumber\": \"<string>\",\n          \"chainId\": \"<string>\",\n          \"from\": \"<string>\",\n          \"gas\": \"<string>\",\n          \"gasPrice\": \"<string>\",\n          \"hash\": \"<string>\",\n          \"input\": \"<string>\",\n          \"maxFeePerGas\": \"<string>\",\n          \"maxPriorityFeePerGas\": \"<string>\",\n          \"nonce\": \"<string>\",\n          \"to\": \"<string>\",\n          \"transactionIndex\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"<string>\",\n          \"effectiveGasPrice\": \"<string>\",\n          \"error\": \"<string>\",\n          \"gasUsed\": \"<string>\",\n          \"logs\": [\n            \"<object>\",\n            \"<object>\"\n          ],\n          \"revertReason\": \"<string>\",\n          \"status\": \"<string>\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"<string>\",\n        \"isPublic\": \"<boolean>\",\n        \"simulationId\": \"<string>\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\"\n          }\n        },\n        \"key_1\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          }\n        },\n        \"key_2\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"networkId\": \"<string>\",\n      \"chainSpec\": {\n        \"chainId\": \"<string>\",\n        \"forkId\": \"<string>\"\n      },\n      \"to\": \"<string>\",\n      \"input\": \"<string>\",\n      \"blockNumber\": \"<string>\",\n      \"transactionIndex\": \"<string>\",\n      \"from\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"gasPrice\": \"<string>\",\n      \"value\": \"<string>\",\n      \"accessList\": [\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"address\": \"<string>\",\n          \"storageKeys\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"blockOverride\": {\n        \"baseFee\": \"<string>\",\n        \"blockHash\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"blockNumber\": \"<string>\",\n        \"difficulty\": \"<string>\",\n        \"gasLimit\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      },\n      \"bundleId\": \"<string>\",\n      \"chainId\": \"<string>\",\n      \"createAt\": \"<string>\",\n      \"debugDeployment\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"maxFeePerGas\": \"<string>\",\n      \"maxPriorityFeePerGas\": \"<string>\",\n      \"originTxHash\": \"<string>\",\n      \"result\": {\n        \"transaction\": {\n          \"accessList\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blockHash\": \"<string>\",\n          \"blockNumber\": \"<string>\",\n          \"chainId\": \"<string>\",\n          \"from\": \"<string>\",\n          \"gas\": \"<string>\",\n          \"gasPrice\": \"<string>\",\n          \"hash\": \"<string>\",\n          \"input\": \"<string>\",\n          \"maxFeePerGas\": \"<string>\",\n          \"maxPriorityFeePerGas\": \"<string>\",\n          \"nonce\": \"<string>\",\n          \"to\": \"<string>\",\n          \"transactionIndex\": \"<string>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"transactionReceipt\": {\n          \"cumulativeGasUsed\": \"<string>\",\n          \"effectiveGasPrice\": \"<string>\",\n          \"error\": \"<string>\",\n          \"gasUsed\": \"<string>\",\n          \"logs\": [\n            \"<object>\",\n            \"<object>\"\n          ],\n          \"revertReason\": \"<string>\",\n          \"status\": \"<string>\"\n        }\n      },\n      \"sharing\": {\n        \"id\": \"<string>\",\n        \"isPublic\": \"<boolean>\",\n        \"simulationId\": \"<string>\"\n      },\n      \"sourceOverrides\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\"\n      },\n      \"stateOverrides\": {\n        \"key_0\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\"\n          }\n        },\n        \"key_1\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\"\n          }\n        },\n        \"key_2\": {\n          \"balance\": \"<string>\",\n          \"code\": \"<string>\",\n          \"state\": {\n            \"key_0\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sentio.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "109a490b-4e53-4899-b86a-169c40bcb8b7",
+    "name": "Sentio AI Debug and Simulation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sentio Open API — REST access to Sentio's Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio's published API reference at docs.sentio.xyz/reference.\n\nContact Support:\n Name: Sentio",
+      "type": "text/plain"
+    }
+  }
+}

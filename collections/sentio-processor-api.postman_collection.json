@@ -1,0 +1,254 @@
+{
+  "item": [
+    {
+      "id": "95f8065c-5d76-48b9-b2ef-586f105fe5bd",
+      "name": "Processor",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "45ec3789-fe3b-4331-97dc-9aba06299a0b",
+          "name": "activate the pending version of a processor",
+          "request": {
+            "name": "activate the pending version of a processor",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "processors",
+                ":owner",
+                ":slug",
+                "activate_pending"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ba89b1d-1168-41bc-87a1-c0782965ef88",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "processors",
+                    ":owner",
+                    ":slug",
+                    "activate_pending"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f01a9e5b-0d77-493e-b1b4-212ca5d7dfa2",
+          "name": "Get processor status",
+          "request": {
+            "name": "Get processor status",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "processors",
+                ":owner",
+                ":slug",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "ACTIVE",
+                  "description": " - ACTIVE: Only active version\n - PENDING: Only pending versions\n - ALL: All version"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "owner",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "081a81b1-2956-4e5e-bd55-a70f4c2f7164",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "processors",
+                    ":owner",
+                    ":slug",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "ACTIVE"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "owner",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"processors\": [\n    {\n      \"cliVersion\": \"string\",\n      \"codeHash\": \"string\",\n      \"commitSha\": \"string\",\n      \"debugFork\": \"string\",\n      \"driverVersion\": \"string\",\n      \"entitySchema\": \"string\",\n      \"entitySchemaVersion\": 2710,\n      \"gitUrl\": \"string\",\n      \"ipfsHash\": \"string\",\n      \"networkOverrides\": [\n        {\n          \"chain\": \"string\",\n          \"host\": \"string\"\n        },\n        {\n          \"chain\": \"string\",\n          \"host\": \"string\"\n        }\n      ],\n      \"numWorkers\": \"string\",\n      \"pause\": true,\n      \"pauseAt\": \"1963-09-19T02:51:02.941Z\",\n      \"pauseReason\": \"string\",\n      \"processorId\": \"string\",\n      \"processorStatus\": {\n        \"errorRecord\": {\n          \"code\": 1479,\n          \"createdAt\": \"2003-06-07T16:35:38.871Z\",\n          \"id\": \"string\",\n          \"message\": \"string\",\n          \"namespace\": 9526,\n          \"namespaceCode\": 4302\n        },\n        \"state\": \"UNKNOWN\"\n      },\n      \"referenceProjectId\": \"string\",\n      \"sdkVersion\": \"string\",\n      \"snChainId\": \"string\",\n      \"snRequiredChains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"states\": [\n        {\n          \"chainId\": \"string\",\n          \"estimatedLatestBlockNumber\": \"string\",\n          \"handlerStat\": \"string\",\n          \"indexerState\": \"string\",\n          \"initialStartBlockNumber\": \"string\",\n          \"lastBlockNumber\": \"string\",\n          \"meterState\": \"string\",\n          \"processedBlockHash\": \"string\",\n          \"processedBlockNumber\": \"string\",\n          \"processedTimestampMicros\": \"string\",\n          \"processedVersion\": 9081,\n          \"status\": {\n            \"errorRecord\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"templates\": \"string\",\n          \"trackers\": \"string\",\n          \"updatedAt\": \"1971-08-09T01:41:31.469Z\"\n        },\n        {\n          \"chainId\": \"string\",\n          \"estimatedLatestBlockNumber\": \"string\",\n          \"handlerStat\": \"string\",\n          \"indexerState\": \"string\",\n          \"initialStartBlockNumber\": \"string\",\n          \"lastBlockNumber\": \"string\",\n          \"meterState\": \"string\",\n          \"processedBlockHash\": \"string\",\n          \"processedBlockNumber\": \"string\",\n          \"processedTimestampMicros\": \"string\",\n          \"processedVersion\": 8649,\n          \"status\": {\n            \"errorRecord\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"templates\": \"string\",\n          \"trackers\": \"string\",\n          \"updatedAt\": \"1961-09-30T02:55:33.411Z\"\n        }\n      ],\n      \"uploadedAt\": \"1987-05-14T01:19:41.059Z\",\n      \"uploadedBy\": {\n        \"firstName\": \"string\",\n        \"id\": \"string\",\n        \"lastName\": \"string\",\n        \"nickname\": \"string\",\n        \"picture\": \"string\",\n        \"username\": \"string\"\n      },\n      \"version\": 7931,\n      \"versionLabel\": \"string\",\n      \"versionState\": \"UNKNOWN\",\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"cliVersion\": \"string\",\n      \"codeHash\": \"string\",\n      \"commitSha\": \"string\",\n      \"debugFork\": \"string\",\n      \"driverVersion\": \"string\",\n      \"entitySchema\": \"string\",\n      \"entitySchemaVersion\": 6058,\n      \"gitUrl\": \"string\",\n      \"ipfsHash\": \"string\",\n      \"networkOverrides\": [\n        {\n          \"chain\": \"string\",\n          \"host\": \"string\"\n        },\n        {\n          \"chain\": \"string\",\n          \"host\": \"string\"\n        }\n      ],\n      \"numWorkers\": \"string\",\n      \"pause\": true,\n      \"pauseAt\": \"1958-12-10T10:24:11.140Z\",\n      \"pauseReason\": \"string\",\n      \"processorId\": \"string\",\n      \"processorStatus\": {\n        \"errorRecord\": {\n          \"code\": 8501,\n          \"createdAt\": \"1959-08-01T04:03:09.989Z\",\n          \"id\": \"string\",\n          \"message\": \"string\",\n          \"namespace\": 7130,\n          \"namespaceCode\": 9156\n        },\n        \"state\": \"UNKNOWN\"\n      },\n      \"referenceProjectId\": \"string\",\n      \"sdkVersion\": \"string\",\n      \"snChainId\": \"string\",\n      \"snRequiredChains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"states\": [\n        {\n          \"chainId\": \"string\",\n          \"estimatedLatestBlockNumber\": \"string\",\n          \"handlerStat\": \"string\",\n          \"indexerState\": \"string\",\n          \"initialStartBlockNumber\": \"string\",\n          \"lastBlockNumber\": \"string\",\n          \"meterState\": \"string\",\n          \"processedBlockHash\": \"string\",\n          \"processedBlockNumber\": \"string\",\n          \"processedTimestampMicros\": \"string\",\n          \"processedVersion\": 1129,\n          \"status\": {\n            \"errorRecord\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"templates\": \"string\",\n          \"trackers\": \"string\",\n          \"updatedAt\": \"2016-12-18T14:01:04.960Z\"\n        },\n        {\n          \"chainId\": \"string\",\n          \"estimatedLatestBlockNumber\": \"string\",\n          \"handlerStat\": \"string\",\n          \"indexerState\": \"string\",\n          \"initialStartBlockNumber\": \"string\",\n          \"lastBlockNumber\": \"string\",\n          \"meterState\": \"string\",\n          \"processedBlockHash\": \"string\",\n          \"processedBlockNumber\": \"string\",\n          \"processedTimestampMicros\": \"string\",\n          \"processedVersion\": 6623,\n          \"status\": {\n            \"errorRecord\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"templates\": \"string\",\n          \"trackers\": \"string\",\n          \"updatedAt\": \"2021-11-12T01:53:48.573Z\"\n        }\n      ],\n      \"uploadedAt\": \"1984-01-01T03:39:51.107Z\",\n      \"uploadedBy\": {\n        \"firstName\": \"string\",\n        \"id\": \"string\",\n        \"lastName\": \"string\",\n        \"nickname\": \"string\",\n        \"picture\": \"string\",\n        \"username\": \"string\"\n      },\n      \"version\": 7426,\n      \"versionLabel\": \"string\",\n      \"versionState\": \"UNKNOWN\",\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sentio.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "95a11aa2-dcd2-47d8-8170-da5b83664f2a",
+    "name": "Sentio AI Processor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sentio Open API — REST access to Sentio's Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio's published API reference at docs.sentio.xyz/reference.\n\nContact Support:\n Name: Sentio",
+      "type": "text/plain"
+    }
+  }
+}

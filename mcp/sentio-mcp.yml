@@ -26,3 +26,8 @@ resources:
   description: Project resource management.
 note: Official hosted MCP server published by Sentio; tool categories map to the REST API families in
   openapi/sentio-openapi.yml.
+deployment:
+  mode: local-stdio
+  verified: searched
+  checked: '2026-08-12'
+  source: catalog MCP census

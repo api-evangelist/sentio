@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI ProcessorExt API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProcessorExt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the source files of a processor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/processors/:owner/:slug/source_files",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Optional version to fetch. If omitted, use latest active version."
+              }
+            ]
+          },
+          "docs": "Get the source files of a processor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

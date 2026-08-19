@@ -1,0 +1,401 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Forks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all forks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all forks"
+        },
+        {
+          "info": {
+            "name": "Create a fork",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a fork"
+        },
+        {
+          "info": {
+            "name": "Get fork by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get fork by id"
+        },
+        {
+          "info": {
+            "name": "Update fork by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fork by id"
+        },
+        {
+          "info": {
+            "name": "Delete fork by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:id",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete fork by id"
+        },
+        {
+          "info": {
+            "name": "Get trace by bundle simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:forkId/bundle/:bundleId/call_trace",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "forkId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "bundleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "withInternalCalls",
+                "value": "",
+                "type": "query",
+                "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+              },
+              {
+                "name": "disableOptimizer",
+                "value": "",
+                "type": "query",
+                "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+              },
+              {
+                "name": "ignoreGasCost",
+                "value": "",
+                "type": "query",
+                "description": "Only effective when disableOptimizer=true."
+              }
+            ]
+          },
+          "docs": "Get trace by bundle simulation"
+        },
+        {
+          "info": {
+            "name": "Get trace by simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:forkId/simulation/:simulationId/call_trace",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "forkId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "simulationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "withInternalCalls",
+                "value": "",
+                "type": "query",
+                "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+              },
+              {
+                "name": "disableOptimizer",
+                "value": "",
+                "type": "query",
+                "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+              },
+              {
+                "name": "ignoreGasCost",
+                "value": "",
+                "type": "query",
+                "description": "Only effective when disableOptimizer=true."
+              }
+            ]
+          },
+          "docs": "Get trace by simulation"
+        },
+        {
+          "info": {
+            "name": "Get trace by transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:forkId/transaction/:txHash/call_trace",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "forkId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "withInternalCalls",
+                "value": "",
+                "type": "query",
+                "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+              },
+              {
+                "name": "disableOptimizer",
+                "value": "",
+                "type": "query",
+                "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+              },
+              {
+                "name": "ignoreGasCost",
+                "value": "",
+                "type": "query",
+                "description": "Only effective when disableOptimizer=true."
+              }
+            ]
+          },
+          "docs": "Get trace by transaction"
+        },
+        {
+          "info": {
+            "name": "Get fork info by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:id/info",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get fork info by id"
+        },
+        {
+          "info": {
+            "name": "Run bundle simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:forkId/simulation_bundle",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "forkId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run bundle simulation"
+        },
+        {
+          "info": {
+            "name": "Run Simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/fork/:forkId/simulation",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "forkId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Simulation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

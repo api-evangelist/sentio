@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Price API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Price",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add coin by Gecko",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/prices/add_coin_by_gecko",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "adds a coin by its coingecko id.\n\ncoingecko id the API ID of the coin in coingecko web page.\n\nplease AWARE that the coingecko id is NOT the same as the symbol of the coin.\n\n![screenshot](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/coingecko_apiid.png)"
+        },
+        {
+          "info": {
+            "name": "Batch get prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/prices/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch get prices"
+        },
+        {
+          "info": {
+            "name": "Check latest price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/prices/check_latest"
+          },
+          "docs": "Check latest price"
+        },
+        {
+          "info": {
+            "name": "Get price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/prices",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp we request the price at. Note, the price service may not have\nthe price at the exact timestamp, in which case it will return the price\nat the closest timestamp."
+              },
+              {
+                "name": "coinId.symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "coinId.address.address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "coinId.address.chain",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "experimentalFlag.enablePythSource",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetPrice returns the price of a given coin identifier, in a best effort way.\nIf we do not have any price data for the given coin, we will return NOT_FOUND error.\nIf we have at least one price data for the given coin, we will return it with the actual timestamp.\nClient is responsible for checking the timestamp and decide whether to use the price or not."
+        },
+        {
+          "info": {
+            "name": "List coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/prices/coins",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "searchQuery",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "chain",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List coins"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

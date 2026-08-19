@@ -1,0 +1,274 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Web API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Web",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CreateLinkSession",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/users/link"
+          }
+        },
+        {
+          "info": {
+            "name": "Get a dashboard by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/dashboards/:dashboardId",
+            "params": [
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path",
+                "description": "filter the dashboard by id"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "filter the dashboard by project id"
+              },
+              {
+                "name": "ownerName",
+                "value": "",
+                "type": "query",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "project slug"
+              }
+            ]
+          },
+          "docs": "Get a dashboard by id"
+        },
+        {
+          "info": {
+            "name": "Delete a dashboard by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sentio.xyz/v1/dashboards/:dashboardId",
+            "params": [
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path",
+                "description": "filter the dashboard by id"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "filter the dashboard by project id"
+              },
+              {
+                "name": "ownerName",
+                "value": "",
+                "type": "query",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "project slug"
+              }
+            ]
+          },
+          "docs": "Delete a dashboard by id"
+        },
+        {
+          "info": {
+            "name": "Export a dashboard to json",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/dashboards/:dashboardId/json",
+            "params": [
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Export a dashboard to json"
+        },
+        {
+          "info": {
+            "name": "Get a dashboard by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/projects/:owner/:slug/dashboards/:dashboardId",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path",
+                "description": "filter the dashboard by id"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "filter the dashboard by project id"
+              }
+            ]
+          },
+          "docs": "Get a dashboard by id"
+        },
+        {
+          "info": {
+            "name": "Get dashboard history by dashboard id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/dashboards/:dashboardId/history",
+            "params": [
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get dashboard history by dashboard id"
+        },
+        {
+          "info": {
+            "name": "Import a dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/dashboards/json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import a dashboard"
+        },
+        {
+          "info": {
+            "name": "List all dashboards in a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/dashboards",
+            "params": [
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "query",
+                "description": "filter the dashboard by id"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "filter the dashboard by project id"
+              },
+              {
+                "name": "ownerName",
+                "value": "",
+                "type": "query",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "project slug"
+              }
+            ]
+          },
+          "docs": "List all dashboards in a project"
+        },
+        {
+          "info": {
+            "name": "List all dashboards in a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/projects/:owner/:slug/dashboards",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path",
+                "description": "username or organization name"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "project slug"
+              },
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "query",
+                "description": "filter the dashboard by id"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "filter the dashboard by project id"
+              }
+            ]
+          },
+          "docs": "List all dashboards in a project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

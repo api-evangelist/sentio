@@ -1,0 +1,422 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Debug and Simulation API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Debug and Simulation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get trace by bundle simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/:chainId/bundle/:bundleId/call_trace",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "bundleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "withInternalCalls",
+                "value": "",
+                "type": "query",
+                "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+              },
+              {
+                "name": "disableOptimizer",
+                "value": "",
+                "type": "query",
+                "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+              },
+              {
+                "name": "ignoreGasCost",
+                "value": "",
+                "type": "query",
+                "description": "Only effective when disableOptimizer=true."
+              }
+            ]
+          },
+          "docs": "Get trace by bundle simulation"
+        },
+        {
+          "info": {
+            "name": "Get trace by simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/:chainId/simulation/:simulationId/call_trace",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "simulationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "withInternalCalls",
+                "value": "",
+                "type": "query",
+                "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+              },
+              {
+                "name": "disableOptimizer",
+                "value": "",
+                "type": "query",
+                "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+              },
+              {
+                "name": "ignoreGasCost",
+                "value": "",
+                "type": "query",
+                "description": "Only effective when disableOptimizer=true."
+              }
+            ]
+          },
+          "docs": "Get trace by simulation"
+        },
+        {
+          "info": {
+            "name": "Get trace by transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/:chainId/transaction/:txHash/call_trace",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "withInternalCalls",
+                "value": "",
+                "type": "query",
+                "description": "Fetch the decoded trace, which will give you the function info, decoded parameters of both external and internal call trace."
+              },
+              {
+                "name": "disableOptimizer",
+                "value": "",
+                "type": "query",
+                "description": "Disable optimizations to make internal calls more accurate, but gas costs will differ from the actual execution."
+              },
+              {
+                "name": "ignoreGasCost",
+                "value": "",
+                "type": "query",
+                "description": "Only effective when disableOptimizer=true."
+              }
+            ]
+          },
+          "docs": "API to get Sentio call trace. It takes `txId.txHash` and `chainSpec.chainId` arguments, where the first is transaction hash, and the second is the numeric ethereum chain ID.\n\nThe results looks very similar to the normal [Ethereum call trace](https://media.githubusercontent.com/media/sentioxyz/docs/HEAD/assets/image%20(2)%20(1)%20(1)%20(1).png). But we have an additional `startIndex` and `startIndex` on each trace entry even for the LOG, representing the execution order in the trace.\n\nThis allows"
+        },
+        {
+          "info": {
+            "name": "Get simulation by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/simulation/:simulationId",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "simulationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get simulation by ID"
+        },
+        {
+          "info": {
+            "name": "Get bundle simulation by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/simulation_bundle/:bundleId",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "bundleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get bundle simulation by ID"
+        },
+        {
+          "info": {
+            "name": "Get list of simulations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/simulation",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "labelContains",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get list of simulations"
+        },
+        {
+          "info": {
+            "name": "Search transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/search_transactions",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeDirect",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTrace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeIn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeOut",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startBlock",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endBlock",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTimestamp",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTimestamp",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transactionStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "methodSignature",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search transactions"
+        },
+        {
+          "info": {
+            "name": "Run simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/:chainId/simulation",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new transaction simulation. The simulation body should be included in the request body.\nYour simulations will be saved, and a unique ID for each simulation is included in the response. It will be useful for fetching simulation details."
+        },
+        {
+          "info": {
+            "name": "Run bundle simulation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/v1/solidity/:owner/:slug/:chainId/simulation_bundle",
+            "params": [
+              {
+                "name": "owner",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You could also create bundle simulations so that one transaction could be executed one after another. For `blockNumber` `transactionIndex` `networkId` `stateOverrides` and `blockOverrides` fields, only the first simulation takes effect."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

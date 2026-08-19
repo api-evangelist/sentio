@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "43a486e1-7e9c-4266-943f-9d52fd5c0035",
+      "name": "Move",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "51ca127a-6851-4f5c-96db-79ed471cd9f4",
+          "name": "Get Aptos transaction call trace",
+          "request": {
+            "name": "Get Aptos transaction call trace",
+            "description": {
+              "content": "Retrieves the detailed call trace for an Aptos transaction",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "move",
+                "call_trace"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "networkId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "txHash",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ae0847e-4212-410c-9bf4-851b66298b77",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "move",
+                    "call_trace"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contentType\": \"string\",\n  \"data\": \"string\",\n  \"extensions\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dc75eca-f6c9-4db1-a890-4aeb1e8953ee",
+          "name": "Get Sui transaction call trace",
+          "request": {
+            "name": "Get Sui transaction call trace",
+            "description": {
+              "content": "Retrieves the detailed call trace for a Sui transaction",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "move",
+                "sui_call_trace"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "networkId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "txDigest",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0a9311d-5dab-4b3e-8d8b-34b671af0975",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "move",
+                    "sui_call_trace"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txDigest",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"calls\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/move_service.SuiCallTrace detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/move_service.SuiCallTrace detected>\"\n        }\n      ],\n      \"contractName\": \"string\",\n      \"error\": {\n        \"codeOffset\": 5413,\n        \"functionName\": \"string\",\n        \"location\": {\n          \"address\": \"string\",\n          \"name\": \"string\"\n        },\n        \"majorStatus\": \"string\",\n        \"message\": \"string\",\n        \"subStatus\": \"string\"\n      },\n      \"from\": \"string\",\n      \"functionName\": \"string\",\n      \"gasUsed\": \"string\",\n      \"location\": \"\",\n      \"pc\": 2355,\n      \"to\": \"string\",\n      \"typeArgs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"calls\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/move_service.SuiCallTrace detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/move_service.SuiCallTrace detected>\"\n        }\n      ],\n      \"contractName\": \"string\",\n      \"error\": {\n        \"codeOffset\": 7486,\n        \"functionName\": \"string\",\n        \"location\": {\n          \"address\": \"string\",\n          \"name\": \"string\"\n        },\n        \"majorStatus\": \"string\",\n        \"message\": \"string\",\n        \"subStatus\": \"string\"\n      },\n      \"from\": \"string\",\n      \"functionName\": \"string\",\n      \"gasUsed\": \"string\",\n      \"location\": \"\",\n      \"pc\": 6144,\n      \"to\": \"string\",\n      \"typeArgs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sentio.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8aa5cce4-c6a4-4da2-9b19-b4063b5b6e8a",
+    "name": "Sentio AI Move API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sentio Open API — REST access to Sentio's Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio's published API reference at docs.sentio.xyz/reference.\n\nContact Support:\n Name: Sentio",
+      "type": "text/plain"
+    }
+  }
+}

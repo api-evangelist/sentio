@@ -1,0 +1,229 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Prices API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adds a new asset by its CoinGecko id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/api/v2/prices/assets/add_by_gecko",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new asset by its CoinGecko id."
+        },
+        {
+          "info": {
+            "name": "Prices multiple assets at multiple timestamps in one call, grouping results per asset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sentio.xyz/api/v2/prices/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Prices multiple assets at multiple timestamps in one call, grouping results per asset."
+        },
+        {
+          "info": {
+            "name": "Returns a continuous price series for a single asset over a [start, end] time range.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/api/v2/prices/series",
+            "params": [
+              {
+                "name": "asset.assetId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.address.chain",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.address.address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to narrow symbol resolution to a single asset class."
+              }
+            ]
+          },
+          "docs": "Returns a continuous price series for a single asset over a [start, end] time range."
+        },
+        {
+          "info": {
+            "name": "Returns the price of a single asset at a given timestamp, or candidates when the asset ref is ambiguous.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/api/v2/prices",
+            "params": [
+              {
+                "name": "asset.assetId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.address.chain",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.address.address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to narrow symbol resolution to a single asset class."
+              }
+            ]
+          },
+          "docs": "Returns the price of a single asset at a given timestamp, or candidates when the asset ref is ambiguous."
+        },
+        {
+          "info": {
+            "name": "Lists known assets with pagination and optional search/chain/class filters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/api/v2/prices/assets",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "searchQuery",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "chain",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to narrow symbol resolution to a single asset class."
+              }
+            ]
+          },
+          "docs": "Lists known assets with pagination and optional search/chain/class filters."
+        },
+        {
+          "info": {
+            "name": "Resolves an asset ref (symbol/address/id) to the matching asset candidates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/api/v2/prices/assets/resolve",
+            "params": [
+              {
+                "name": "asset.assetId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.address.chain",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.address.address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset.symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assetClass",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter to narrow symbol resolution to a single asset class."
+              }
+            ]
+          },
+          "docs": "Resolves an asset ref (symbol/address/id) to the matching asset candidates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sentio AI Move API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Move",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Aptos transaction call trace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/move/call_trace",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the detailed call trace for an Aptos transaction"
+        },
+        {
+          "info": {
+            "name": "Get Sui transaction call trace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sentio.xyz/v1/move/sui_call_trace",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txDigest",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the detailed call trace for a Sui transaction"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
