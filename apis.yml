@@ -40,6 +40,16 @@ tags:
 - Monitoring
 - Developer Tools
 - Crypto
+tags_raw:
+- Web3
+- Blockchain
+- Observability
+- Analytics
+- Data
+- Indexing
+- Monitoring
+- Developer Tools
+- Crypto
 - API
 apis:
 - aid: sentio:sentio-ai-api
@@ -48,6 +58,8 @@ apis:
   humanURL: https://docs.sentio.xyz/reference
   baseURL: https://api.sentio.xyz
   tags:
+  - Artificial Intelligence
+  tags_raw:
   - AI
   properties:
   - type: OpenAPI
