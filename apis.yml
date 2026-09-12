@@ -183,6 +183,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Website
+  url: https://www.sentio.xyz/
 - type: Overlay
   url: overlays/sentio-openapi-overlay.yaml
 - type: AgenticAccess
