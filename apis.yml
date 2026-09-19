@@ -153,6 +153,8 @@ apis:
   humanURL: https://docs.sentio.xyz/reference
   baseURL: https://api.sentio.xyz
   tags:
+  - Processors
+  tags_raw:
   - Processor
   properties:
   - type: OpenAPI
