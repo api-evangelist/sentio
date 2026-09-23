@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Sentio AI Processor API
+  title: Sentio Processor API
   description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
   version: '1.0'
   contact:
@@ -73,13 +73,6 @@ paths:
       - Processor
 components:
   schemas:
-    processor_service.GetProcessorStatusResponse.ProcessorStatus:
-      properties:
-        errorRecord:
-          $ref: '#/components/schemas/common.ErrorRecord'
-        state:
-          $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
-      type: object
     processor_service.ChainState.Status:
       properties:
         errorRecord:
@@ -88,6 +81,21 @@ components:
           $ref: '#/components/schemas/processor_service.ChainState.Status.State'
       title: Status of this chain indexer
       type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus:
+      properties:
+        errorRecord:
+          $ref: '#/components/schemas/common.ErrorRecord'
+        state:
+          $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
+      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - STARTING
+      - PROCESSING
+      type: string
     processor_service.ChainState:
       properties:
         chainId:
@@ -136,6 +144,20 @@ components:
           format: date-time
           type: string
       type: object
+    processor_service.NetworkOverride:
+      properties:
+        chain:
+          type: string
+        host:
+          type: string
+      type: object
+    processor_service.GetProcessorStatusResponse:
+      properties:
+        processors:
+          items:
+            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
+          type: array
+      type: object
     processor_service.ChainState.Status.State:
       default: UNKNOWN
       enum:
@@ -153,50 +175,6 @@ components:
       - ACTIVE
       - OBSOLETE
       type: string
-    common.ErrorRecord:
-      properties:
-        code:
-          format: int32
-          title: same as google.rpc.status.Status.code
-          type: integer
-        createdAt:
-          format: date-time
-          title: details
-          type: string
-        id:
-          type: string
-        message:
-          type: string
-        namespace:
-          format: int32
-          type: integer
-        namespaceCode:
-          format: int32
-          title: additional codes definted in the namespace
-          type: integer
-      type: object
-    processor_service.NetworkOverride:
-      properties:
-        chain:
-          type: string
-        host:
-          type: string
-      type: object
-    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - ERROR
-      - STARTING
-      - PROCESSING
-      type: string
-    processor_service.GetProcessorStatusResponse:
-      properties:
-        processors:
-          items:
-            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
-          type: array
-      type: object
     common.UserInfo:
       description: The same to user but with sensitive data removed.
       properties:
@@ -281,6 +259,28 @@ components:
           items:
             type: string
           type: array
+      type: object
+    common.ErrorRecord:
+      properties:
+        code:
+          format: int32
+          title: same as google.rpc.status.Status.code
+          type: integer
+        createdAt:
+          format: date-time
+          title: details
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+        namespace:
+          format: int32
+          type: integer
+        namespaceCode:
+          format: int32
+          title: additional codes definted in the namespace
+          type: integer
       type: object
   securitySchemes:
     ApiKeyHeaderAuth:

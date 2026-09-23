@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Sentio AI Prices API
+  title: Sentio Prices API
   description: 'Sentio Open API — REST access to Sentio''s Web3 observability platform: analytics (SQL/metrics/event logs), price data, processors, dashboards, alerts, debugging/simulation (forks), and AI chat. Harvested from Sentio''s published API reference at docs.sentio.xyz/reference.'
   version: '1.0'
   contact:
@@ -27,7 +27,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/price_service.AddAssetByGeckoResponse'
-      summary: Adds a new asset by its CoinGecko id.
+      summary: Adds a new asset by its CoinGecko id
       tags:
       - Prices
   /api/v2/prices/batch:
@@ -55,7 +55,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/price_service.BatchGetPricesV2Response'
-      summary: Prices multiple assets at multiple timestamps in one call, grouping results per asset.
+      summary: Prices multiple assets at multiple timestamps in one call, grouping results per…
       tags:
       - Prices
   /api/v2/prices/series:
@@ -112,7 +112,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/price_service.GetPriceSeriesV2Response'
-      summary: Returns a continuous price series for a single asset over a [start, end] time range.
+      summary: Returns a continuous price series for a single asset over a [start, end] time…
       tags:
       - Prices
   /api/v2/prices:
@@ -163,7 +163,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/price_service.GetPriceV2Response'
-      summary: Returns the price of a single asset at a given timestamp, or candidates when the asset ref is ambiguous.
+      summary: Returns the price of a single asset at a given timestamp, or candidates when…
       tags:
       - Prices
   /api/v2/prices/assets:
@@ -205,7 +205,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/price_service.ListAssetsV2Response'
-      summary: Lists known assets with pagination and optional search/chain/class filters.
+      summary: Lists known assets with pagination and optional search/chain/class filters
       tags:
       - Prices
   /api/v2/prices/assets/resolve:
@@ -245,11 +245,124 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/price_service.ResolveAssetsResponse'
-      summary: Resolves an asset ref (symbol/address/id) to the matching asset candidates.
+      summary: Resolves an asset ref (symbol/address/id) to the matching asset candidates
       tags:
       - Prices
 components:
   schemas:
+    price_service.AddressID:
+      properties:
+        address:
+          type: string
+        chain:
+          type: string
+      type: object
+    price_service.GetPriceSeriesV2Response:
+      properties:
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        series:
+          $ref: '#/components/schemas/price_service.PriceSeries'
+      type: object
+    price_service.AddAssetByGeckoResponse:
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/price_service.AddressID'
+          type: array
+        assetId:
+          type: string
+        currentPrice:
+          format: double
+          type: number
+        message:
+          type: string
+        status:
+          $ref: '#/components/schemas/price_service.AddAssetByGeckoResponse.Status'
+        symbol:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    price_service.AssetCandidate:
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/price_service.AddressID'
+          type: array
+        assetClass:
+          type: string
+        assetId:
+          type: string
+        marketCap:
+          format: double
+          type: number
+        name:
+          type: string
+        symbol:
+          type: string
+      type: object
+    price_service.AddAssetByGeckoRequest:
+      properties:
+        coingeckoId:
+          type: string
+      type: object
+    price_service.AddAssetByGeckoResponse.Status:
+      default: OK
+      enum:
+      - OK
+      - ALREADY_EXISTS
+      - GECKO_NOT_FOUND
+      - GECKO_RETURN_NON_SUPPORTED_CHAIN
+      type: string
+    price_service.BatchGetPricesV2Response.Item:
+      properties:
+        asset:
+          $ref: '#/components/schemas/price_service.AssetRef'
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        error:
+          type: string
+        series:
+          $ref: '#/components/schemas/price_service.PriceSeries'
+      type: object
+    price_service.ResolveAssetsResponse:
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/price_service.AssetCandidate'
+          type: array
+      type: object
+    price_service.AssetRef:
+      properties:
+        address:
+          $ref: '#/components/schemas/price_service.AddressID'
+        assetId:
+          type: string
+        symbol:
+          type: string
+      type: object
+    price_service.ListAssetsV2Response:
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/price_service.AssetCandidate'
+          type: array
+      type: object
+    price_service.PricePoint:
+      properties:
+        assetId:
+          type: string
+        price:
+          format: double
+          type: number
+        source:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
     price_service.PriceSeries:
       properties:
         assetId:
@@ -261,27 +374,6 @@ components:
         source:
           type: string
       type: object
-    price_service.GetPriceSeriesV2Response:
-      properties:
-        candidates:
-          $ref: '#/components/schemas/price_service.CandidateList'
-        series:
-          $ref: '#/components/schemas/price_service.PriceSeries'
-      type: object
-    price_service.AddressID:
-      properties:
-        address:
-          type: string
-        chain:
-          type: string
-      type: object
-    price_service.GetPriceV2Response:
-      properties:
-        candidates:
-          $ref: '#/components/schemas/price_service.CandidateList'
-        price:
-          $ref: '#/components/schemas/price_service.PricePoint'
-      type: object
     price_service.BatchGetPricesV2Response:
       properties:
         items:
@@ -289,12 +381,19 @@ components:
             $ref: '#/components/schemas/price_service.BatchGetPricesV2Response.Item'
           type: array
       type: object
-    price_service.ListAssetsV2Response:
+    price_service.CandidateList:
       properties:
-        assets:
+        candidates:
           items:
             $ref: '#/components/schemas/price_service.AssetCandidate'
           type: array
+      type: object
+    price_service.GetPriceV2Response:
+      properties:
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        price:
+          $ref: '#/components/schemas/price_service.PricePoint'
       type: object
     price_service.BatchGetPricesV2Request:
       description: 'Cross-product request: each entry in `assets` is priced at each entry in `timestamps`.
@@ -318,105 +417,6 @@ components:
             format: date-time
             type: string
           type: array
-      type: object
-    price_service.BatchGetPricesV2Response.Item:
-      properties:
-        asset:
-          $ref: '#/components/schemas/price_service.AssetRef'
-        candidates:
-          $ref: '#/components/schemas/price_service.CandidateList'
-        error:
-          type: string
-        series:
-          $ref: '#/components/schemas/price_service.PriceSeries'
-      type: object
-    price_service.CandidateList:
-      properties:
-        candidates:
-          items:
-            $ref: '#/components/schemas/price_service.AssetCandidate'
-          type: array
-      type: object
-    price_service.ResolveAssetsResponse:
-      properties:
-        assets:
-          items:
-            $ref: '#/components/schemas/price_service.AssetCandidate'
-          type: array
-      type: object
-    price_service.PricePoint:
-      properties:
-        assetId:
-          type: string
-        price:
-          format: double
-          type: number
-        source:
-          type: string
-        timestamp:
-          format: date-time
-          type: string
-      type: object
-    price_service.AssetRef:
-      properties:
-        address:
-          $ref: '#/components/schemas/price_service.AddressID'
-        assetId:
-          type: string
-        symbol:
-          type: string
-      type: object
-    price_service.AssetCandidate:
-      properties:
-        addresses:
-          items:
-            $ref: '#/components/schemas/price_service.AddressID'
-          type: array
-        assetClass:
-          type: string
-        assetId:
-          type: string
-        marketCap:
-          format: double
-          type: number
-        name:
-          type: string
-        symbol:
-          type: string
-      type: object
-    price_service.AddAssetByGeckoResponse.Status:
-      default: OK
-      enum:
-      - OK
-      - ALREADY_EXISTS
-      - GECKO_NOT_FOUND
-      - GECKO_RETURN_NON_SUPPORTED_CHAIN
-      type: string
-    price_service.AddAssetByGeckoRequest:
-      properties:
-        coingeckoId:
-          type: string
-      type: object
-    price_service.AddAssetByGeckoResponse:
-      properties:
-        addresses:
-          items:
-            $ref: '#/components/schemas/price_service.AddressID'
-          type: array
-        assetId:
-          type: string
-        currentPrice:
-          format: double
-          type: number
-        message:
-          type: string
-        status:
-          $ref: '#/components/schemas/price_service.AddAssetByGeckoResponse.Status'
-        symbol:
-          type: string
-        timestamp:
-          format: date-time
-          type: string
       type: object
   securitySchemes:
     ApiKeyHeaderAuth:

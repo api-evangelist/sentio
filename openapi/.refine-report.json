@@ -1,17 +1,7 @@
 {
   "provider": "sentio",
   "sources": [
-    "sentio-ai-api-openapi.yml",
-    "sentio-alerts-api-openapi.yml",
-    "sentio-data-api-openapi.yml",
-    "sentio-debug-and-simulation-api-openapi.yml",
-    "sentio-forks-api-openapi.yml",
-    "sentio-move-api-openapi.yml",
-    "sentio-price-api-openapi.yml",
-    "sentio-prices-api-openapi.yml",
-    "sentio-processor-api-openapi.yml",
-    "sentio-processorext-api-openapi.yml",
-    "sentio-web-api-openapi.yml"
+    "_original/sentio-openapi.yml"
   ],
   "outputs": [
     "sentio-ai-api-openapi.yml",
@@ -28,9 +18,42 @@
   ],
   "archived": [],
   "errors": [
-    "sentio-data-api-openapi.yml: dangling $ref: #/components/requestBodies/analytic_service.AnalyticService.SaveSQLBody"
+    "sentio-openapi.yml: dangling $ref: #/components/requestBodies/analytic_service.AnalyticService.SaveSQLBody"
   ],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sentio-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "sentio-openapi.yml: tagged paths POST /api/v2/prices/assets/add_by_gecko -> Prices",
+    "sentio-openapi.yml: tagged paths POST /api/v2/prices/batch -> Prices",
+    "sentio-openapi.yml: tagged paths GET /api/v2/prices/series -> Prices",
+    "sentio-openapi.yml: tagged paths GET /api/v2/prices -> Prices",
+    "sentio-openapi.yml: tagged paths GET /api/v2/prices/assets -> Prices",
+    "sentio-openapi.yml: tagged paths GET /api/v2/prices/assets/resolve -> Prices",
+    "sentio-openapi.yml: declared missing tag: AI",
+    "sentio-openapi.yml: declared missing tag: Alerts",
+    "sentio-openapi.yml: declared missing tag: Data",
+    "sentio-openapi.yml: declared missing tag: Debug and Simulation",
+    "sentio-openapi.yml: declared missing tag: Forks",
+    "sentio-openapi.yml: declared missing tag: Move",
+    "sentio-openapi.yml: declared missing tag: Price",
+    "sentio-openapi.yml: declared missing tag: Prices",
+    "sentio-openapi.yml: declared missing tag: Processor",
+    "sentio-openapi.yml: declared missing tag: ProcessorExt",
+    "sentio-openapi.yml: declared missing tag: Web",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sentio-ai-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-alerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-debug-and-simulation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-forks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-move-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-price-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-prices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-processor-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-processorext-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sentio-web-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,0 +1,26 @@
+# Front Door AI Index — sentio — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: sentio
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.sentio.xyz
+  final_host: www.sentio.xyz
+  ownership: own
+  owner: sentio
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 1
+  host_score: 1
+  density: 2.08
+  words: 480
+  tiers:
+    agentic: 0
+    core: 1
+    model: 0
+  ambiguous: 2
+  top_terms:
+    agent: 2
+    AI: 1
