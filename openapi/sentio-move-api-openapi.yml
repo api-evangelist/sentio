@@ -97,19 +97,48 @@ components:
             type: string
           type: array
       type: object
-    move_service.GetSuiCallTraceResponse:
-      properties:
-        result:
-          items:
-            $ref: '#/components/schemas/move_service.SuiCallTrace'
-          type: array
-      type: object
     move_service.SuiCallTrace.Error.ModuleId:
       properties:
         address:
           type: string
         name:
           type: string
+      type: object
+    google.api.HttpBody:
+      properties:
+        contentType:
+          type: string
+        data:
+          format: byte
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/google.protobuf.Any'
+          type: array
+      type: object
+    move_service.SuiCallTrace.Error:
+      properties:
+        codeOffset:
+          format: int64
+          type: integer
+        functionName:
+          type: string
+        location:
+          $ref: '#/components/schemas/move_service.SuiCallTrace.Error.ModuleId'
+        majorStatus:
+          type: string
+        message:
+          type: string
+        subStatus:
+          format: uint64
+          type: string
+      type: object
+    move_service.GetSuiCallTraceResponse:
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/move_service.SuiCallTrace'
+          type: array
       type: object
     google.protobuf.Any:
       additionalProperties: {}
@@ -168,35 +197,6 @@ components:
             implemented one and considers contacting these URLs to be problematic and
 
             a potential security issue. Do not attempt to contact type URLs.'
-          type: string
-      type: object
-    google.api.HttpBody:
-      properties:
-        contentType:
-          type: string
-        data:
-          format: byte
-          type: string
-        extensions:
-          items:
-            $ref: '#/components/schemas/google.protobuf.Any'
-          type: array
-      type: object
-    move_service.SuiCallTrace.Error:
-      properties:
-        codeOffset:
-          format: int64
-          type: integer
-        functionName:
-          type: string
-        location:
-          $ref: '#/components/schemas/move_service.SuiCallTrace.Error.ModuleId'
-        majorStatus:
-          type: string
-        message:
-          type: string
-        subStatus:
-          format: uint64
           type: string
       type: object
   securitySchemes:

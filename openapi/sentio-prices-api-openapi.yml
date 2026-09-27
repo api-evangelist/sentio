@@ -250,19 +250,46 @@ paths:
       - Prices
 components:
   schemas:
-    price_service.AddressID:
+    price_service.AssetCandidate:
       properties:
-        address:
+        addresses:
+          items:
+            $ref: '#/components/schemas/price_service.AddressID'
+          type: array
+        assetClass:
           type: string
-        chain:
+        assetId:
+          type: string
+        marketCap:
+          format: double
+          type: number
+        name:
+          type: string
+        symbol:
           type: string
       type: object
-    price_service.GetPriceSeriesV2Response:
+    price_service.CandidateList:
       properties:
         candidates:
-          $ref: '#/components/schemas/price_service.CandidateList'
-        series:
-          $ref: '#/components/schemas/price_service.PriceSeries'
+          items:
+            $ref: '#/components/schemas/price_service.AssetCandidate'
+          type: array
+      type: object
+    price_service.PriceSeries:
+      properties:
+        assetId:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/price_service.PricePoint'
+          type: array
+        source:
+          type: string
+      type: object
+    price_service.AddAssetByGeckoRequest:
+      properties:
+        coingeckoId:
+          type: string
       type: object
     price_service.AddAssetByGeckoResponse:
       properties:
@@ -285,48 +312,6 @@ components:
           format: date-time
           type: string
       type: object
-    price_service.AssetCandidate:
-      properties:
-        addresses:
-          items:
-            $ref: '#/components/schemas/price_service.AddressID'
-          type: array
-        assetClass:
-          type: string
-        assetId:
-          type: string
-        marketCap:
-          format: double
-          type: number
-        name:
-          type: string
-        symbol:
-          type: string
-      type: object
-    price_service.AddAssetByGeckoRequest:
-      properties:
-        coingeckoId:
-          type: string
-      type: object
-    price_service.AddAssetByGeckoResponse.Status:
-      default: OK
-      enum:
-      - OK
-      - ALREADY_EXISTS
-      - GECKO_NOT_FOUND
-      - GECKO_RETURN_NON_SUPPORTED_CHAIN
-      type: string
-    price_service.BatchGetPricesV2Response.Item:
-      properties:
-        asset:
-          $ref: '#/components/schemas/price_service.AssetRef'
-        candidates:
-          $ref: '#/components/schemas/price_service.CandidateList'
-        error:
-          type: string
-        series:
-          $ref: '#/components/schemas/price_service.PriceSeries'
-      type: object
     price_service.ResolveAssetsResponse:
       properties:
         assets:
@@ -334,66 +319,12 @@ components:
             $ref: '#/components/schemas/price_service.AssetCandidate'
           type: array
       type: object
-    price_service.AssetRef:
-      properties:
-        address:
-          $ref: '#/components/schemas/price_service.AddressID'
-        assetId:
-          type: string
-        symbol:
-          type: string
-      type: object
-    price_service.ListAssetsV2Response:
-      properties:
-        assets:
-          items:
-            $ref: '#/components/schemas/price_service.AssetCandidate'
-          type: array
-      type: object
-    price_service.PricePoint:
-      properties:
-        assetId:
-          type: string
-        price:
-          format: double
-          type: number
-        source:
-          type: string
-        timestamp:
-          format: date-time
-          type: string
-      type: object
-    price_service.PriceSeries:
-      properties:
-        assetId:
-          type: string
-        points:
-          items:
-            $ref: '#/components/schemas/price_service.PricePoint'
-          type: array
-        source:
-          type: string
-      type: object
     price_service.BatchGetPricesV2Response:
       properties:
         items:
           items:
             $ref: '#/components/schemas/price_service.BatchGetPricesV2Response.Item'
           type: array
-      type: object
-    price_service.CandidateList:
-      properties:
-        candidates:
-          items:
-            $ref: '#/components/schemas/price_service.AssetCandidate'
-          type: array
-      type: object
-    price_service.GetPriceV2Response:
-      properties:
-        candidates:
-          $ref: '#/components/schemas/price_service.CandidateList'
-        price:
-          $ref: '#/components/schemas/price_service.PricePoint'
       type: object
     price_service.BatchGetPricesV2Request:
       description: 'Cross-product request: each entry in `assets` is priced at each entry in `timestamps`.
@@ -416,6 +347,75 @@ components:
           items:
             format: date-time
             type: string
+          type: array
+      type: object
+    price_service.AssetRef:
+      properties:
+        address:
+          $ref: '#/components/schemas/price_service.AddressID'
+        assetId:
+          type: string
+        symbol:
+          type: string
+      type: object
+    price_service.BatchGetPricesV2Response.Item:
+      properties:
+        asset:
+          $ref: '#/components/schemas/price_service.AssetRef'
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        error:
+          type: string
+        series:
+          $ref: '#/components/schemas/price_service.PriceSeries'
+      type: object
+    price_service.GetPriceSeriesV2Response:
+      properties:
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        series:
+          $ref: '#/components/schemas/price_service.PriceSeries'
+      type: object
+    price_service.GetPriceV2Response:
+      properties:
+        candidates:
+          $ref: '#/components/schemas/price_service.CandidateList'
+        price:
+          $ref: '#/components/schemas/price_service.PricePoint'
+      type: object
+    price_service.AddAssetByGeckoResponse.Status:
+      default: OK
+      enum:
+      - OK
+      - ALREADY_EXISTS
+      - GECKO_NOT_FOUND
+      - GECKO_RETURN_NON_SUPPORTED_CHAIN
+      type: string
+    price_service.AddressID:
+      properties:
+        address:
+          type: string
+        chain:
+          type: string
+      type: object
+    price_service.PricePoint:
+      properties:
+        assetId:
+          type: string
+        price:
+          format: double
+          type: number
+        source:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    price_service.ListAssetsV2Response:
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/price_service.AssetCandidate'
           type: array
       type: object
   securitySchemes:

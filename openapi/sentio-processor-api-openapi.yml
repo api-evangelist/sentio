@@ -73,14 +73,6 @@ paths:
       - Processor
 components:
   schemas:
-    processor_service.ChainState.Status:
-      properties:
-        errorRecord:
-          $ref: '#/components/schemas/common.ErrorRecord'
-        state:
-          $ref: '#/components/schemas/processor_service.ChainState.Status.State'
-      title: Status of this chain indexer
-      type: object
     processor_service.GetProcessorStatusResponse.ProcessorStatus:
       properties:
         errorRecord:
@@ -88,14 +80,6 @@ components:
         state:
           $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
       type: object
-    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - ERROR
-      - STARTING
-      - PROCESSING
-      type: string
     processor_service.ChainState:
       properties:
         chainId:
@@ -151,22 +135,6 @@ components:
         host:
           type: string
       type: object
-    processor_service.GetProcessorStatusResponse:
-      properties:
-        processors:
-          items:
-            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
-          type: array
-      type: object
-    processor_service.ChainState.Status.State:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - ERROR
-      - CATCHING_UP
-      - PROCESSING_LATEST
-      - QUEUING
-      type: string
     processor_service.ProcessorVersionState:
       default: UNKNOWN
       enum:
@@ -191,6 +159,29 @@ components:
         username:
           type: string
       type: object
+    processor_service.GetProcessorStatusResponse:
+      properties:
+        processors:
+          items:
+            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
+          type: array
+      type: object
+    processor_service.ChainState.Status:
+      properties:
+        errorRecord:
+          $ref: '#/components/schemas/common.ErrorRecord'
+        state:
+          $ref: '#/components/schemas/processor_service.ChainState.Status.State'
+      title: Status of this chain indexer
+      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - STARTING
+      - PROCESSING
+      type: string
     processor_service.GetProcessorStatusResponse.ProcessorEx:
       properties:
         cliVersion:
@@ -282,6 +273,15 @@ components:
           title: additional codes definted in the namespace
           type: integer
       type: object
+    processor_service.ChainState.Status.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - CATCHING_UP
+      - PROCESSING_LATEST
+      - QUEUING
+      type: string
   securitySchemes:
     ApiKeyHeaderAuth:
       in: header

@@ -413,55 +413,32 @@ paths:
       - Forks
 components:
   schemas:
-    solidity_service.ForkType:
-      default: MANAGED
-      enum:
-      - MANAGED
-      - EXTERNAL
-      type: string
-    solidity_service.NodeForkConfig:
+    evm.TransactionReceipt:
       properties:
-        forkBlockNumber:
-          format: uint64
+        cumulativeGasUsed:
           type: string
-        forkRetryBackoff:
-          format: uint64
+        effectiveGasPrice:
           type: string
-        forkUrl:
+        error:
+          type: string
+        gasUsed:
+          type: string
+        logs:
+          items:
+            type: object
+          type: array
+        revertReason:
+          type: string
+        status:
+          title: '0x0: failed, 0x1: succeed'
           type: string
       type: object
-    solidity_service.NodeEnvironment:
+    solidity_service.ExternalFork:
       properties:
-        baseFee:
-          type: string
-        chainId:
-          format: uint64
-          type: string
-        gasLimit:
-          type: string
-        gasPrice:
-          type: string
-      type: object
-    solidity_service.GetForkResponse:
-      properties:
-        fork:
-          $ref: '#/components/schemas/solidity_service.Fork'
-      type: object
-    solidity_service.BlockOverrides:
-      properties:
-        baseFee:
-          type: string
-        blockHash:
-          additionalProperties:
-            type: string
-          type: object
-        blockNumber:
-          type: string
-        difficulty:
-          type: string
-        gasLimit:
-          type: string
-        timestamp:
+        chainConfig:
+          $ref: '#/components/schemas/solidity_service.BaseChainConfig'
+        nodeAdditionalHeaders:
+          title: Additional headers for node requests
           type: string
       type: object
     solidity_service.ForkService.CreateForkBody:
@@ -471,14 +448,65 @@ components:
       required:
       - fork
       type: object
-    solidity_service.SourceFetcherType:
-      default: ETHERSCAN
-      enum:
-      - ETHERSCAN
-      - BLOCKSCOUT
-      - OKLINK
-      - ETHERSCAN_V2
-      type: string
+    solidity_service.Fork:
+      properties:
+        createTime:
+          format: date-time
+          type: string
+        externalFork:
+          $ref: '#/components/schemas/solidity_service.ExternalFork'
+        extra:
+          type: string
+        id:
+          type: string
+        managedFork:
+          $ref: '#/components/schemas/solidity_service.ManagedFork'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/solidity_service.ForkType'
+        updateTime:
+          format: date-time
+          type: string
+      type: object
+    solidity_service.ManagedFork:
+      properties:
+        chainId:
+          type: string
+        parentBlockNumber:
+          format: int64
+          type: string
+        parentChainSpec:
+          $ref: '#/components/schemas/solidity_service.ChainIdentifier'
+        parentRpcEndpoint:
+          type: string
+        rpcEndpoint:
+          type: string
+        version:
+          format: int64
+          type: string
+      type: object
+    evm.AccessListItem:
+      properties:
+        address:
+          type: string
+        storageKeys:
+          items:
+            type: string
+          type: array
+      type: object
+    solidity_service.UpdateForkResponse:
+      properties:
+        fork:
+          $ref: '#/components/schemas/solidity_service.Fork'
+      type: object
+    solidity_service.Simulation.Result:
+      properties:
+        transaction:
+          $ref: '#/components/schemas/evm.Transaction'
+        transactionReceipt:
+          $ref: '#/components/schemas/evm.TransactionReceipt'
+      type: object
     solidity_service.SolidityAPIService.SimulateTransactionBundleOnForkBody:
       example:
         simulations:
@@ -508,62 +536,28 @@ components:
       required:
       - simulations
       type: object
-    solidity_service.SimulateTransactionBundleResponse:
+    solidity_service.SolidityAPIService.SimulateTransactionOnForkBody:
+      example:
+        simulation:
+          blockNumber: '17415072'
+          blockOverride:
+            baseFee: '0x0'
+          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
+          gas: '0x31ae2'
+          gasPrice: '0xe59a1adbe'
+          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
+          networkId: '1'
+          stateOverrides:
+            '0x0811fd1808e14f0b93f0514313965a5f142c5539':
+              balance: '0x1111111111111111'
+          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
+          transactionIndex: '97'
+          value: '0x0'
       properties:
-        bundleId:
-          type: string
-        error:
-          type: string
-        simulations:
-          items:
-            $ref: '#/components/schemas/solidity_service.Simulation'
-          type: array
-      type: object
-    solidity_service.ListForksResponse:
-      properties:
-        forks:
-          items:
-            $ref: '#/components/schemas/solidity_service.Fork'
-          type: array
-      type: object
-    evm.AccessListItem:
-      properties:
-        address:
-          type: string
-        storageKeys:
-          items:
-            type: string
-          type: array
-      type: object
-    solidity_service.CreateForkResponse:
-      properties:
-        fork:
-          $ref: '#/components/schemas/solidity_service.Fork'
-      type: object
-    solidity_service.UpdateForkResponse:
-      properties:
-        fork:
-          $ref: '#/components/schemas/solidity_service.Fork'
-      type: object
-    solidity_service.Simulation.Result:
-      properties:
-        transaction:
-          $ref: '#/components/schemas/evm.Transaction'
-        transactionReceipt:
-          $ref: '#/components/schemas/evm.TransactionReceipt'
-      type: object
-    solidity_service.StateOverride:
-      properties:
-        balance:
-          description: uint256
-          title: map<string, string> stateDiff = 4;
-          type: string
-        code:
-          type: string
-        state:
-          additionalProperties:
-            type: string
-          type: object
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
+      required:
+      - simulation
       type: object
     google.api.HttpBody:
       properties:
@@ -577,12 +571,22 @@ components:
             $ref: '#/components/schemas/google.protobuf.Any'
           type: array
       type: object
-    solidity_service.ForkService.UpdateForkBody:
+    solidity_service.BlockOverrides:
       properties:
-        fork:
-          $ref: '#/components/schemas/solidity_service.Fork'
-      required:
-      - fork
+        baseFee:
+          type: string
+        blockHash:
+          additionalProperties:
+            type: string
+          type: object
+        blockNumber:
+          type: string
+        difficulty:
+          type: string
+        gasLimit:
+          type: string
+        timestamp:
+          type: string
       type: object
     solidity_service.BaseChainConfig:
       properties:
@@ -605,67 +609,16 @@ components:
         sourceFetcherType:
           $ref: '#/components/schemas/solidity_service.SourceFetcherType'
       type: object
-    solidity_service.SimulateTransactionResponse:
+    solidity_service.SimulateTransactionBundleResponse:
       properties:
-        simulation:
-          $ref: '#/components/schemas/solidity_service.Simulation'
-      type: object
-    evm.Transaction:
-      properties:
-        accessList:
-          items:
-            $ref: '#/components/schemas/evm.AccessListItem'
-          type: array
-        blockHash:
-          type: string
-        blockNumber:
-          type: string
-        chainId:
-          type: string
-        from:
-          type: string
-        gas:
-          type: string
-        gasPrice:
-          type: string
-        hash:
-          type: string
-        input:
-          type: string
-        maxFeePerGas:
-          type: string
-        maxPriorityFeePerGas:
-          type: string
-        nonce:
-          type: string
-        to:
-          type: string
-        transactionIndex:
-          type: string
-        type:
-          type: string
-        value:
-          type: string
-      type: object
-    evm.TransactionReceipt:
-      properties:
-        cumulativeGasUsed:
-          type: string
-        effectiveGasPrice:
+        bundleId:
           type: string
         error:
           type: string
-        gasUsed:
-          type: string
-        logs:
+        simulations:
           items:
-            type: object
+            $ref: '#/components/schemas/solidity_service.Simulation'
           type: array
-        revertReason:
-          type: string
-        status:
-          title: '0x0: failed, 0x1: succeed'
-          type: string
       type: object
     solidity_service.SimulationSharing:
       properties:
@@ -676,12 +629,37 @@ components:
         simulationId:
           type: string
       type: object
+    solidity_service.StateOverride:
+      properties:
+        balance:
+          description: uint256
+          title: map<string, string> stateDiff = 4;
+          type: string
+        code:
+          type: string
+        state:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     solidity_service.ChainIdentifier:
       properties:
         chainId:
           type: string
         forkId:
           type: string
+      type: object
+    solidity_service.ListForksResponse:
+      properties:
+        forks:
+          items:
+            $ref: '#/components/schemas/solidity_service.Fork'
+          type: array
+      type: object
+    solidity_service.SimulateTransactionResponse:
+      properties:
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
       type: object
     solidity_service.Simulation:
       properties:
@@ -758,6 +736,89 @@ components:
       - gasPrice
       - value
       type: object
+    solidity_service.CreateForkResponse:
+      properties:
+        fork:
+          $ref: '#/components/schemas/solidity_service.Fork'
+      type: object
+    solidity_service.GetForkInfoResponse:
+      properties:
+        currentBlockHash:
+          type: string
+        currentBlockNumber:
+          type: string
+        currentBlockTimestamp:
+          format: uint64
+          type: string
+        environment:
+          $ref: '#/components/schemas/solidity_service.NodeEnvironment'
+        forkConfig:
+          $ref: '#/components/schemas/solidity_service.NodeForkConfig'
+        hardFork:
+          type: string
+        transactionOrder:
+          type: string
+      type: object
+    solidity_service.GetForkResponse:
+      properties:
+        fork:
+          $ref: '#/components/schemas/solidity_service.Fork'
+      type: object
+    evm.Transaction:
+      properties:
+        accessList:
+          items:
+            $ref: '#/components/schemas/evm.AccessListItem'
+          type: array
+        blockHash:
+          type: string
+        blockNumber:
+          type: string
+        chainId:
+          type: string
+        from:
+          type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        hash:
+          type: string
+        input:
+          type: string
+        maxFeePerGas:
+          type: string
+        maxPriorityFeePerGas:
+          type: string
+        nonce:
+          type: string
+        to:
+          type: string
+        transactionIndex:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+      type: object
+    solidity_service.ForkType:
+      default: MANAGED
+      enum:
+      - MANAGED
+      - EXTERNAL
+      type: string
+    solidity_service.NodeEnvironment:
+      properties:
+        baseFee:
+          type: string
+        chainId:
+          format: uint64
+          type: string
+        gasLimit:
+          type: string
+        gasPrice:
+          type: string
+      type: object
     google.protobuf.Any:
       additionalProperties: {}
       description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nIn its binary encoding, an `Any` is an ordinary message; but in other wire\nforms like JSON, it has a special encoding. The format of the type URL is\ndescribed on the `type_url` field.\n\nProtobuf APIs provide utilities to interact with `Any` values:\n\n- A 'pack' operation accepts a message and constructs a generic `Any` wrapper\n  around it.\n- An 'unpack' operation reads the content of an `Any` message, either into an\n  existing message or a new one. Unpack operations must check the type of the\n  value they unpack against the declared `type_url`.\n- An 'is' operation decides whether an `Any` contains a message of the given\n  type, i.e. whether it can 'unpack' that type.\n\nThe JSON format representation of an `Any` follows one of these cases:\n\n- For types without special-cased JSON encodings, the JSON format\n  representation of the `Any` is the same as that of the message, with an\n  additional `@type` field which contains the type URL.\n- For types with special-cased JSON encodings (typically called 'well-known'\n  types, listed in https://protobuf.dev/programming-guides/json/#any), the\n  JSON format representation has a key `@type` which contains the type URL\n  and a key `value` which contains the JSON-serialized value.\n\nThe text format representation of an `Any` is like a message with one field\nwhose name is the type URL in brackets. For example, an `Any` containing a\n`foo.Bar` message may be written `[type.googleapis.com/foo.Bar] { a: 2 }`."
@@ -817,91 +878,30 @@ components:
             a potential security issue. Do not attempt to contact type URLs.'
           type: string
       type: object
-    solidity_service.ManagedFork:
+    solidity_service.SourceFetcherType:
+      default: ETHERSCAN
+      enum:
+      - ETHERSCAN
+      - BLOCKSCOUT
+      - OKLINK
+      - ETHERSCAN_V2
+      type: string
+    solidity_service.ForkService.UpdateForkBody:
       properties:
-        chainId:
-          type: string
-        parentBlockNumber:
-          format: int64
-          type: string
-        parentChainSpec:
-          $ref: '#/components/schemas/solidity_service.ChainIdentifier'
-        parentRpcEndpoint:
-          type: string
-        rpcEndpoint:
-          type: string
-        version:
-          format: int64
-          type: string
+        fork:
+          $ref: '#/components/schemas/solidity_service.Fork'
+      required:
+      - fork
       type: object
-    solidity_service.GetForkInfoResponse:
+    solidity_service.NodeForkConfig:
       properties:
-        currentBlockHash:
-          type: string
-        currentBlockNumber:
-          type: string
-        currentBlockTimestamp:
+        forkBlockNumber:
           format: uint64
           type: string
-        environment:
-          $ref: '#/components/schemas/solidity_service.NodeEnvironment'
-        forkConfig:
-          $ref: '#/components/schemas/solidity_service.NodeForkConfig'
-        hardFork:
+        forkRetryBackoff:
+          format: uint64
           type: string
-        transactionOrder:
-          type: string
-      type: object
-    solidity_service.Fork:
-      properties:
-        createTime:
-          format: date-time
-          type: string
-        externalFork:
-          $ref: '#/components/schemas/solidity_service.ExternalFork'
-        extra:
-          type: string
-        id:
-          type: string
-        managedFork:
-          $ref: '#/components/schemas/solidity_service.ManagedFork'
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/solidity_service.ForkType'
-        updateTime:
-          format: date-time
-          type: string
-      type: object
-    solidity_service.SolidityAPIService.SimulateTransactionOnForkBody:
-      example:
-        simulation:
-          blockNumber: '17415072'
-          blockOverride:
-            baseFee: '0x0'
-          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
-          gas: '0x31ae2'
-          gasPrice: '0xe59a1adbe'
-          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
-          networkId: '1'
-          stateOverrides:
-            '0x0811fd1808e14f0b93f0514313965a5f142c5539':
-              balance: '0x1111111111111111'
-          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
-          transactionIndex: '97'
-          value: '0x0'
-      properties:
-        simulation:
-          $ref: '#/components/schemas/solidity_service.Simulation'
-      required:
-      - simulation
-      type: object
-    solidity_service.ExternalFork:
-      properties:
-        chainConfig:
-          $ref: '#/components/schemas/solidity_service.BaseChainConfig'
-        nodeAdditionalHeaders:
-          title: Additional headers for node requests
+        forkUrl:
           type: string
       type: object
   securitySchemes:

@@ -462,137 +462,25 @@ paths:
       - Debug and Simulation
 components:
   schemas:
-    solidity_service.EvmSearchTransactionsResponse:
+    evm.TransactionReceipt:
       properties:
-        nextPageToken:
-          format: byte
+        cumulativeGasUsed:
           type: string
-        transactions:
-          items:
-            $ref: '#/components/schemas/solidity_service.EvmRawTransaction'
-          type: array
-      type: object
-    solidity_service.GetSimulationBundleResponse:
-      properties:
-        error:
-          type: string
-        simulations:
-          items:
-            $ref: '#/components/schemas/solidity_service.Simulation'
-          type: array
-      type: object
-    solidity_service.BlockOverrides:
-      properties:
-        baseFee:
-          type: string
-        blockHash:
-          additionalProperties:
-            type: string
-          type: object
-        blockNumber:
-          type: string
-        difficulty:
-          type: string
-        gasLimit:
-          type: string
-        timestamp:
-          type: string
-      type: object
-    solidity_service.SolidityAPIService.SimulateTransactionBody:
-      example:
-        simulation:
-          blockNumber: '17415072'
-          blockOverride:
-            baseFee: '0x0'
-          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
-          gas: '0x31ae2'
-          gasPrice: '0xe59a1adbe'
-          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
-          networkId: '1'
-          stateOverrides:
-            '0x0811fd1808e14f0b93f0514313965a5f142c5539':
-              balance: '0x1111111111111111'
-          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
-          transactionIndex: '97'
-          value: '0x0'
-      properties:
-        simulation:
-          $ref: '#/components/schemas/solidity_service.Simulation'
-      required:
-      - simulation
-      type: object
-    solidity_service.GetSimulationResponse:
-      properties:
-        simulation:
-          $ref: '#/components/schemas/solidity_service.Simulation'
-      type: object
-    solidity_service.SimulateTransactionBundleResponse:
-      properties:
-        bundleId:
+        effectiveGasPrice:
           type: string
         error:
           type: string
-        simulations:
+        gasUsed:
+          type: string
+        logs:
           items:
-            $ref: '#/components/schemas/solidity_service.Simulation'
+            type: object
           type: array
-      type: object
-    evm.AccessListItem:
-      properties:
-        address:
+        revertReason:
           type: string
-        storageKeys:
-          items:
-            type: string
-          type: array
-      type: object
-    solidity_service.Simulation.Result:
-      properties:
-        transaction:
-          $ref: '#/components/schemas/evm.Transaction'
-        transactionReceipt:
-          $ref: '#/components/schemas/evm.TransactionReceipt'
-      type: object
-    solidity_service.StateOverride:
-      properties:
-        balance:
-          description: uint256
-          title: map<string, string> stateDiff = 4;
+        status:
+          title: '0x0: failed, 0x1: succeed'
           type: string
-        code:
-          type: string
-        state:
-          additionalProperties:
-            type: string
-          type: object
-      type: object
-    google.api.HttpBody:
-      properties:
-        contentType:
-          type: string
-        data:
-          format: byte
-          type: string
-        extensions:
-          items:
-            $ref: '#/components/schemas/google.protobuf.Any'
-          type: array
-      type: object
-    solidity_service.GetSimulationsResponse:
-      properties:
-        count:
-          format: int64
-          type: string
-        page:
-          format: int32
-          type: integer
-        pageSize:
-          format: int32
-          type: integer
-        simulations:
-          items:
-            $ref: '#/components/schemas/solidity_service.Simulation'
-          type: array
       type: object
     solidity_service.EvmRawTransaction:
       properties:
@@ -622,67 +510,70 @@ components:
         tx:
           $ref: '#/components/schemas/evm.Transaction'
       type: object
-    solidity_service.SimulateTransactionResponse:
+    solidity_service.GetSimulationBundleResponse:
       properties:
-        simulation:
-          $ref: '#/components/schemas/solidity_service.Simulation'
-      type: object
-    evm.Transaction:
-      properties:
-        accessList:
-          items:
-            $ref: '#/components/schemas/evm.AccessListItem'
-          type: array
-        blockHash:
+        error:
           type: string
+        simulations:
+          items:
+            $ref: '#/components/schemas/solidity_service.Simulation'
+          type: array
+      type: object
+    evm.AccessListItem:
+      properties:
+        address:
+          type: string
+        storageKeys:
+          items:
+            type: string
+          type: array
+      type: object
+    solidity_service.Simulation.Result:
+      properties:
+        transaction:
+          $ref: '#/components/schemas/evm.Transaction'
+        transactionReceipt:
+          $ref: '#/components/schemas/evm.TransactionReceipt'
+      type: object
+    google.api.HttpBody:
+      properties:
+        contentType:
+          type: string
+        data:
+          format: byte
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/google.protobuf.Any'
+          type: array
+      type: object
+    solidity_service.BlockOverrides:
+      properties:
+        baseFee:
+          type: string
+        blockHash:
+          additionalProperties:
+            type: string
+          type: object
         blockNumber:
           type: string
-        chainId:
+        difficulty:
           type: string
-        from:
+        gasLimit:
           type: string
-        gas:
-          type: string
-        gasPrice:
-          type: string
-        hash:
-          type: string
-        input:
-          type: string
-        maxFeePerGas:
-          type: string
-        maxPriorityFeePerGas:
-          type: string
-        nonce:
-          type: string
-        to:
-          type: string
-        transactionIndex:
-          type: string
-        type:
-          type: string
-        value:
+        timestamp:
           type: string
       type: object
-    evm.TransactionReceipt:
+    solidity_service.SimulateTransactionBundleResponse:
       properties:
-        cumulativeGasUsed:
-          type: string
-        effectiveGasPrice:
+        bundleId:
           type: string
         error:
           type: string
-        gasUsed:
-          type: string
-        logs:
+        simulations:
           items:
-            type: object
+            $ref: '#/components/schemas/solidity_service.Simulation'
           type: array
-        revertReason:
-          type: string
-        status:
-          title: '0x0: failed, 0x1: succeed'
-          type: string
       type: object
     solidity_service.SimulationSharing:
       properties:
@@ -692,6 +583,93 @@ components:
           type: boolean
         simulationId:
           type: string
+      type: object
+    solidity_service.StateOverride:
+      properties:
+        balance:
+          description: uint256
+          title: map<string, string> stateDiff = 4;
+          type: string
+        code:
+          type: string
+        state:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    solidity_service.ChainIdentifier:
+      properties:
+        chainId:
+          type: string
+        forkId:
+          type: string
+      type: object
+    solidity_service.SolidityAPIService.SimulateTransactionBody:
+      example:
+        simulation:
+          blockNumber: '17415072'
+          blockOverride:
+            baseFee: '0x0'
+          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
+          gas: '0x31ae2'
+          gasPrice: '0xe59a1adbe'
+          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
+          networkId: '1'
+          stateOverrides:
+            '0x0811fd1808e14f0b93f0514313965a5f142c5539':
+              balance: '0x1111111111111111'
+          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
+          transactionIndex: '97'
+          value: '0x0'
+      properties:
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
+      required:
+      - simulation
+      type: object
+    solidity_service.EvmSearchTransactionsResponse:
+      properties:
+        nextPageToken:
+          format: byte
+          type: string
+        transactions:
+          items:
+            $ref: '#/components/schemas/solidity_service.EvmRawTransaction'
+          type: array
+      type: object
+    solidity_service.SimulateTransactionResponse:
+      properties:
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
+      type: object
+    solidity_service.SolidityAPIService.SimulateTransactionBundleBody:
+      example:
+        simulations:
+        - blockNumber: '17415072'
+          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
+          gas: '0x31ae2'
+          gasPrice: '0xe59a1adbe'
+          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
+          network_id: '1'
+          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
+          transactionIndex: '97'
+          value: '0x0'
+        - from: '0x99922ca65188cc218a5d316969dc66d8672994f2'
+          gas: '0x52'
+          gasPrice: '0xe5909173e'
+          input: 0x
+          maxFeePerGas: '0x147d03'
+          maxPriorityFeePerGas: '0x3b023380'
+          to: '0xae96a46b64e08861cf2af8c7d954b722e0725a0c'
+          value: '0xbe32c0faed7400'
+      properties:
+        simulations:
+          description: For blockNumber, transactionIndex, networkId, stateOverrides and blockOverrides fields, only the first simulation takes effect.
+          items:
+            $ref: '#/components/schemas/solidity_service.Simulation'
+          type: array
+      required:
+      - simulations
       type: object
     solidity_service.Simulation:
       properties:
@@ -768,12 +746,47 @@ components:
       - gasPrice
       - value
       type: object
-    solidity_service.ChainIdentifier:
+    evm.Transaction:
       properties:
+        accessList:
+          items:
+            $ref: '#/components/schemas/evm.AccessListItem'
+          type: array
+        blockHash:
+          type: string
+        blockNumber:
+          type: string
         chainId:
           type: string
-        forkId:
+        from:
           type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        hash:
+          type: string
+        input:
+          type: string
+        maxFeePerGas:
+          type: string
+        maxPriorityFeePerGas:
+          type: string
+        nonce:
+          type: string
+        to:
+          type: string
+        transactionIndex:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+      type: object
+    solidity_service.GetSimulationResponse:
+      properties:
+        simulation:
+          $ref: '#/components/schemas/solidity_service.Simulation'
       type: object
     google.protobuf.Any:
       additionalProperties: {}
@@ -834,34 +847,21 @@ components:
             a potential security issue. Do not attempt to contact type URLs.'
           type: string
       type: object
-    solidity_service.SolidityAPIService.SimulateTransactionBundleBody:
-      example:
-        simulations:
-        - blockNumber: '17415072'
-          from: '0x5e8bb488e85ea732e17150862b1acfc213a7c13d'
-          gas: '0x31ae2'
-          gasPrice: '0xe59a1adbe'
-          input: '0x3593564c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000647dffef0000000000000000000000000000000000000000000000000000000000000002080c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000003077b58d5d378391980000000000000000000000000000000000000000000000000000000032b2ced3e40e9d100000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000082646b22a3960da69ef7a778c16dd6fb85dd999000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000032b2ced3e40e9d1'
-          network_id: '1'
-          to: '0xef1c6e67703c7bd7107eed8303fbe6ec2554bf6b'
-          transactionIndex: '97'
-          value: '0x0'
-        - from: '0x99922ca65188cc218a5d316969dc66d8672994f2'
-          gas: '0x52'
-          gasPrice: '0xe5909173e'
-          input: 0x
-          maxFeePerGas: '0x147d03'
-          maxPriorityFeePerGas: '0x3b023380'
-          to: '0xae96a46b64e08861cf2af8c7d954b722e0725a0c'
-          value: '0xbe32c0faed7400'
+    solidity_service.GetSimulationsResponse:
       properties:
+        count:
+          format: int64
+          type: string
+        page:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
         simulations:
-          description: For blockNumber, transactionIndex, networkId, stateOverrides and blockOverrides fields, only the first simulation takes effect.
           items:
             $ref: '#/components/schemas/solidity_service.Simulation'
           type: array
-      required:
-      - simulations
       type: object
   securitySchemes:
     ApiKeyHeaderAuth:
