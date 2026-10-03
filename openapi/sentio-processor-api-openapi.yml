@@ -73,13 +73,22 @@ paths:
       - Processor
 components:
   schemas:
-    processor_service.GetProcessorStatusResponse.ProcessorStatus:
-      properties:
-        errorRecord:
-          $ref: '#/components/schemas/common.ErrorRecord'
-        state:
-          $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
-      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - STARTING
+      - PROCESSING
+      type: string
+    processor_service.ProcessorVersionState:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - PENDING
+      - ACTIVE
+      - OBSOLETE
+      type: string
     processor_service.ChainState:
       properties:
         chainId:
@@ -128,60 +137,6 @@ components:
           format: date-time
           type: string
       type: object
-    processor_service.NetworkOverride:
-      properties:
-        chain:
-          type: string
-        host:
-          type: string
-      type: object
-    processor_service.ProcessorVersionState:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - PENDING
-      - ACTIVE
-      - OBSOLETE
-      type: string
-    common.UserInfo:
-      description: The same to user but with sensitive data removed.
-      properties:
-        firstName:
-          type: string
-        id:
-          type: string
-        lastName:
-          type: string
-        nickname:
-          type: string
-        picture:
-          type: string
-        username:
-          type: string
-      type: object
-    processor_service.GetProcessorStatusResponse:
-      properties:
-        processors:
-          items:
-            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
-          type: array
-      type: object
-    processor_service.ChainState.Status:
-      properties:
-        errorRecord:
-          $ref: '#/components/schemas/common.ErrorRecord'
-        state:
-          $ref: '#/components/schemas/processor_service.ChainState.Status.State'
-      title: Status of this chain indexer
-      type: object
-    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - ERROR
-      - STARTING
-      - PROCESSING
-      type: string
     processor_service.GetProcessorStatusResponse.ProcessorEx:
       properties:
         cliVersion:
@@ -250,6 +205,51 @@ components:
           items:
             type: string
           type: array
+      type: object
+    processor_service.GetProcessorStatusResponse:
+      properties:
+        processors:
+          items:
+            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
+          type: array
+      type: object
+    processor_service.NetworkOverride:
+      properties:
+        chain:
+          type: string
+        host:
+          type: string
+      type: object
+    processor_service.ChainState.Status:
+      properties:
+        errorRecord:
+          $ref: '#/components/schemas/common.ErrorRecord'
+        state:
+          $ref: '#/components/schemas/processor_service.ChainState.Status.State'
+      title: Status of this chain indexer
+      type: object
+    common.UserInfo:
+      description: The same to user but with sensitive data removed.
+      properties:
+        firstName:
+          type: string
+        id:
+          type: string
+        lastName:
+          type: string
+        nickname:
+          type: string
+        picture:
+          type: string
+        username:
+          type: string
+      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus:
+      properties:
+        errorRecord:
+          $ref: '#/components/schemas/common.ErrorRecord'
+        state:
+          $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
       type: object
     common.ErrorRecord:
       properties:

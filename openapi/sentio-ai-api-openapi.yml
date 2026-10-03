@@ -102,6 +102,61 @@ paths:
       - AI
 components:
   schemas:
+    ai_service.Context.Scenario:
+      default: SCENARIO_UNSPECIFIED
+      enum:
+      - SCENARIO_UNSPECIFIED
+      - SCENARIO_SQL
+      - SCENARIO_INSIGHT
+      - SCENARIO_AUTO
+      type: string
+    common.Duration:
+      properties:
+        unit:
+          type: string
+        value:
+          format: double
+          type: number
+      type: object
+    ai_service.AiService.PostSessionMessageBody:
+      properties:
+        message:
+          $ref: '#/components/schemas/ai_service.Message'
+      title: PostSessionMessageRequest adds a message to an existing session
+      type: object
+    common.TabularData.ColumnType:
+      default: STRING
+      enum:
+      - STRING
+      - NUMBER
+      - BOOLEAN
+      - LIST
+      - TIME
+      - MAP
+      - JSON
+      - TOKEN
+      - DYNAMIC
+      type: string
+    common.Matrix.Sample:
+      properties:
+        metric:
+          $ref: '#/components/schemas/common.Matrix.Metric'
+        values:
+          items:
+            $ref: '#/components/schemas/common.Matrix.Value'
+          type: array
+      type: object
+    ai_service.InsightQueryResult:
+      properties:
+        alias:
+          type: string
+        error:
+          type: string
+        id:
+          type: string
+        matrix:
+          $ref: '#/components/schemas/common.Matrix'
+      type: object
     ai_service.Context:
       properties:
         autoConfig:
@@ -124,73 +179,15 @@ components:
           type: integer
       title: Context provides environment information for a chat session
       type: object
-    ai_service.InsightQueryContent:
+    ai_service.ErrorContent:
       properties:
-        chartType:
-          $ref: '#/components/schemas/ai_service.ChartType'
-        explanation:
-          title: Explanation of what the query does and how it works
+        code:
+          title: Error code identifying the type of error
           type: string
-        formulas:
-          items:
-            $ref: '#/components/schemas/common.Formula'
-          title: Mathematical formulas to apply to the query results
-          type: array
-        queries:
-          items:
-            $ref: '#/components/schemas/common.Query'
-          title: List of queries to execute for generating insights
-          type: array
-        results:
-          items:
-            $ref: '#/components/schemas/ai_service.InsightQueryResult'
-          title: List of query results
-          type: array
-        samplesLimit:
-          format: int32
-          title: Maximum number of data samples to return
-          type: integer
-        timeRange:
-          $ref: '#/components/schemas/common.TimeRangeLite'
-        title:
-          title: Title for the query result visualization
+        message:
+          title: Human-readable error message
           type: string
-      type: object
-    ai_service.InsightConfig:
-      properties:
-        executeQuery:
-          title: Whether to automatically execute generated Insight queries
-          type: boolean
-      title: InsightConfig contains configuration specific to Insight scenarios
-      type: object
-    common.TabularData.ColumnType:
-      default: STRING
-      enum:
-      - STRING
-      - NUMBER
-      - BOOLEAN
-      - LIST
-      - TIME
-      - MAP
-      - JSON
-      - TOKEN
-      - DYNAMIC
-      type: string
-    ai_service.Message.Role:
-      default: ROLE_UNSPECIFIED
-      enum:
-      - ROLE_UNSPECIFIED
-      - ROLE_USER
-      - ROLE_ASSISTANT
-      - ROLE_SYSTEM
-      - AI_ROLE_TOOL
-      type: string
-    ai_service.SqlConfig:
-      properties:
-        executeQuery:
-          title: Whether to automatically execute generated SQL queries
-          type: boolean
-      title: SqlConfig contains configuration specific to SQL scenarios
+      title: ErrorContent represents error information
       type: object
     common.TimeRangeLite:
       description: 'start and end time of the time range, Find more: https://docs.sentio.xyz/reference/data#time-range-configuration-guide'
@@ -219,56 +216,21 @@ components:
       - step
       title: Time range
       type: object
-    ai_service.ErrorContent:
+    common.Aggregate.AggregateOps:
+      default: AVG
+      enum:
+      - AVG
+      - SUM
+      - MIN
+      - MAX
+      - COUNT
+      type: string
+    ai_service.AutoConfig:
       properties:
-        code:
-          title: Error code identifying the type of error
-          type: string
-        message:
-          title: Human-readable error message
-          type: string
-      title: ErrorContent represents error information
-      type: object
-    ai_service.StructuredContent:
-      properties:
-        error:
-          $ref: '#/components/schemas/ai_service.ErrorContent'
-        insightQuery:
-          $ref: '#/components/schemas/ai_service.InsightQueryContent'
-        sql:
-          $ref: '#/components/schemas/ai_service.SqlContent'
-        type:
-          $ref: '#/components/schemas/ai_service.StructuredContent.ContentType'
-      title: StructuredContent represents structured content that can contain SQL queries, errors, or other formatted data
-      type: object
-    ai_service.HealthzResponse:
-      properties:
-        service:
-          title: Service name identifier
-          type: string
-        status:
-          title: Health status ("ok", "degraded", "unavailable")
-          type: string
-      title: HealthzResponse contains health check status
-      type: object
-    common.Matrix:
-      properties:
-        samples:
-          items:
-            $ref: '#/components/schemas/common.Matrix.Sample'
-          type: array
-        totalSamples:
-          format: int32
-          type: integer
-      type: object
-    common.Function:
-      properties:
-        arguments:
-          items:
-            $ref: '#/components/schemas/common.Argument'
-          type: array
-        name:
-          type: string
+        executeQuery:
+          title: Whether to automatically execute generated queries (SQL or Insight)
+          type: boolean
+      title: AutoConfig contains configuration specific to Auto scenarios
       type: object
     ai_service.Message:
       description: Message represents a single message in an AI conversation with either text or structured content. Messages are generated as part of a 'run' (identified by run_id), and the is_final flag indicates when all messages for a run have been generated.
@@ -292,33 +254,86 @@ components:
           title: Plain text content of the message
           type: string
       type: object
-    common.Duration:
+    common.Aggregate:
       properties:
-        unit:
+        grouping:
+          items:
+            type: string
+          type: array
+        op:
+          $ref: '#/components/schemas/common.Aggregate.AggregateOps'
+      type: object
+    common.TabularData:
+      properties:
+        columnTypes:
+          additionalProperties:
+            $ref: '#/components/schemas/common.TabularData.ColumnType'
+          type: object
+        columns:
+          items:
+            type: string
+          type: array
+        cursor:
+          description: The pagination cursor for the next page of results. If present, use this value in the `cursor` field of the next request to retrieve subsequent data. If null or empty, there are no more results.
+          type: string
+        generatedAt:
+          format: date-time
+          type: string
+        rows:
+          items:
+            type: object
+          type: array
+      type: object
+    common.Matrix.Value:
+      properties:
+        timestamp:
+          format: int64
           type: string
         value:
           format: double
           type: number
       type: object
-    ai_service.SqlContent:
+    ai_service.HealthzResponse:
       properties:
-        chartType:
-          $ref: '#/components/schemas/ai_service.ChartType'
+        service:
+          title: Service name identifier
+          type: string
+        status:
+          title: Health status ("ok", "degraded", "unavailable")
+          type: string
+      title: HealthzResponse contains health check status
+      type: object
+    common.Function:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/common.Argument'
+          type: array
+        name:
+          type: string
+      type: object
+    common.Matrix.Metric:
+      properties:
+        displayName:
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      type: object
+    ai_service.StructuredContent:
+      properties:
         error:
-          title: Error from query execution
-          type: string
-        explanation:
-          title: Explanation of what the query does and how it works
-          type: string
-        query:
-          title: SQL query text
-          type: string
-        result:
-          $ref: '#/components/schemas/common.TabularData'
-        title:
-          title: Title for the query result visualization
-          type: string
-      title: SqlContent contains content including the query text, explanation, visualization options and results
+          $ref: '#/components/schemas/ai_service.ErrorContent'
+        insightQuery:
+          $ref: '#/components/schemas/ai_service.InsightQueryContent'
+        sql:
+          $ref: '#/components/schemas/ai_service.SqlContent'
+        type:
+          $ref: '#/components/schemas/ai_service.StructuredContent.ContentType'
+      title: StructuredContent represents structured content that can contain SQL queries, errors, or other formatted data
       type: object
     ai_service.ChatSession:
       description: ChatSession represents an interactive conversation session with the AI. Messages in the session are ordered and accessed via cursor positions.
@@ -337,63 +352,16 @@ components:
           title: Whether to use streaming responses
           type: boolean
       type: object
-    ai_service.PostSessionMessageResponse:
-      properties:
-        currentCursorPosition:
-          format: int32
-          title: Updated cursor position after adding the message
-          type: integer
-      title: PostSessionMessageResponse confirms message addition and updates cursor
-      type: object
-    common.Matrix.Sample:
-      properties:
-        metric:
-          $ref: '#/components/schemas/common.Matrix.Metric'
-        values:
-          items:
-            $ref: '#/components/schemas/common.Matrix.Value'
-          type: array
-      type: object
-    common.Matrix.Metric:
-      properties:
-        displayName:
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          type: string
-      type: object
-    common.Formula:
-      description: the formula to combine multiple queries
-      example:
-        expression: sum(a)+sum(b)
-      properties:
-        alias:
-          title: bool enabled = 2;
-          type: string
-        color:
-          type: string
-        disabled:
-          type: boolean
-        expression:
-          type: string
-        functions:
-          items:
-            $ref: '#/components/schemas/common.Function'
-          type: array
-        id:
-          type: string
-      title: formula
-      type: object
-    ai_service.Context.Scenario:
-      default: SCENARIO_UNSPECIFIED
+    ai_service.ChartType:
+      default: CHART_TYPE_UNSPECIFIED
+      description: "- CHART_TYPE_UNSPECIFIED: Default unspecified type\n - CHART_TYPE_TABLE: Tabular data visualization\n - CHART_TYPE_LINE: Line chart\n - CHART_TYPE_BAR: Bar chart\n - CHART_TYPE_PIE: Pie chart"
       enum:
-      - SCENARIO_UNSPECIFIED
-      - SCENARIO_SQL
-      - SCENARIO_INSIGHT
-      - SCENARIO_AUTO
+      - CHART_TYPE_UNSPECIFIED
+      - CHART_TYPE_TABLE
+      - CHART_TYPE_LINE
+      - CHART_TYPE_BAR
+      - CHART_TYPE_PIE
+      title: ChartType defines the supported visualization types
       type: string
     ai_service.Resource:
       properties:
@@ -418,40 +386,84 @@ components:
           type: string
       title: Resource represents a resource that can be attached to a message, such as a file, image, or other content
       type: object
-    common.Aggregate.AggregateOps:
-      default: AVG
+    ai_service.SqlConfig:
+      properties:
+        executeQuery:
+          title: Whether to automatically execute generated SQL queries
+          type: boolean
+      title: SqlConfig contains configuration specific to SQL scenarios
+      type: object
+    ai_service.InsightConfig:
+      properties:
+        executeQuery:
+          title: Whether to automatically execute generated Insight queries
+          type: boolean
+      title: InsightConfig contains configuration specific to Insight scenarios
+      type: object
+    ai_service.PostSessionMessageResponse:
+      properties:
+        currentCursorPosition:
+          format: int32
+          title: Updated cursor position after adding the message
+          type: integer
+      title: PostSessionMessageResponse confirms message addition and updates cursor
+      type: object
+    common.Argument:
+      properties:
+        boolValue:
+          type: boolean
+        doubleValue:
+          format: double
+          type: number
+        durationValue:
+          $ref: '#/components/schemas/common.Duration'
+        intValue:
+          format: int32
+          type: integer
+        stringValue:
+          type: string
+      type: object
+    ai_service.Message.Role:
+      default: ROLE_UNSPECIFIED
       enum:
-      - AVG
-      - SUM
-      - MIN
-      - MAX
-      - COUNT
+      - ROLE_UNSPECIFIED
+      - ROLE_USER
+      - ROLE_ASSISTANT
+      - ROLE_SYSTEM
+      - AI_ROLE_TOOL
       type: string
-    ai_service.AiService.PostSessionMessageBody:
-      properties:
-        message:
-          $ref: '#/components/schemas/ai_service.Message'
-      title: PostSessionMessageRequest adds a message to an existing session
-      type: object
-    common.Aggregate:
-      properties:
-        grouping:
-          items:
-            type: string
-          type: array
-        op:
-          $ref: '#/components/schemas/common.Aggregate.AggregateOps'
-      type: object
-    ai_service.InsightQueryResult:
+    common.Formula:
+      description: the formula to combine multiple queries
+      example:
+        expression: sum(a)+sum(b)
       properties:
         alias:
+          title: bool enabled = 2;
           type: string
-        error:
+        color:
           type: string
+        disabled:
+          type: boolean
+        expression:
+          type: string
+        functions:
+          items:
+            $ref: '#/components/schemas/common.Function'
+          type: array
         id:
           type: string
-        matrix:
-          $ref: '#/components/schemas/common.Matrix'
+      title: formula
+      type: object
+    ai_service.CreateChatSessionResponse:
+      properties:
+        currentCursorPosition:
+          format: int32
+          title: Current cursor position - indicates the latest message position in the conversation
+          type: integer
+        sessionId:
+          title: Unique identifier for the new session
+          type: string
+      title: CreateChatSessionResponse contains the newly created session information
       type: object
     ai_service.StructuredContent.ContentType:
       default: CONTENT_TYPE_UNSPECIFIED
@@ -461,13 +473,6 @@ components:
       - CONTENT_TYPE_INSIGHT_QUERY
       - CONTENT_TYPE_ERROR
       type: string
-    ai_service.AutoConfig:
-      properties:
-        executeQuery:
-          title: Whether to automatically execute generated queries (SQL or Insight)
-          type: boolean
-      title: AutoConfig contains configuration specific to Auto scenarios
-      type: object
     common.Query:
       description: the query to fetch metrics data, promql
       example:
@@ -513,72 +518,67 @@ components:
           type: string
       title: Metrics query
       type: object
-    ai_service.CreateChatSessionResponse:
+    ai_service.SqlContent:
       properties:
-        currentCursorPosition:
+        chartType:
+          $ref: '#/components/schemas/ai_service.ChartType'
+        error:
+          title: Error from query execution
+          type: string
+        explanation:
+          title: Explanation of what the query does and how it works
+          type: string
+        query:
+          title: SQL query text
+          type: string
+        result:
+          $ref: '#/components/schemas/common.TabularData'
+        title:
+          title: Title for the query result visualization
+          type: string
+      title: SqlContent contains content including the query text, explanation, visualization options and results
+      type: object
+    ai_service.InsightQueryContent:
+      properties:
+        chartType:
+          $ref: '#/components/schemas/ai_service.ChartType'
+        explanation:
+          title: Explanation of what the query does and how it works
+          type: string
+        formulas:
+          items:
+            $ref: '#/components/schemas/common.Formula'
+          title: Mathematical formulas to apply to the query results
+          type: array
+        queries:
+          items:
+            $ref: '#/components/schemas/common.Query'
+          title: List of queries to execute for generating insights
+          type: array
+        results:
+          items:
+            $ref: '#/components/schemas/ai_service.InsightQueryResult'
+          title: List of query results
+          type: array
+        samplesLimit:
           format: int32
-          title: Current cursor position - indicates the latest message position in the conversation
+          title: Maximum number of data samples to return
           type: integer
-        sessionId:
-          title: Unique identifier for the new session
+        timeRange:
+          $ref: '#/components/schemas/common.TimeRangeLite'
+        title:
+          title: Title for the query result visualization
           type: string
-      title: CreateChatSessionResponse contains the newly created session information
       type: object
-    common.Matrix.Value:
+    common.Matrix:
       properties:
-        timestamp:
-          format: int64
-          type: string
-        value:
-          format: double
-          type: number
-      type: object
-    ai_service.ChartType:
-      default: CHART_TYPE_UNSPECIFIED
-      description: "- CHART_TYPE_UNSPECIFIED: Default unspecified type\n - CHART_TYPE_TABLE: Tabular data visualization\n - CHART_TYPE_LINE: Line chart\n - CHART_TYPE_BAR: Bar chart\n - CHART_TYPE_PIE: Pie chart"
-      enum:
-      - CHART_TYPE_UNSPECIFIED
-      - CHART_TYPE_TABLE
-      - CHART_TYPE_LINE
-      - CHART_TYPE_BAR
-      - CHART_TYPE_PIE
-      title: ChartType defines the supported visualization types
-      type: string
-    common.TabularData:
-      properties:
-        columnTypes:
-          additionalProperties:
-            $ref: '#/components/schemas/common.TabularData.ColumnType'
-          type: object
-        columns:
+        samples:
           items:
-            type: string
+            $ref: '#/components/schemas/common.Matrix.Sample'
           type: array
-        cursor:
-          description: The pagination cursor for the next page of results. If present, use this value in the `cursor` field of the next request to retrieve subsequent data. If null or empty, there are no more results.
-          type: string
-        generatedAt:
-          format: date-time
-          type: string
-        rows:
-          items:
-            type: object
-          type: array
-      type: object
-    common.Argument:
-      properties:
-        boolValue:
-          type: boolean
-        doubleValue:
-          format: double
-          type: number
-        durationValue:
-          $ref: '#/components/schemas/common.Duration'
-        intValue:
+        totalSamples:
           format: int32
           type: integer
-        stringValue:
-          type: string
       type: object
   securitySchemes:
     ApiKeyHeaderAuth:

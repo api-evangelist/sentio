@@ -167,25 +167,6 @@ paths:
       - Price
 components:
   schemas:
-    price_service.BatchGetPricesResponse.CoinPrice:
-      properties:
-        coinId:
-          $ref: '#/components/schemas/price_service.CoinID'
-        error:
-          type: string
-        price:
-          $ref: '#/components/schemas/price_service.BatchGetPricesResponse.CoinPrice.Price'
-      type: object
-    price_service.CoinID.AddressIdentifier:
-      description: 'The coin can be defined as a symbol, e.g. BTC, ETH, etc, or an address + chain.
-
-        The format of the chain is consistent with the Sentio internal representation.'
-      properties:
-        address:
-          type: string
-        chain:
-          type: string
-      type: object
     price_service.GetPriceResponse:
       description: GetPriceResponse is the response for GetPrice.
       properties:
@@ -200,23 +181,6 @@ components:
           format: date-time
           type: string
       type: object
-    price_service.CoinID:
-      description: The identifier of a coin.
-      properties:
-        address:
-          $ref: '#/components/schemas/price_service.CoinID.AddressIdentifier'
-        symbol:
-          type: string
-      type: object
-    price_service.CheckLatestPriceResponse:
-      properties:
-        latestPrice:
-          $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
-        prices:
-          items:
-            $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
-          type: array
-      type: object
     price_service.BatchGetPricesResponse:
       properties:
         prices:
@@ -224,16 +188,6 @@ components:
             $ref: '#/components/schemas/price_service.BatchGetPricesResponse.CoinPrice'
           type: array
       type: object
-    price_service.AddCoinByGeckoResponse.Status:
-      default: OK
-      enum:
-      - OK
-      - ALREADY_EXISTS
-      - MISMATCH_WITH_EXISTING
-      - GECKO_NOT_FOUND
-      - GECKO_RETURN_NON_SUPPORTED_CHAIN
-      - GECKO_HAS_DUPLICATE_SYMBOL
-      type: string
     price_service.ListCoinsResponse:
       properties:
         coinAddressesInChain:
@@ -246,6 +200,16 @@ components:
             $ref: '#/components/schemas/price_service.CoinID'
           type: array
       type: object
+    price_service.CoinID.AddressIdentifier:
+      description: 'The coin can be defined as a symbol, e.g. BTC, ETH, etc, or an address + chain.
+
+        The format of the chain is consistent with the Sentio internal representation.'
+      properties:
+        address:
+          type: string
+        chain:
+          type: string
+      type: object
     price_service.CheckLatestPriceResponse.CoinPrice:
       properties:
         coinId:
@@ -256,6 +220,69 @@ components:
         timestamp:
           format: date-time
           type: string
+      type: object
+    price_service.BatchGetPricesRequest:
+      properties:
+        coinIds:
+          items:
+            $ref: '#/components/schemas/price_service.CoinID'
+          type: array
+        experimentalFlag:
+          $ref: '#/components/schemas/price_service.ExperimentalFlag'
+        timestamps:
+          items:
+            format: date-time
+            type: string
+          type: array
+      title: 'GetPricesRequest is the request for GetPrices.
+
+        return every price on every given timestamp (if exact exists) for the given coin'
+      type: object
+    price_service.BatchGetPricesResponse.CoinPrice:
+      properties:
+        coinId:
+          $ref: '#/components/schemas/price_service.CoinID'
+        error:
+          type: string
+        price:
+          $ref: '#/components/schemas/price_service.BatchGetPricesResponse.CoinPrice.Price'
+      type: object
+    price_service.AddCoinByGeckoRequest:
+      properties:
+        coingeckoId:
+          type: string
+      type: object
+    price_service.CoinID:
+      description: The identifier of a coin.
+      properties:
+        address:
+          $ref: '#/components/schemas/price_service.CoinID.AddressIdentifier'
+        symbol:
+          type: string
+      type: object
+    price_service.AddCoinByGeckoResponse.Status:
+      default: OK
+      enum:
+      - OK
+      - ALREADY_EXISTS
+      - MISMATCH_WITH_EXISTING
+      - GECKO_NOT_FOUND
+      - GECKO_RETURN_NON_SUPPORTED_CHAIN
+      - GECKO_HAS_DUPLICATE_SYMBOL
+      type: string
+    price_service.CheckLatestPriceResponse:
+      properties:
+        latestPrice:
+          $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
+        prices:
+          items:
+            $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
+          type: array
+      type: object
+    price_service.ExperimentalFlag:
+      properties:
+        enablePythSource:
+          type: boolean
       type: object
     price_service.BatchGetPricesResponse.CoinPrice.Price:
       properties:
@@ -281,33 +308,6 @@ components:
           type: string
         timestamp:
           format: date-time
-          type: string
-      type: object
-    price_service.ExperimentalFlag:
-      properties:
-        enablePythSource:
-          type: boolean
-      type: object
-    price_service.BatchGetPricesRequest:
-      properties:
-        coinIds:
-          items:
-            $ref: '#/components/schemas/price_service.CoinID'
-          type: array
-        experimentalFlag:
-          $ref: '#/components/schemas/price_service.ExperimentalFlag'
-        timestamps:
-          items:
-            format: date-time
-            type: string
-          type: array
-      title: 'GetPricesRequest is the request for GetPrices.
-
-        return every price on every given timestamp (if exact exists) for the given coin'
-      type: object
-    price_service.AddCoinByGeckoRequest:
-      properties:
-        coingeckoId:
           type: string
       type: object
   securitySchemes:
