@@ -413,69 +413,31 @@ paths:
       - Forks
 components:
   schemas:
-    google.protobuf.Any:
-      additionalProperties: {}
-      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nIn its binary encoding, an `Any` is an ordinary message; but in other wire\nforms like JSON, it has a special encoding. The format of the type URL is\ndescribed on the `type_url` field.\n\nProtobuf APIs provide utilities to interact with `Any` values:\n\n- A 'pack' operation accepts a message and constructs a generic `Any` wrapper\n  around it.\n- An 'unpack' operation reads the content of an `Any` message, either into an\n  existing message or a new one. Unpack operations must check the type of the\n  value they unpack against the declared `type_url`.\n- An 'is' operation decides whether an `Any` contains a message of the given\n  type, i.e. whether it can 'unpack' that type.\n\nThe JSON format representation of an `Any` follows one of these cases:\n\n- For types without special-cased JSON encodings, the JSON format\n  representation of the `Any` is the same as that of the message, with an\n  additional `@type` field which contains the type URL.\n- For types with special-cased JSON encodings (typically called 'well-known'\n  types, listed in https://protobuf.dev/programming-guides/json/#any), the\n  JSON format representation has a key `@type` which contains the type URL\n  and a key `value` which contains the JSON-serialized value.\n\nThe text format representation of an `Any` is like a message with one field\nwhose name is the type URL in brackets. For example, an `Any` containing a\n`foo.Bar` message may be written `[type.googleapis.com/foo.Bar] { a: 2 }`."
-      properties:
-        '@type':
-          description: 'Identifies the type of the serialized Protobuf message with a URI reference
-
-            consisting of a prefix ending in a slash and the fully-qualified type name.
-
-
-            Example: type.googleapis.com/google.protobuf.StringValue
-
-
-            This string must contain at least one `/` character, and the content after
-
-            the last `/` must be the fully-qualified name of the type in canonical
-
-            form, without a leading dot. Do not write a scheme on these URI references
-
-            so that clients do not attempt to contact them.
-
-
-            The prefix is arbitrary and Protobuf implementations are expected to
-
-            simply strip off everything up to and including the last `/` to identify
-
-            the type. `type.googleapis.com/` is a common default prefix that some
-
-            legacy implementations require. This prefix does not indicate the origin of
-
-            the type, and URIs containing it are not expected to respond to any
-
-            requests.
-
-
-            All type URL strings must be legal URI references with the additional
-
-            restriction (for the text format) that the content of the reference
-
-            must consist only of alphanumeric characters, percent-encoded escapes, and
-
-            characters in the following set (not including the outer backticks):
-
-            `/-.~_!$&()*+,;=`. Despite our allowing percent encodings, implementations
-
-            should not unescape them to prevent confusion with existing parsers. For
-
-            example, `type.googleapis.com%2FFoo` should be rejected.
-
-
-            In the original design of `Any`, the possibility of launching a type
-
-            resolution service at these type URLs was considered but Protobuf never
-
-            implemented one and considers contacting these URLs to be problematic and
-
-            a potential security issue. Do not attempt to contact type URLs.'
-          type: string
-      type: object
     solidity_service.UpdateForkResponse:
       properties:
         fork:
           $ref: '#/components/schemas/solidity_service.Fork'
+      type: object
+    solidity_service.BaseChainConfig:
+      properties:
+        debugEndpoint:
+          type: string
+        endpoint:
+          type: string
+        oklinkChainShortName:
+          title: Required if source_fetcher_type is OKLINK
+          type: string
+        sourceFetcherApiKeys:
+          items:
+            type: string
+          type: array
+        sourceFetcherEndpoint:
+          type: string
+        sourceFetcherTimeout:
+          format: int64
+          type: string
+        sourceFetcherType:
+          $ref: '#/components/schemas/solidity_service.SourceFetcherType'
       type: object
     solidity_service.ManagedFork:
       properties:
@@ -494,12 +456,12 @@ components:
           format: int64
           type: string
       type: object
-    solidity_service.ForkService.CreateForkBody:
+    solidity_service.Simulation.Result:
       properties:
-        fork:
-          $ref: '#/components/schemas/solidity_service.Fork'
-      required:
-      - fork
+        transaction:
+          $ref: '#/components/schemas/evm.Transaction'
+        transactionReceipt:
+          $ref: '#/components/schemas/evm.TransactionReceipt'
       type: object
     solidity_service.SourceFetcherType:
       default: ETHERSCAN
@@ -509,26 +471,36 @@ components:
       - OKLINK
       - ETHERSCAN_V2
       type: string
-    evm.AccessListItem:
+    solidity_service.ChainIdentifier:
       properties:
-        address:
+        chainId:
           type: string
-        storageKeys:
-          items:
-            type: string
-          type: array
+        forkId:
+          type: string
       type: object
-    solidity_service.NodeEnvironment:
+    solidity_service.BlockOverrides:
       properties:
         baseFee:
           type: string
-        chainId:
-          format: uint64
+        blockHash:
+          additionalProperties:
+            type: string
+          type: object
+        blockNumber:
+          type: string
+        difficulty:
           type: string
         gasLimit:
           type: string
-        gasPrice:
+        timestamp:
           type: string
+      type: object
+    solidity_service.ListForksResponse:
+      properties:
+        forks:
+          items:
+            $ref: '#/components/schemas/solidity_service.Fork'
+          type: array
       type: object
     solidity_service.SolidityAPIService.SimulateTransactionBundleOnForkBody:
       example:
@@ -559,82 +531,6 @@ components:
       required:
       - simulations
       type: object
-    solidity_service.GetForkInfoResponse:
-      properties:
-        currentBlockHash:
-          type: string
-        currentBlockNumber:
-          type: string
-        currentBlockTimestamp:
-          format: uint64
-          type: string
-        environment:
-          $ref: '#/components/schemas/solidity_service.NodeEnvironment'
-        forkConfig:
-          $ref: '#/components/schemas/solidity_service.NodeForkConfig'
-        hardFork:
-          type: string
-        transactionOrder:
-          type: string
-      type: object
-    evm.TransactionReceipt:
-      properties:
-        cumulativeGasUsed:
-          type: string
-        effectiveGasPrice:
-          type: string
-        error:
-          type: string
-        gasUsed:
-          type: string
-        logs:
-          items:
-            type: object
-          type: array
-        revertReason:
-          type: string
-        status:
-          title: '0x0: failed, 0x1: succeed'
-          type: string
-      type: object
-    solidity_service.StateOverride:
-      properties:
-        balance:
-          description: uint256
-          title: map<string, string> stateDiff = 4;
-          type: string
-        code:
-          type: string
-        state:
-          additionalProperties:
-            type: string
-          type: object
-      type: object
-    solidity_service.ExternalFork:
-      properties:
-        chainConfig:
-          $ref: '#/components/schemas/solidity_service.BaseChainConfig'
-        nodeAdditionalHeaders:
-          title: Additional headers for node requests
-          type: string
-      type: object
-    solidity_service.ForkType:
-      default: MANAGED
-      enum:
-      - MANAGED
-      - EXTERNAL
-      type: string
-    solidity_service.SimulateTransactionBundleResponse:
-      properties:
-        bundleId:
-          type: string
-        error:
-          type: string
-        simulations:
-          items:
-            $ref: '#/components/schemas/solidity_service.Simulation'
-          type: array
-      type: object
     solidity_service.SolidityAPIService.SimulateTransactionOnForkBody:
       example:
         simulation:
@@ -658,22 +554,59 @@ components:
       required:
       - simulation
       type: object
+    solidity_service.GetForkInfoResponse:
+      properties:
+        currentBlockHash:
+          type: string
+        currentBlockNumber:
+          type: string
+        currentBlockTimestamp:
+          format: uint64
+          type: string
+        environment:
+          $ref: '#/components/schemas/solidity_service.NodeEnvironment'
+        forkConfig:
+          $ref: '#/components/schemas/solidity_service.NodeForkConfig'
+        hardFork:
+          type: string
+        transactionOrder:
+          type: string
+      type: object
     solidity_service.CreateForkResponse:
       properties:
         fork:
           $ref: '#/components/schemas/solidity_service.Fork'
       type: object
-    solidity_service.GetForkResponse:
+    solidity_service.ForkType:
+      default: MANAGED
+      enum:
+      - MANAGED
+      - EXTERNAL
+      type: string
+    google.api.HttpBody:
       properties:
-        fork:
-          $ref: '#/components/schemas/solidity_service.Fork'
+        contentType:
+          type: string
+        data:
+          format: byte
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/google.protobuf.Any'
+          type: array
       type: object
-    solidity_service.ForkService.UpdateForkBody:
+    solidity_service.StateOverride:
       properties:
-        fork:
-          $ref: '#/components/schemas/solidity_service.Fork'
-      required:
-      - fork
+        balance:
+          description: uint256
+          title: map<string, string> stateDiff = 4;
+          type: string
+        code:
+          type: string
+        state:
+          additionalProperties:
+            type: string
+          type: object
       type: object
     solidity_service.Fork:
       properties:
@@ -696,10 +629,59 @@ components:
           format: date-time
           type: string
       type: object
+    solidity_service.GetForkResponse:
+      properties:
+        fork:
+          $ref: '#/components/schemas/solidity_service.Fork'
+      type: object
+    evm.AccessListItem:
+      properties:
+        address:
+          type: string
+        storageKeys:
+          items:
+            type: string
+          type: array
+      type: object
+    evm.TransactionReceipt:
+      properties:
+        cumulativeGasUsed:
+          type: string
+        effectiveGasPrice:
+          type: string
+        error:
+          type: string
+        gasUsed:
+          type: string
+        logs:
+          items:
+            type: object
+          type: array
+        revertReason:
+          type: string
+        status:
+          title: '0x0: failed, 0x1: succeed'
+          type: string
+      type: object
     solidity_service.SimulateTransactionResponse:
       properties:
         simulation:
           $ref: '#/components/schemas/solidity_service.Simulation'
+      type: object
+    solidity_service.ForkService.CreateForkBody:
+      properties:
+        fork:
+          $ref: '#/components/schemas/solidity_service.Fork'
+      required:
+      - fork
+      type: object
+    solidity_service.ExternalFork:
+      properties:
+        chainConfig:
+          $ref: '#/components/schemas/solidity_service.BaseChainConfig'
+        nodeAdditionalHeaders:
+          title: Additional headers for node requests
+          type: string
       type: object
     solidity_service.Simulation:
       properties:
@@ -776,49 +758,16 @@ components:
       - gasPrice
       - value
       type: object
-    google.api.HttpBody:
-      properties:
-        contentType:
-          type: string
-        data:
-          format: byte
-          type: string
-        extensions:
-          items:
-            $ref: '#/components/schemas/google.protobuf.Any'
-          type: array
-      type: object
-    solidity_service.SimulationSharing:
-      properties:
-        id:
-          type: string
-        isPublic:
-          type: boolean
-        simulationId:
-          type: string
-      type: object
-    solidity_service.ChainIdentifier:
-      properties:
-        chainId:
-          type: string
-        forkId:
-          type: string
-      type: object
-    solidity_service.BlockOverrides:
+    solidity_service.NodeEnvironment:
       properties:
         baseFee:
           type: string
-        blockHash:
-          additionalProperties:
-            type: string
-          type: object
-        blockNumber:
-          type: string
-        difficulty:
+        chainId:
+          format: uint64
           type: string
         gasLimit:
           type: string
-        timestamp:
+        gasPrice:
           type: string
       type: object
     solidity_service.NodeForkConfig:
@@ -830,6 +779,33 @@ components:
           format: uint64
           type: string
         forkUrl:
+          type: string
+      type: object
+    solidity_service.ForkService.UpdateForkBody:
+      properties:
+        fork:
+          $ref: '#/components/schemas/solidity_service.Fork'
+      required:
+      - fork
+      type: object
+    solidity_service.SimulateTransactionBundleResponse:
+      properties:
+        bundleId:
+          type: string
+        error:
+          type: string
+        simulations:
+          items:
+            $ref: '#/components/schemas/solidity_service.Simulation'
+          type: array
+      type: object
+    solidity_service.SimulationSharing:
+      properties:
+        id:
+          type: string
+        isPublic:
+          type: boolean
+        simulationId:
           type: string
       type: object
     evm.Transaction:
@@ -869,40 +845,64 @@ components:
         value:
           type: string
       type: object
-    solidity_service.Simulation.Result:
+    google.protobuf.Any:
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nIn its binary encoding, an `Any` is an ordinary message; but in other wire\nforms like JSON, it has a special encoding. The format of the type URL is\ndescribed on the `type_url` field.\n\nProtobuf APIs provide utilities to interact with `Any` values:\n\n- A 'pack' operation accepts a message and constructs a generic `Any` wrapper\n  around it.\n- An 'unpack' operation reads the content of an `Any` message, either into an\n  existing message or a new one. Unpack operations must check the type of the\n  value they unpack against the declared `type_url`.\n- An 'is' operation decides whether an `Any` contains a message of the given\n  type, i.e. whether it can 'unpack' that type.\n\nThe JSON format representation of an `Any` follows one of these cases:\n\n- For types without special-cased JSON encodings, the JSON format\n  representation of the `Any` is the same as that of the message, with an\n  additional `@type` field which contains the type URL.\n- For types with special-cased JSON encodings (typically called 'well-known'\n  types, listed in https://protobuf.dev/programming-guides/json/#any), the\n  JSON format representation has a key `@type` which contains the type URL\n  and a key `value` which contains the JSON-serialized value.\n\nThe text format representation of an `Any` is like a message with one field\nwhose name is the type URL in brackets. For example, an `Any` containing a\n`foo.Bar` message may be written `[type.googleapis.com/foo.Bar] { a: 2 }`."
       properties:
-        transaction:
-          $ref: '#/components/schemas/evm.Transaction'
-        transactionReceipt:
-          $ref: '#/components/schemas/evm.TransactionReceipt'
-      type: object
-    solidity_service.ListForksResponse:
-      properties:
-        forks:
-          items:
-            $ref: '#/components/schemas/solidity_service.Fork'
-          type: array
-      type: object
-    solidity_service.BaseChainConfig:
-      properties:
-        debugEndpoint:
+        '@type':
+          description: 'Identifies the type of the serialized Protobuf message with a URI reference
+
+            consisting of a prefix ending in a slash and the fully-qualified type name.
+
+
+            Example: type.googleapis.com/google.protobuf.StringValue
+
+
+            This string must contain at least one `/` character, and the content after
+
+            the last `/` must be the fully-qualified name of the type in canonical
+
+            form, without a leading dot. Do not write a scheme on these URI references
+
+            so that clients do not attempt to contact them.
+
+
+            The prefix is arbitrary and Protobuf implementations are expected to
+
+            simply strip off everything up to and including the last `/` to identify
+
+            the type. `type.googleapis.com/` is a common default prefix that some
+
+            legacy implementations require. This prefix does not indicate the origin of
+
+            the type, and URIs containing it are not expected to respond to any
+
+            requests.
+
+
+            All type URL strings must be legal URI references with the additional
+
+            restriction (for the text format) that the content of the reference
+
+            must consist only of alphanumeric characters, percent-encoded escapes, and
+
+            characters in the following set (not including the outer backticks):
+
+            `/-.~_!$&()*+,;=`. Despite our allowing percent encodings, implementations
+
+            should not unescape them to prevent confusion with existing parsers. For
+
+            example, `type.googleapis.com%2FFoo` should be rejected.
+
+
+            In the original design of `Any`, the possibility of launching a type
+
+            resolution service at these type URLs was considered but Protobuf never
+
+            implemented one and considers contacting these URLs to be problematic and
+
+            a potential security issue. Do not attempt to contact type URLs.'
           type: string
-        endpoint:
-          type: string
-        oklinkChainShortName:
-          title: Required if source_fetcher_type is OKLINK
-          type: string
-        sourceFetcherApiKeys:
-          items:
-            type: string
-          type: array
-        sourceFetcherEndpoint:
-          type: string
-        sourceFetcherTimeout:
-          format: int64
-          type: string
-        sourceFetcherType:
-          $ref: '#/components/schemas/solidity_service.SourceFetcherType'
       type: object
   securitySchemes:
     ApiKeyHeaderAuth:

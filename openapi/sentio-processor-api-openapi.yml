@@ -73,69 +73,50 @@ paths:
       - Processor
 components:
   schemas:
-    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - ERROR
-      - STARTING
-      - PROCESSING
-      type: string
-    processor_service.ProcessorVersionState:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - PENDING
-      - ACTIVE
-      - OBSOLETE
-      type: string
-    processor_service.ChainState:
+    common.UserInfo:
+      description: The same to user but with sensitive data removed.
       properties:
-        chainId:
-          description: The chain id.
+        firstName:
           type: string
-        estimatedLatestBlockNumber:
-          format: int64
+        id:
           type: string
-        handlerStat:
-          title: The serialized handler stat
+        lastName:
           type: string
-        indexerState:
-          description: The serialized indexer state.
+        nickname:
           type: string
-        initialStartBlockNumber:
-          format: int64
+        picture:
           type: string
-        lastBlockNumber:
-          format: int64
+        username:
           type: string
-        meterState:
-          description: The serialized meter state.
-          type: string
-        processedBlockHash:
-          type: string
-        processedBlockNumber:
-          description: The most recently processed block number and block hash.
-          format: int64
-          type: string
-        processedTimestampMicros:
-          format: int64
-          type: string
-        processedVersion:
+      type: object
+    common.ErrorRecord:
+      properties:
+        code:
           format: int32
-          title: Processed version
+          title: same as google.rpc.status.Status.code
           type: integer
-        status:
-          $ref: '#/components/schemas/processor_service.ChainState.Status'
-        templates:
-          description: The serialized templates info.
-          type: string
-        trackers:
-          description: To be deprecated after the migration.
-          type: string
-        updatedAt:
+        createdAt:
           format: date-time
+          title: details
           type: string
+        id:
+          type: string
+        message:
+          type: string
+        namespace:
+          format: int32
+          type: integer
+        namespaceCode:
+          format: int32
+          title: additional codes definted in the namespace
+          type: integer
+      type: object
+    processor_service.GetProcessorStatusResponse:
+      properties:
+        processors:
+          items:
+            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
+          type: array
       type: object
     processor_service.GetProcessorStatusResponse.ProcessorEx:
       properties:
@@ -206,13 +187,6 @@ components:
             type: string
           type: array
       type: object
-    processor_service.GetProcessorStatusResponse:
-      properties:
-        processors:
-          items:
-            $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorEx'
-          type: array
-      type: object
     processor_service.NetworkOverride:
       properties:
         chain:
@@ -220,6 +194,62 @@ components:
         host:
           type: string
       type: object
+    processor_service.ChainState:
+      properties:
+        chainId:
+          description: The chain id.
+          type: string
+        estimatedLatestBlockNumber:
+          format: int64
+          type: string
+        handlerStat:
+          title: The serialized handler stat
+          type: string
+        indexerState:
+          description: The serialized indexer state.
+          type: string
+        initialStartBlockNumber:
+          format: int64
+          type: string
+        lastBlockNumber:
+          format: int64
+          type: string
+        meterState:
+          description: The serialized meter state.
+          type: string
+        processedBlockHash:
+          type: string
+        processedBlockNumber:
+          description: The most recently processed block number and block hash.
+          format: int64
+          type: string
+        processedTimestampMicros:
+          format: int64
+          type: string
+        processedVersion:
+          format: int32
+          title: Processed version
+          type: integer
+        status:
+          $ref: '#/components/schemas/processor_service.ChainState.Status'
+        templates:
+          description: The serialized templates info.
+          type: string
+        trackers:
+          description: To be deprecated after the migration.
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    processor_service.ProcessorVersionState:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - PENDING
+      - ACTIVE
+      - OBSOLETE
+      type: string
     processor_service.ChainState.Status:
       properties:
         errorRecord:
@@ -228,22 +258,6 @@ components:
           $ref: '#/components/schemas/processor_service.ChainState.Status.State'
       title: Status of this chain indexer
       type: object
-    common.UserInfo:
-      description: The same to user but with sensitive data removed.
-      properties:
-        firstName:
-          type: string
-        id:
-          type: string
-        lastName:
-          type: string
-        nickname:
-          type: string
-        picture:
-          type: string
-        username:
-          type: string
-      type: object
     processor_service.GetProcessorStatusResponse.ProcessorStatus:
       properties:
         errorRecord:
@@ -251,28 +265,14 @@ components:
         state:
           $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
       type: object
-    common.ErrorRecord:
-      properties:
-        code:
-          format: int32
-          title: same as google.rpc.status.Status.code
-          type: integer
-        createdAt:
-          format: date-time
-          title: details
-          type: string
-        id:
-          type: string
-        message:
-          type: string
-        namespace:
-          format: int32
-          type: integer
-        namespaceCode:
-          format: int32
-          title: additional codes definted in the namespace
-          type: integer
-      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - STARTING
+      - PROCESSING
+      type: string
     processor_service.ChainState.Status.State:
       default: UNKNOWN
       enum:

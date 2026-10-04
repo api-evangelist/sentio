@@ -44,6 +44,14 @@ paths:
       - ProcessorExt
 components:
   schemas:
+    processor_service.GetProcessorSourceFilesResponse:
+      properties:
+        sourceFiles:
+          items:
+            $ref: '#/components/schemas/processor_service.ProcessorSourceFile'
+          title: list of source files
+          type: array
+      type: object
     processor_service.ProcessorSourceFile:
       properties:
         content:
@@ -52,14 +60,6 @@ components:
         path:
           title: relative path of the source file
           type: string
-      type: object
-    processor_service.GetProcessorSourceFilesResponse:
-      properties:
-        sourceFiles:
-          items:
-            $ref: '#/components/schemas/processor_service.ProcessorSourceFile'
-          title: list of source files
-          type: array
       type: object
   securitySchemes:
     ApiKeyHeaderAuth:
