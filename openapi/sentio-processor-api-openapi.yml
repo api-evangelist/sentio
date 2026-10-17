@@ -73,6 +73,94 @@ paths:
       - Processor
 components:
   schemas:
+    processor_service.ChainState.Status.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - CATCHING_UP
+      - PROCESSING_LATEST
+      - QUEUING
+      type: string
+    processor_service.ProcessorVersionState:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - PENDING
+      - ACTIVE
+      - OBSOLETE
+      type: string
+    processor_service.NetworkOverride:
+      properties:
+        chain:
+          type: string
+        host:
+          type: string
+      type: object
+    processor_service.ChainState:
+      properties:
+        chainId:
+          description: The chain id.
+          type: string
+        estimatedLatestBlockNumber:
+          format: int64
+          type: string
+        handlerStat:
+          title: The serialized handler stat
+          type: string
+        indexerState:
+          description: The serialized indexer state.
+          type: string
+        initialStartBlockNumber:
+          format: int64
+          type: string
+        lastBlockNumber:
+          format: int64
+          type: string
+        meterState:
+          description: The serialized meter state.
+          type: string
+        processedBlockHash:
+          type: string
+        processedBlockNumber:
+          description: The most recently processed block number and block hash.
+          format: int64
+          type: string
+        processedTimestampMicros:
+          format: int64
+          type: string
+        processedVersion:
+          format: int32
+          title: Processed version
+          type: integer
+        status:
+          $ref: '#/components/schemas/processor_service.ChainState.Status'
+        templates:
+          description: The serialized templates info.
+          type: string
+        trackers:
+          description: To be deprecated after the migration.
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    processor_service.ChainState.Status:
+      properties:
+        errorRecord:
+          $ref: '#/components/schemas/common.ErrorRecord'
+        state:
+          $ref: '#/components/schemas/processor_service.ChainState.Status.State'
+      title: Status of this chain indexer
+      type: object
+    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - ERROR
+      - STARTING
+      - PROCESSING
+      type: string
     common.UserInfo:
       description: The same to user but with sensitive data removed.
       properties:
@@ -187,77 +275,6 @@ components:
             type: string
           type: array
       type: object
-    processor_service.NetworkOverride:
-      properties:
-        chain:
-          type: string
-        host:
-          type: string
-      type: object
-    processor_service.ChainState:
-      properties:
-        chainId:
-          description: The chain id.
-          type: string
-        estimatedLatestBlockNumber:
-          format: int64
-          type: string
-        handlerStat:
-          title: The serialized handler stat
-          type: string
-        indexerState:
-          description: The serialized indexer state.
-          type: string
-        initialStartBlockNumber:
-          format: int64
-          type: string
-        lastBlockNumber:
-          format: int64
-          type: string
-        meterState:
-          description: The serialized meter state.
-          type: string
-        processedBlockHash:
-          type: string
-        processedBlockNumber:
-          description: The most recently processed block number and block hash.
-          format: int64
-          type: string
-        processedTimestampMicros:
-          format: int64
-          type: string
-        processedVersion:
-          format: int32
-          title: Processed version
-          type: integer
-        status:
-          $ref: '#/components/schemas/processor_service.ChainState.Status'
-        templates:
-          description: The serialized templates info.
-          type: string
-        trackers:
-          description: To be deprecated after the migration.
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-      type: object
-    processor_service.ProcessorVersionState:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - PENDING
-      - ACTIVE
-      - OBSOLETE
-      type: string
-    processor_service.ChainState.Status:
-      properties:
-        errorRecord:
-          $ref: '#/components/schemas/common.ErrorRecord'
-        state:
-          $ref: '#/components/schemas/processor_service.ChainState.Status.State'
-      title: Status of this chain indexer
-      type: object
     processor_service.GetProcessorStatusResponse.ProcessorStatus:
       properties:
         errorRecord:
@@ -265,23 +282,6 @@ components:
         state:
           $ref: '#/components/schemas/processor_service.GetProcessorStatusResponse.ProcessorStatus.State'
       type: object
-    processor_service.GetProcessorStatusResponse.ProcessorStatus.State:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - ERROR
-      - STARTING
-      - PROCESSING
-      type: string
-    processor_service.ChainState.Status.State:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - ERROR
-      - CATCHING_UP
-      - PROCESSING_LATEST
-      - QUEUING
-      type: string
   securitySchemes:
     ApiKeyHeaderAuth:
       in: header

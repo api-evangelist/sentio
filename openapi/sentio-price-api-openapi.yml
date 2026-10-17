@@ -167,10 +167,26 @@ paths:
       - Price
 components:
   schemas:
-    price_service.ExperimentalFlag:
+    price_service.GetPriceResponse:
+      description: GetPriceResponse is the response for GetPrice.
       properties:
-        enablePythSource:
-          type: boolean
+        price:
+          description: Price in USD.
+          format: double
+          type: number
+        source:
+          type: string
+        timestamp:
+          description: The actual timestamp of the price returned.
+          format: date-time
+          type: string
+      type: object
+    price_service.BatchGetPricesResponse:
+      properties:
+        prices:
+          items:
+            $ref: '#/components/schemas/price_service.BatchGetPricesResponse.CoinPrice'
+          type: array
       type: object
     price_service.CoinID.AddressIdentifier:
       description: 'The coin can be defined as a symbol, e.g. BTC, ETH, etc, or an address + chain.
@@ -182,16 +198,10 @@ components:
         chain:
           type: string
       type: object
-    price_service.CheckLatestPriceResponse.CoinPrice:
+    price_service.ExperimentalFlag:
       properties:
-        coinId:
-          $ref: '#/components/schemas/price_service.CoinID'
-        price:
-          format: double
-          type: number
-        timestamp:
-          format: date-time
-          type: string
+        enablePythSource:
+          type: boolean
       type: object
     price_service.AddCoinByGeckoResponse.Status:
       default: OK
@@ -203,6 +213,17 @@ components:
       - GECKO_RETURN_NON_SUPPORTED_CHAIN
       - GECKO_HAS_DUPLICATE_SYMBOL
       type: string
+    price_service.CheckLatestPriceResponse.CoinPrice:
+      properties:
+        coinId:
+          $ref: '#/components/schemas/price_service.CoinID'
+        price:
+          format: double
+          type: number
+        timestamp:
+          format: date-time
+          type: string
+      type: object
     price_service.BatchGetPricesRequest:
       properties:
         coinIds:
@@ -219,65 +240,6 @@ components:
       title: 'GetPricesRequest is the request for GetPrices.
 
         return every price on every given timestamp (if exact exists) for the given coin'
-      type: object
-    price_service.BatchGetPricesResponse:
-      properties:
-        prices:
-          items:
-            $ref: '#/components/schemas/price_service.BatchGetPricesResponse.CoinPrice'
-          type: array
-      type: object
-    price_service.BatchGetPricesResponse.CoinPrice:
-      properties:
-        coinId:
-          $ref: '#/components/schemas/price_service.CoinID'
-        error:
-          type: string
-        price:
-          $ref: '#/components/schemas/price_service.BatchGetPricesResponse.CoinPrice.Price'
-      type: object
-    price_service.ListCoinsResponse:
-      properties:
-        coinAddressesInChain:
-          additionalProperties:
-            $ref: '#/components/schemas/price_service.CoinID'
-          title: map from symbol to address, only returned when chain is set
-          type: object
-        coins:
-          items:
-            $ref: '#/components/schemas/price_service.CoinID'
-          type: array
-      type: object
-    price_service.CoinID:
-      description: The identifier of a coin.
-      properties:
-        address:
-          $ref: '#/components/schemas/price_service.CoinID.AddressIdentifier'
-        symbol:
-          type: string
-      type: object
-    price_service.GetPriceResponse:
-      description: GetPriceResponse is the response for GetPrice.
-      properties:
-        price:
-          description: Price in USD.
-          format: double
-          type: number
-        source:
-          type: string
-        timestamp:
-          description: The actual timestamp of the price returned.
-          format: date-time
-          type: string
-      type: object
-    price_service.CheckLatestPriceResponse:
-      properties:
-        latestPrice:
-          $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
-        prices:
-          items:
-            $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
-          type: array
       type: object
     price_service.AddCoinByGeckoResponse:
       properties:
@@ -298,17 +260,55 @@ components:
           format: date-time
           type: string
       type: object
-    price_service.AddCoinByGeckoRequest:
-      properties:
-        coingeckoId:
-          type: string
-      type: object
     price_service.BatchGetPricesResponse.CoinPrice.Price:
       properties:
         results:
           items:
             $ref: '#/components/schemas/price_service.GetPriceResponse'
           type: array
+      type: object
+    price_service.CheckLatestPriceResponse:
+      properties:
+        latestPrice:
+          $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
+        prices:
+          items:
+            $ref: '#/components/schemas/price_service.CheckLatestPriceResponse.CoinPrice'
+          type: array
+      type: object
+    price_service.AddCoinByGeckoRequest:
+      properties:
+        coingeckoId:
+          type: string
+      type: object
+    price_service.CoinID:
+      description: The identifier of a coin.
+      properties:
+        address:
+          $ref: '#/components/schemas/price_service.CoinID.AddressIdentifier'
+        symbol:
+          type: string
+      type: object
+    price_service.ListCoinsResponse:
+      properties:
+        coinAddressesInChain:
+          additionalProperties:
+            $ref: '#/components/schemas/price_service.CoinID'
+          title: map from symbol to address, only returned when chain is set
+          type: object
+        coins:
+          items:
+            $ref: '#/components/schemas/price_service.CoinID'
+          type: array
+      type: object
+    price_service.BatchGetPricesResponse.CoinPrice:
+      properties:
+        coinId:
+          $ref: '#/components/schemas/price_service.CoinID'
+        error:
+          type: string
+        price:
+          $ref: '#/components/schemas/price_service.BatchGetPricesResponse.CoinPrice.Price'
       type: object
   securitySchemes:
     ApiKeyHeaderAuth:
